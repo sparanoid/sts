@@ -51,7 +51,12 @@ export function StatusItem({ data }: { data: Status }) {
         {data.results.map(result => (
           <Tooltip key={result.timestamp}>
             <TooltipTrigger
-              className={clsx('w-full h-8', result.success ? 'bg-emerald-700' : 'bg-red-700')}
+              className={clsx(
+                'w-full h-8',
+                result.success
+                  ? 'bg-emerald-700 hover:bg-emerald-500'
+                  : 'bg-red-700 hover:bg-red-500'
+              )}
             />
             <TooltipContent className='grid'>
               {result.conditionResults?.length ? (
