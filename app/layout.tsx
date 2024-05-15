@@ -7,6 +7,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: process.env.SITE_TITLE || 'Gatus Frontend',
   description: process.env.SITE_DESC || 'A fully open-source status page for Gatus backend',
+  icons: process.env.SITE_LOGO || '',
 }
 
 export default function RootLayout({
