@@ -8,7 +8,9 @@ export async function getStatuses() {
   }
 
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=90`
-  const res = await fetch(url)
+  const res = await fetch(url, {
+    next: { revalidate: 10 },
+  })
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
