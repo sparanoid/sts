@@ -74,7 +74,7 @@ export default async function Home() {
   }, 0)
 
   return (
-    <main className='container mx-auto max-w-screen-md p-2 sm:p-4'>
+    <main className='container mx-auto max-w-screen-md px-2 py-4 sm:px-4'>
       <nav className='flex gap-2 items-center justify-center'>
         {process.env.SITE_BACK_URL && process.env.SITE_BACK_TITLE ? (
           <>
