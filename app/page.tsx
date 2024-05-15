@@ -162,7 +162,7 @@ export default async function Home() {
       </Accordion>
 
       <footer className='text-center py-8 text-sm text-text/50'>
-        {process.env.FOOTER_TEXT || 'sts frontend, gatus backend'}
+        {process.env.FOOTER_TEXT || 'sts, a fully open-source status page for Gatus backend'}
       </footer>
     </main>
   )

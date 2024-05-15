@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+
+import { TooltipProvider } from '@/components/ui/tooltip'
+
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <TooltipProvider delayDuration={0}>
+        <body>{children}</body>
+      </TooltipProvider>
     </html>
   )
 }
