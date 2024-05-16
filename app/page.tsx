@@ -128,22 +128,22 @@ export default function Home() {
         <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
           {globalStatus === 'up' ? (
             <>
-              <IconCircleCheckFilled className='size-10 fill-emerald-700' />
+              <div className='indicator up text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
           ) : globalStatus === 'partial' ? (
             <>
-              <IconAlertCircleFilled className='size-10 fill-amber-600' />
+              <div className='indicator partial text-amber-600' />
               <h1 className='m-0'>Some services are offline</h1>
             </>
           ) : globalStatus === 'down' ? (
             <>
-              <IconCircleXFilled className='size-10 fill-red-700' />
+              <div className='indicator down text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
             </>
           ) : (
             <>
-              <IconHelpCircleFilled className='size-10 fill-gray-600' />
+              <div className='indicator unknown text-gray-600' />
               <h1 className='m-0'>Unkown service status</h1>
             </>
           )}

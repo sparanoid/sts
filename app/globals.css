@@ -289,3 +289,49 @@
     }
   }
 }
+
+.indicator {
+  background-color: currentColor;
+  display: block;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+
+  &::before {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-color: currentColor;
+    opacity: 0;
+    transform: scale(1);
+    animation: radar 2s ease infinite;
+  }
+
+  &.up::before {
+    animation-duration: 4s;
+  }
+
+  &.partial::before {
+    animation-duration: 2s;
+  }
+
+  &.up::before {
+    animation-duration: 1s;
+  }
+
+  &.unknown::before {
+    animation: none;
+  }
+}
+
+@keyframes radar {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
