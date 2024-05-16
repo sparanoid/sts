@@ -9,8 +9,10 @@ const fetcher: Fetcher<Status[]> = async (...args: Parameters<typeof fetch>) => 
   return resp.json()
 }
 
-function useStatses() {
-  const { data, error } = useSWR(`/api/status`, fetcher, { refreshInterval: 1000 * 60 })
+function useStatses(size: number) {
+  const { data, error } = useSWR(size ? `/api/status?size=${size}` : null, fetcher, {
+    refreshInterval: 1000 * 60,
+  })
 
   return {
     data: data,

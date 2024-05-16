@@ -6,6 +6,7 @@ import type { Status, UptimeState } from '@/types'
 
 // import { getStatuses } from '@/lib/getStatuses'
 import useStatses from '@/utils/useStatses'
+import { useViewportSize } from '@/utils/useViewportSize'
 import timeFromNow from '@/utils/timeFromNow'
 
 import {
@@ -27,8 +28,10 @@ interface GroupedData {
 }
 
 export default function Home() {
+  const { width } = useViewportSize()
+
   // const data = await getStatuses()
-  const { data, isLoading, isError } = useStatses()
+  const { data, isLoading, isError } = useStatses(width < 640 ? 30 : width < 1024 ? 60 : 90)
   const [resolvedData, setResolvedData] = useState<GroupedData>()
   const [globalStatus, setGlobalStatus] = useState<UptimeState>()
   const [latestTimestamp, setLatestTimestamp] = useState<number>()
