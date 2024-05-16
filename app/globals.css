@@ -317,7 +317,7 @@
     animation-duration: 2s;
   }
 
-  &.up::before {
+  &.down::before {
     animation-duration: 1s;
   }
 
