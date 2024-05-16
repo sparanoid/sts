@@ -2,6 +2,21 @@
 
 sts, a fully open-source status page for Gatus backend
 
+## Features
+
+- Use [Gatus](https://github.com/TwiN/gatus) as your backend
+- Fully responsive
+- Dark mode support
+- Brand-free footer
+- All 100 scores in Lighthouse test
+
+## Stack
+
+- Framework: Next.js
+- UI: Floating UI + Radix Primitives
+- CSS: Tailwind + custom-made OKLCH color palettes
+- Data fetching: SWR
+
 ## Getting Started
 
 First, run the development server:
