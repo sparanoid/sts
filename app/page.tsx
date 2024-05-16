@@ -1,3 +1,7 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
 import {
   IconAlertCircleFilled,
   IconCircleCheckFilled,
@@ -7,9 +11,9 @@ import {
 
 import type { Status, UptimeState } from '@/types'
 
-import { getStatuses } from '@/lib/getStatuses'
+// import { getStatuses } from '@/lib/getStatuses'
+import useStatses from '@/utils/useStatses'
 import timeFromNow from '@/utils/timeFromNow'
-// import useStatses from '@/utils/useStatses'
 
 import {
   Accordion,
@@ -19,82 +23,103 @@ import {
 } from '@/components/ui/accordion'
 import { StatusItem } from '@/components/status-item'
 
-export default async function Home() {
-  // const { data, isLoading, isError } = useStatses()
-  const data = await getStatuses()
+interface GroupedData {
+  [key: string]: {
+    groupStatus: UptimeState
+    data: Status[]
+  }
+}
 
-  interface GroupedData {
-    [key: string]: {
-      groupStatus: UptimeState
-      data: Status[]
+export default function Home() {
+  // const data = await getStatuses()
+  const { data, isLoading, isError } = useStatses()
+  const [resolvedData, setResolvedData] = useState<GroupedData>()
+  const [globalStatus, setGlobalStatus] = useState<UptimeState>()
+  const [latestTimestamp, setLatestTimestamp] = useState<number>()
+
+  useEffect(() => {
+    function resolveGroupStatus(statuses: Status[]): UptimeState {
+      // let allUp = statuses.every(status => status.results.every(result => result.success))
+      // let allDown = statuses.every(status => status.results.every(result => !result.success))
+      let allUp = statuses.every(status => status.results[status.results.length - 1].success)
+      let allDown = statuses.every(status => !status.results[status.results.length - 1].success)
+
+      if (allUp) return 'up'
+      if (allDown) return 'down'
+      return 'partial'
     }
-  }
 
-  function resolveGroupStatus(statuses: Status[]): UptimeState {
-    // let allUp = statuses.every(status => status.results.every(result => result.success))
-    // let allDown = statuses.every(status => status.results.every(result => !result.success))
-    let allUp = statuses.every(status => status.results[status.results.length - 1].success)
-    let allDown = statuses.every(status => !status.results[status.results.length - 1].success)
+    function resolveUptime(status: Status) {
+      const total = status.results.length
+      const success = status.results.filter(result => result.success).length
+      return (success / total) * 100
+    }
 
-    if (allUp) return 'up'
-    if (allDown) return 'down'
-    return 'partial'
-  }
+    function processData(data: Status[]) {
+      const groupedData = data.reduce((acc: GroupedData, status) => {
+        const group = status.group
+        acc[group] = acc[group] || { groupStatus: 'unknown', data: [] }
+        status.uptime = resolveUptime(status)
+        acc[group].data.push(status)
+        return acc
+      }, {})
 
-  function resolveUptime(status: Status) {
-    const total = status.results.length
-    const success = status.results.filter(result => result.success).length
-    return (success / total) * 100
-  }
+      Object.keys(groupedData).forEach(group => {
+        groupedData[group].groupStatus = resolveGroupStatus(groupedData[group].data)
+      })
 
-  function processData(data: Status[]) {
-    const groupedData = data.reduce((acc: GroupedData, status) => {
-      const group = status.group
-      acc[group] = acc[group] || { groupStatus: 'unknown', data: [] }
-      status.uptime = resolveUptime(status)
-      acc[group].data.push(status)
-      return acc
-    }, {})
+      return groupedData
+    }
 
-    Object.keys(groupedData).forEach(group => {
-      groupedData[group].groupStatus = resolveGroupStatus(groupedData[group].data)
-    })
+    if (data && data.length) {
+      setResolvedData(processData(data))
+      setGlobalStatus(resolveGroupStatus(data))
+      setLatestTimestamp(
+        data.reduce((latest, item) => {
+          const maxUnixTimestamp = item.results.reduce((max, result) => {
+            const unixTimestamp = new Date(result.timestamp).getTime()
+            return unixTimestamp > max ? unixTimestamp : max
+          }, latest)
+          return maxUnixTimestamp > latest ? maxUnixTimestamp : latest
+        }, 0)
+      )
+    }
+  }, [data])
 
-    return groupedData
-  }
+  // const resolvedData = processData(data)
+  // const globalStatus = resolveGroupStatus(data)
+  // const latestTimestamp = data.reduce((latest, item) => {
+  //   const maxUnixTimestamp = item.results.reduce((max, result) => {
+  //     const unixTimestamp = new Date(result.timestamp).getTime()
+  //     return unixTimestamp > max ? unixTimestamp : max
+  //   }, latest)
+  //   return maxUnixTimestamp > latest ? maxUnixTimestamp : latest
+  // }, 0)
 
-  const resolvedData = processData(data)
-  const globalStatus = resolveGroupStatus(data)
-  const latestTimestamp = data.reduce((latest, item) => {
-    const maxUnixTimestamp = item.results.reduce((max, result) => {
-      const unixTimestamp = new Date(result.timestamp).getTime()
-      return unixTimestamp > max ? unixTimestamp : max
-    }, latest)
-    return maxUnixTimestamp > latest ? maxUnixTimestamp : latest
-  }, 0)
+  if (!resolvedData || !globalStatus || !latestTimestamp) return
 
   return (
     <main className='container mx-auto max-w-screen-md px-2 py-4 sm:px-4'>
       <nav className='flex gap-2 items-center justify-center'>
-        {process.env.SITE_BACK_URL && process.env.SITE_BACK_TITLE ? (
+        {process.env.NEXT_PUBLIC_SITE_BACK_URL && process.env.NEXT_PUBLIC_SITE_BACK_TITLE ? (
           <>
-            <a href={process.env.SITE_BACK_URL}>
-              {process.env.SITE_LOGO ? (
+            <a href={process.env.NEXT_PUBLIC_SITE_BACK_URL}>
+              {process.env.NEXT_PUBLIC_SITE_LOGO ? (
                 <picture>
                   <img
-                    src={process.env.SITE_LOGO}
+                    src={process.env.NEXT_PUBLIC_SITE_LOGO}
                     className='size-6'
-                    alt={process.env.SITE_BACK_TITLE}
+                    alt={process.env.NEXT_PUBLIC_SITE_BACK_TITLE}
                   />
                 </picture>
               ) : (
-                <span>{process.env.SITE_BACK_TITLE}</span>
+                <span>{process.env.NEXT_PUBLIC_SITE_BACK_TITLE}</span>
               )}
             </a>
             <span className='w-[1px] h-4 bg-text/10' />
           </>
         ) : null}
-        <a href={process.env.SITE_URL || '/'}>{process.env.SITE_TITLE}</a>
+        <a href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>{process.env.NEXT_PUBLIC_SITE_TITLE}</a>
       </nav>
 
       <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
@@ -162,7 +187,8 @@ export default async function Home() {
       </Accordion>
 
       <footer className='text-center py-8 text-sm text-text/50'>
-        {process.env.FOOTER_TEXT || 'sts, a fully open-source status page for Gatus backend'}
+        {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
+          'sts, a fully open-source status page for Gatus backend'}
       </footer>
     </main>
   )

@@ -4,8 +4,8 @@ import { Status } from '@/types'
 import timeFromNow from '@/utils/timeFromNow'
 import { IconCircleCheckFilled, IconCircleXFilled, IconInfoCircle } from '@tabler/icons-react'
 
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip-radix'
-// import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+// import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip-radix'
+import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import lazyFloat from '@/utils/lazyFloat'
 
 export function StatusItem({ data }: { data: Status }) {
@@ -58,7 +58,9 @@ export function StatusItem({ data }: { data: Status }) {
                   ? 'bg-emerald-700 hover:bg-emerald-500'
                   : 'bg-red-700 hover:bg-red-500'
               )}
-            />
+            >
+              <span />
+            </TooltipTrigger>
             <TooltipContent className='grid'>
               {result.conditionResults?.length ? (
                 <div>
