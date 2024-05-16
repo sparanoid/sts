@@ -22,6 +22,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { StatusItem } from '@/components/status-item'
+import { Skeleton } from '@/components/ui/skeleton'
+import Link from 'next/link'
 
 interface GroupedData {
   [key: string]: {
@@ -96,14 +98,12 @@ export default function Home() {
   //   return maxUnixTimestamp > latest ? maxUnixTimestamp : latest
   // }, 0)
 
-  if (!resolvedData || !globalStatus || !latestTimestamp) return
-
   return (
     <main className='container mx-auto max-w-screen-md px-2 py-4 sm:px-4'>
       <nav className='flex gap-2 items-center justify-center'>
         {process.env.NEXT_PUBLIC_SITE_BACK_URL && process.env.NEXT_PUBLIC_SITE_BACK_TITLE ? (
           <>
-            <a href={process.env.NEXT_PUBLIC_SITE_BACK_URL}>
+            <Link href={process.env.NEXT_PUBLIC_SITE_BACK_URL}>
               {process.env.NEXT_PUBLIC_SITE_LOGO ? (
                 <picture>
                   <img
@@ -115,76 +115,98 @@ export default function Home() {
               ) : (
                 <span>{process.env.NEXT_PUBLIC_SITE_BACK_TITLE}</span>
               )}
-            </a>
+            </Link>
             <span className='w-[1px] h-4 bg-text/10' />
           </>
         ) : null}
-        <a href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>{process.env.NEXT_PUBLIC_SITE_TITLE}</a>
+        <Link href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>
+          {process.env.NEXT_PUBLIC_SITE_TITLE}
+        </Link>
       </nav>
 
-      <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
-        {globalStatus === 'up' ? (
-          <>
-            <IconCircleCheckFilled className='size-10 fill-emerald-700' />
-            <h1 className='m-0'>All services are online</h1>
-          </>
-        ) : globalStatus === 'partial' ? (
-          <>
-            <IconAlertCircleFilled className='size-10 fill-amber-600' />
-            <h1 className='m-0'>Some services are offline</h1>
-          </>
-        ) : globalStatus === 'down' ? (
-          <>
-            <IconCircleXFilled className='size-10 fill-red-700' />
-            <h1 className='m-0'>All services are offline</h1>
-          </>
-        ) : (
-          <>
-            <IconHelpCircleFilled className='size-10 fill-gray-600' />
-            <h1 className='m-0'>Unkown service status</h1>
-          </>
-        )}
-        <div>Last updated on {timeFromNow(latestTimestamp)}</div>
-      </div>
+      {globalStatus && latestTimestamp ? (
+        <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
+          {globalStatus === 'up' ? (
+            <>
+              <IconCircleCheckFilled className='size-10 fill-emerald-700' />
+              <h1 className='m-0'>All services are online</h1>
+            </>
+          ) : globalStatus === 'partial' ? (
+            <>
+              <IconAlertCircleFilled className='size-10 fill-amber-600' />
+              <h1 className='m-0'>Some services are offline</h1>
+            </>
+          ) : globalStatus === 'down' ? (
+            <>
+              <IconCircleXFilled className='size-10 fill-red-700' />
+              <h1 className='m-0'>All services are offline</h1>
+            </>
+          ) : (
+            <>
+              <IconHelpCircleFilled className='size-10 fill-gray-600' />
+              <h1 className='m-0'>Unkown service status</h1>
+            </>
+          )}
+          <div>Last updated on {timeFromNow(latestTimestamp)}</div>
+        </div>
+      ) : (
+        <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
+          <Skeleton className='size-10 rounded-full' />
+          <Skeleton className='h-[38px] w-[258px]' />
+          <Skeleton className='h-[24px] w-[215px]' />
+        </div>
+      )}
 
-      <Accordion type='multiple' className='grid gap-2'>
-        {Object.entries(resolvedData).map(([group, statuses]) => (
-          <AccordionItem value={group} key={group}>
-            <AccordionTrigger>
-              <div className='text-left line-clamp-1'>{group}</div>
-              <div className='text-sm font-normal'>
-                {statuses.groupStatus === 'up' ? (
-                  <div className='flex gap-1 items-center'>
-                    <IconCircleCheckFilled className='size-4 fill-emerald-700' />
-                    <span>Operational</span>
-                  </div>
-                ) : statuses.groupStatus === 'partial' ? (
-                  <div className='flex gap-1 items-center'>
-                    <IconAlertCircleFilled className='size-4 fill-amber-600' />
-                    <span>Partial</span>
-                  </div>
-                ) : statuses.groupStatus === 'down' ? (
-                  <div className='flex gap-1 items-center'>
-                    <IconCircleXFilled className='size-4 fill-red-700' />
-                    <span>Down</span>
-                  </div>
-                ) : (
-                  <div className='flex gap-1 items-center'>
-                    <IconHelpCircleFilled className='size-4 fill-gray-600' />
-                    <span>Unknown</span>
-                  </div>
-                )}
-              </div>
-            </AccordionTrigger>
+      {resolvedData ? (
+        <Accordion type='multiple' className='grid gap-2'>
+          {Object.entries(resolvedData).map(([group, statuses]) => (
+            <AccordionItem value={group} key={group}>
+              <AccordionTrigger>
+                <div className='text-left line-clamp-1'>{group}</div>
+                <div className='text-sm font-normal'>
+                  {statuses.groupStatus === 'up' ? (
+                    <div className='flex gap-1 items-center'>
+                      <IconCircleCheckFilled className='size-4 fill-emerald-700' />
+                      <span>Operational</span>
+                    </div>
+                  ) : statuses.groupStatus === 'partial' ? (
+                    <div className='flex gap-1 items-center'>
+                      <IconAlertCircleFilled className='size-4 fill-amber-600' />
+                      <span>Partial</span>
+                    </div>
+                  ) : statuses.groupStatus === 'down' ? (
+                    <div className='flex gap-1 items-center'>
+                      <IconCircleXFilled className='size-4 fill-red-700' />
+                      <span>Down</span>
+                    </div>
+                  ) : (
+                    <div className='flex gap-1 items-center'>
+                      <IconHelpCircleFilled className='size-4 fill-gray-600' />
+                      <span>Unknown</span>
+                    </div>
+                  )}
+                </div>
+              </AccordionTrigger>
 
-            <AccordionContent className='grid gap-4'>
-              {statuses.data.map(status => (
-                <StatusItem data={status} key={status.key} />
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+              <AccordionContent className='grid gap-4'>
+                {statuses.data.map(status => (
+                  <StatusItem data={status} key={status.key} />
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      ) : (
+        <div className='grid gap-2'>
+          {[
+            ...new Array(
+              process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3
+            ),
+          ].map((_, idx) => {
+            return <Skeleton key={idx} className='h-[47px] w-full rounded-lg' />
+          })}
+        </div>
+      )}
 
       <footer className='text-center py-8 text-sm text-text/50'>
         {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
