@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from 'react'
 
-import {
-  IconAlertCircleFilled,
-  IconCircleCheckFilled,
-  IconCircleXFilled,
-  IconHelpCircleFilled,
-} from '@tabler/icons-react'
-
 import type { Status, UptimeState } from '@/types'
 
 // import { getStatuses } from '@/lib/getStatuses'
@@ -128,22 +121,22 @@ export default function Home() {
         <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
           {globalStatus === 'up' ? (
             <>
-              <div className='indicator up text-emerald-700' />
+              <div className='indicator up size-8 text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
           ) : globalStatus === 'partial' ? (
             <>
-              <div className='indicator partial text-amber-600' />
+              <div className='indicator partial size-8 text-amber-600' />
               <h1 className='m-0'>Some services are offline</h1>
             </>
           ) : globalStatus === 'down' ? (
             <>
-              <div className='indicator down text-red-700' />
+              <div className='indicator down size-8 text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
             </>
           ) : (
             <>
-              <div className='indicator unknown text-gray-600' />
+              <div className='indicator unknown size-8 text-gray-600' />
               <h1 className='m-0'>Unkown service status</h1>
             </>
           )}
@@ -164,25 +157,25 @@ export default function Home() {
               <AccordionTrigger asChild>
                 <h2 className='cursor-pointer text-lg'>
                   <div className='text-left line-clamp-1'>{group}</div>
-                  <div className='text-sm font-normal'>
+                  <div className='text-xs uppercase'>
                     {statuses.groupStatus === 'up' ? (
-                      <div className='flex gap-1 items-center'>
-                        <IconCircleCheckFilled className='size-4 fill-emerald-700' />
+                      <div className='flex gap-1 items-center text-emerald-700'>
+                        <div className='indicator up size-2.5' />
                         <span>Operational</span>
                       </div>
                     ) : statuses.groupStatus === 'partial' ? (
-                      <div className='flex gap-1 items-center'>
-                        <IconAlertCircleFilled className='size-4 fill-amber-600' />
+                      <div className='flex gap-1 items-center text-amber-600'>
+                        <div className='indicator partial size-2.5' />
                         <span>Partial</span>
                       </div>
                     ) : statuses.groupStatus === 'down' ? (
-                      <div className='flex gap-1 items-center'>
-                        <IconCircleXFilled className='size-4 fill-red-700' />
-                        <span>Down</span>
+                      <div className='flex gap-1 items-center text-red-700'>
+                        <div className='indicator down size-2.5' />
+                        <span>Offline</span>
                       </div>
                     ) : (
-                      <div className='flex gap-1 items-center'>
-                        <IconHelpCircleFilled className='size-4 fill-gray-600' />
+                      <div className='flex gap-1 items-center text-gray-600'>
+                        <div className='indicator unknown size-2.5' />
                         <span>Unknown</span>
                       </div>
                     )}

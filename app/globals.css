@@ -294,8 +294,6 @@
   background-color: currentColor;
   display: block;
   border-radius: 100%;
-  width: 2rem;
-  height: 2rem;
 
   &::before {
     display: block;
