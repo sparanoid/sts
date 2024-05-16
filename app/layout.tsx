@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 
 import './globals.css'
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   )
 }

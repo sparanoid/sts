@@ -1,6 +1,4 @@
 import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
-import { twClientColor } from './utils/twClientColor'
 
 const config = {
   // darkMode: ['class'],
@@ -18,11 +16,6 @@ const config = {
       serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
       mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
     },
-
-    boxShadow: ({ theme }) => ({
-      ...defaultTheme.boxShadow,
-      floating: `0 0 0 1px ${twClientColor(theme('colors.black'), '10%')}, 0 10px 30px 0 ${twClientColor(theme('colors.link'), '15%')}`,
-    }),
 
     extend: {
       // https://tailwindcss.com/docs/customizing-colors

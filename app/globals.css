@@ -290,6 +290,314 @@
   }
 }
 
+.logo {
+  font-family: var(--fontstack-figures);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.responsive-image {
+  max-width: 100%;
+  object-fit: contain;
+
+  @media (max-width: 540px) {
+    height: auto;
+  }
+}
+
+.margin-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn,
+.select {
+  font-size: 0.8rem;
+  font-weight: 500;
+  appearance: none;
+  border: 1px solid theme(colors.text / 40%);
+  border-top-color: theme(colors.text / 30%);
+  border-bottom-color: theme(colors.text / 50%);
+  color: theme(colors.text);
+  background: theme(colors.card / 20%);
+  border-radius: 4px;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+  box-shadow: 0 1px 1px 0 theme(colors.black / 10%);
+
+  [data-theme='subspace'] &,
+  [data-theme='dark'] & {
+    border-top-color: theme(colors.text / 80%);
+    border-bottom-color: theme(colors.text / 30%);
+  }
+
+  &:hover {
+    border-color: theme(colors.text);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    border-color: theme(colors.text / 40%);
+    cursor: not-allowed;
+  }
+}
+
+/* Force a link text color with `.btn` style */
+a.btn {
+  color: theme(colors.text);
+}
+
+.input {
+  color: theme(colors.text);
+  font-size: 0.8rem;
+
+  &::placeholder {
+    color: theme(colors.text / 40%);
+  }
+
+  &.text,
+  &[type='search'],
+  &[type='number'],
+  &[type='text'] {
+    appearance: none;
+    border: 1px solid theme(colors.text / 40%);
+    box-shadow: inset 0 1px 1px 0 theme(colors.black / 10%);
+    background: transparent;
+    border-radius: 4px;
+    padding: 0.25em 0.5em;
+    outline: none;
+
+    &:hover {
+      border-color: theme(colors.text / 60%);
+    }
+
+    &:focus {
+      border-color: theme(colors.text);
+    }
+
+    &.lg {
+      padding: 0.5em;
+    }
+  }
+
+  &[type='checkbox'],
+  &[type='radio'] {
+    appearance: none;
+    width: 1em;
+    height: 1em;
+    padding: 0;
+    margin: 0;
+    margin-right: 0.2em;
+    background-color: theme(colors.text / 10%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* border-radius: 2px; */
+    border: 1px solid theme(colors.text / 40%);
+    box-shadow: inset 0 1px 1px 0 theme(colors.black / 20%);
+    cursor: pointer;
+
+    + label {
+      opacity: 0.7;
+      cursor: pointer;
+      font-weight: 500;
+
+      span {
+        display: block;
+        margin-left: calc((1em + 0.2em) * 0.8);
+        opacity: 0.6;
+        font-weight: normal;
+      }
+    }
+
+    &:checked {
+      /* From Bootsrap */
+      /* https://getbootstrap.com/docs/5.2/forms/overview/ */
+      /* NOTE: this is defined below for specific checkbox and radio */
+      /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e"); */
+
+      + label {
+        opacity: 1;
+        /* text-decoration: none; */
+      }
+    }
+  }
+
+  &[type='search'] {
+    &::-webkit-search-cancel-button {
+      width: 1em;
+      height: 1em;
+      appearance: none;
+      mask-image: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z'/%3E%3C/svg%3E");
+      mask-repeat: no-repeat;
+      mask-position: center center;
+      background-color: currentColor;
+      background-repeat: no-repeat;
+      margin-right: 0;
+      cursor: pointer;
+    }
+  }
+
+  &[type='checkbox'] {
+    border-radius: 2px;
+
+    &:checked {
+      /* From Bootsrap */
+      /* https://getbootstrap.com/docs/5.2/forms/overview/ */
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+
+      /* TODO: currentColor does not work */
+      [data-theme='subspace'] &,
+      [data-theme='dark'] & {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+      }
+    }
+  }
+
+  &[type='radio'] {
+    border-radius: 50%;
+
+    &:checked {
+      /* From Bootsrap */
+      /* https://getbootstrap.com/docs/5.2/forms/overview/ */
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='black'/%3e%3c/svg%3e");
+
+      [data-theme='subspace'] &,
+      [data-theme='dark'] & {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='white'/%3e%3c/svg%3e");
+      }
+    }
+  }
+
+  /* &[type=range] {
+
+    &::-webkit-slider-thumb {
+      width: 1rem;
+      height: 1rem;
+      margin-top: -0.25rem;
+      background: theme(colors.card / light%);
+      border: 0;
+      border-radius: 1rem;
+      appearance: none;
+    }
+
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 0.5rem;
+      color: transparent;
+      cursor: pointer;
+      background: theme(colors.card);
+      border: 1px solid theme(colors.text / 20%);
+      border-color: transparent;
+      border-radius: 1rem;
+    }
+  } */
+
+  &[type='date'] {
+    appearance: none;
+    padding: 2px 4px;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid theme(colors.text / 40%);
+    border-radius: 4px;
+    width: fit-content;
+
+    &::-webkit-calendar-picker-indicator {
+      width: 1em;
+      height: 1em;
+      appearance: none;
+      mask-image: url('data:image/svg+xml,%0A%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2216%22%20height=%2215%22%20viewBox=%220%200%2024%2024%22%3E%3Cpath%20fill=%22WindowText%22%20d=%22M20%203h-1V1h-2v2H7V1H5v2H4c-1.1%200-2%20.9-2%202v16c0%201.1.9%202%202%202h16c1.1%200%202-.9%202-2V5c0-1.1-.9-2-2-2zm0%2018H4V8h16v13z%22/%3E%3Cpath%20fill=%22none%22%20d=%22M0%200h24v24H0z%22/%3E%3C/svg%3E');
+      mask-repeat: no-repeat;
+      mask-position: center center;
+      background: currentColor;
+      cursor: pointer;
+    }
+  }
+}
+
+.pseudo-link {
+  color: theme(colors.link);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.pseudo-link-hover-highlight {
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: theme(colors.link);
+  }
+}
+
+.filter-auto-dark {
+  /* filter: invert(0); */
+
+  [data-theme='subspace'] &,
+  [data-theme='dark'] & {
+    filter: invert(100%);
+  }
+}
+
+.badge {
+  font-size: 12px;
+  color: theme(colors.orange.600);
+  background: theme(colors.orange.600 / 10%);
+  padding: 1px 4px;
+  margin-left: 2px;
+  border-radius: 4px;
+  border: 1px solid;
+
+  &.badge-danger {
+    color: theme(colors.red.600);
+    background: theme(colors.red.600 / 10%);
+  }
+
+  &.badge-success {
+    color: theme(colors.green.600);
+    background: theme(colors.green.600 / 10%);
+  }
+
+  &.badge-info {
+    color: theme(colors.blue.600);
+    background: theme(colors.blue.600 / 10%);
+  }
+
+  &.badge-warning {
+    color: theme(colors.amber.600);
+    background: theme(colors.amber.600 / 10%);
+  }
+
+  &.badge-sm {
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 1px 3px;
+  }
+}
+
+.floating {
+  background: var(--floating-ui-bg);
+  box-shadow: var(--floating-ui-shadow);
+  border: var(--floating-ui-border);
+  /* width: max-content; */
+  -webkit-backdrop-filter: var(--floating-ui-backdrop);
+  backdrop-filter: var(--floating-ui-backdrop);
+  z-index: var(--order-floating);
+}
+
+::selection {
+  background: theme(colors.text / 30%);
+}
+
+.vsc-controller {
+  display: none;
+}
+
 .indicator {
   background-color: currentColor;
   display: block;

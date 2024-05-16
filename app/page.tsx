@@ -17,6 +17,7 @@ import {
 import { StatusItem } from '@/components/status-item'
 import { Skeleton } from '@/components/ui/skeleton'
 import Link from 'next/link'
+import { ThemeSwitch } from '@/components/theme-switch'
 
 interface GroupedData {
   [key: string]: {
@@ -144,8 +145,8 @@ export default function Home() {
         </div>
       ) : (
         <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
-          <Skeleton className='size-10 rounded-full' />
-          <Skeleton className='h-[38px] w-[258px] rounded-md' />
+          <Skeleton className='size-8 rounded-full' />
+          <Skeleton className='h-[38.4px] w-[258px] rounded-md' />
           <Skeleton className='h-[24px] w-[215px] rounded-md' />
         </div>
       )}
@@ -203,9 +204,12 @@ export default function Home() {
         </div>
       )}
 
-      <footer className='text-center py-8 text-sm text-text/80'>
-        {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
-          'sts, a fully open-source status page for Gatus backend'}
+      <footer className='grid gap-2 justify-items-center text-center py-8 text-sm text-text/80'>
+        <div>
+          {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
+            'sts, a fully open-source status page for Gatus backend'}
+        </div>
+        <ThemeSwitch />
       </footer>
     </main>
   )
