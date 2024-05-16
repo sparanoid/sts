@@ -206,7 +206,7 @@ const MenuComponent = React.forwardRef<
 
   return (
     <FloatingNode id={nodeId}>
-      <span
+      <button
         ref={referenceRef}
         data-open={open ? '' : undefined}
         {...getReferenceProps({
@@ -227,7 +227,7 @@ const MenuComponent = React.forwardRef<
             ›
           </span>
         )}
-      </span>
+      </button>
       <FloatingPortal>
         {open && (
           <FloatingFocusManager

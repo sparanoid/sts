@@ -163,24 +163,24 @@ export default function Home() {
                   <div className='text-left line-clamp-1'>{group}</div>
                   <div className='text-xs uppercase'>
                     {statuses.groupStatus === 'up' ? (
-                      <div className='flex gap-1 items-center text-emerald-700'>
-                        <div className='indicator up size-2.5' />
-                        <span>Operational</span>
+                      <div className='flex gap-1 items-center'>
+                        <div className='indicator up size-2.5 text-emerald-700' />
+                        <span className='text-emerald-800'>Operational</span>
                       </div>
                     ) : statuses.groupStatus === 'partial' ? (
-                      <div className='flex gap-1 items-center text-amber-600'>
-                        <div className='indicator partial size-2.5' />
-                        <span>Partial</span>
+                      <div className='flex gap-1 items-center'>
+                        <div className='indicator partial size-2.5 text-amber-600' />
+                        <span className='text-amber-700'>Partial</span>
                       </div>
                     ) : statuses.groupStatus === 'down' ? (
-                      <div className='flex gap-1 items-center text-red-700'>
-                        <div className='indicator down size-2.5' />
-                        <span>Offline</span>
+                      <div className='flex gap-1 items-center'>
+                        <div className='indicator down size-2.5 text-red-700' />
+                        <span className='text-red-800'>Offline</span>
                       </div>
                     ) : (
-                      <div className='flex gap-1 items-center text-gray-600'>
-                        <div className='indicator unknown size-2.5' />
-                        <span>Unknown</span>
+                      <div className='flex gap-1 items-center'>
+                        <div className='indicator unknown size-2.5 text-gray-600' />
+                        <span className='text-gray-700'>Unknown</span>
                       </div>
                     )}
                   </div>

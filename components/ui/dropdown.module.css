@@ -1,5 +1,6 @@
 .Root {
   display: inline-flex;
+  align-items: center;
   appearance: none;
   border: none;
   padding: 0;

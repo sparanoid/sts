@@ -35,12 +35,12 @@ export function StatusItem({ data }: { data: Status }) {
             className={clsx(
               'text-sm text-right text-nowrap',
               data.uptime > 90
-                ? 'text-emerald-700'
+                ? 'text-emerald-800'
                 : data.uptime > 75
-                  ? 'text-yellow-700'
+                  ? 'text-yellow-800'
                   : data.uptime > 50
-                    ? 'text-amber-600'
-                    : 'text-red-700'
+                    ? 'text-amber-700'
+                    : 'text-red-800'
             )}
           >
             {data.uptime?.toFixed(2)}% uptime
@@ -111,7 +111,7 @@ export function StatusItem({ data }: { data: Status }) {
       </div>
 
       {/* Timestamps */}
-      <div className='flex justify-between items-center text-sm text-text/50'>
+      <div className='flex justify-between items-center text-sm text-text/80'>
         <div>{timeFromNow(+new Date(firstResult.timestamp))}</div>
         <div>{timeFromNow(+new Date(lastResult.timestamp))}</div>
       </div>
