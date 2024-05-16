@@ -143,7 +143,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, React.HTMLProps<H
         <div
           ref={ref}
           className={clsx(
-            'z-100 overflow-hidden rounded-md bg-bg border border-text/10 px-3 py-1.5 text-text shadow-lg',
+            'z-100 overflow-hidden rounded-md bg-bg px-3 py-1.5 text-text shadow-floating',
             className
           )}
           style={{

@@ -1,12 +1,23 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
+import { twClientColor } from './utils/twClientColor'
 
-const config: Config = {
+const config = {
+  // darkMode: ['class'],
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  prefix: '',
   theme: {
+    // Override default values
+    // https://tailwindcss.com/docs/theme#overriding-the-default-theme
+    boxShadow: ({ theme }) => ({
+      ...defaultTheme.boxShadow,
+      floating: `0 0 0 1px ${twClientColor(theme('colors.black'), '10%')}, 0 10px 30px 0 ${twClientColor(theme('colors.link'), '15%')}`,
+    }),
+
     extend: {
       // https://tailwindcss.com/docs/customizing-colors
       colors: {
@@ -298,5 +309,6 @@ const config: Config = {
     },
   },
   plugins: [],
-}
+} satisfies Config
+
 export default config
