@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 
-// import { TooltipProvider } from '@/components/ui/tooltip-radix'
-
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -18,9 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      {/* <TooltipProvider delayDuration={0} disableHoverableContent={true}> */}
       <body>{children}</body>
-      {/* </TooltipProvider> */}
     </html>
   )
 }
