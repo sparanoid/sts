@@ -152,8 +152,8 @@ export default function Home() {
       ) : (
         <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
           <Skeleton className='size-10 rounded-full' />
-          <Skeleton className='h-[38px] w-[258px]' />
-          <Skeleton className='h-[24px] w-[215px]' />
+          <Skeleton className='h-[38px] w-[258px] rounded-md' />
+          <Skeleton className='h-[24px] w-[215px] rounded-md' />
         </div>
       )}
 
@@ -161,31 +161,33 @@ export default function Home() {
         <Accordion type='multiple' className='grid gap-2'>
           {Object.entries(resolvedData).map(([group, statuses]) => (
             <AccordionItem value={group} key={group}>
-              <AccordionTrigger>
-                <div className='text-left line-clamp-1'>{group}</div>
-                <div className='text-sm font-normal'>
-                  {statuses.groupStatus === 'up' ? (
-                    <div className='flex gap-1 items-center'>
-                      <IconCircleCheckFilled className='size-4 fill-emerald-700' />
-                      <span>Operational</span>
-                    </div>
-                  ) : statuses.groupStatus === 'partial' ? (
-                    <div className='flex gap-1 items-center'>
-                      <IconAlertCircleFilled className='size-4 fill-amber-600' />
-                      <span>Partial</span>
-                    </div>
-                  ) : statuses.groupStatus === 'down' ? (
-                    <div className='flex gap-1 items-center'>
-                      <IconCircleXFilled className='size-4 fill-red-700' />
-                      <span>Down</span>
-                    </div>
-                  ) : (
-                    <div className='flex gap-1 items-center'>
-                      <IconHelpCircleFilled className='size-4 fill-gray-600' />
-                      <span>Unknown</span>
-                    </div>
-                  )}
-                </div>
+              <AccordionTrigger asChild>
+                <h2 className='cursor-pointer text-lg'>
+                  <div className='text-left line-clamp-1'>{group}</div>
+                  <div className='text-sm font-normal'>
+                    {statuses.groupStatus === 'up' ? (
+                      <div className='flex gap-1 items-center'>
+                        <IconCircleCheckFilled className='size-4 fill-emerald-700' />
+                        <span>Operational</span>
+                      </div>
+                    ) : statuses.groupStatus === 'partial' ? (
+                      <div className='flex gap-1 items-center'>
+                        <IconAlertCircleFilled className='size-4 fill-amber-600' />
+                        <span>Partial</span>
+                      </div>
+                    ) : statuses.groupStatus === 'down' ? (
+                      <div className='flex gap-1 items-center'>
+                        <IconCircleXFilled className='size-4 fill-red-700' />
+                        <span>Down</span>
+                      </div>
+                    ) : (
+                      <div className='flex gap-1 items-center'>
+                        <IconHelpCircleFilled className='size-4 fill-gray-600' />
+                        <span>Unknown</span>
+                      </div>
+                    )}
+                  </div>
+                </h2>
               </AccordionTrigger>
 
               <AccordionContent className='grid gap-4'>
@@ -203,12 +205,12 @@ export default function Home() {
               process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3
             ),
           ].map((_, idx) => {
-            return <Skeleton key={idx} className='h-[47px] w-full rounded-lg' />
+            return <Skeleton key={idx} className='mt-[1px] h-[52px] w-full rounded-lg' />
           })}
         </div>
       )}
 
-      <footer className='text-center py-8 text-sm text-text/50'>
+      <footer className='text-center py-8 text-sm text-text/80'>
         {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
           'sts, a fully open-source status page for Gatus backend'}
       </footer>
