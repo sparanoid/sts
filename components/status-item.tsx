@@ -7,6 +7,7 @@ import { IconCircleCheckFilled, IconCircleXFilled, IconInfoCircle } from '@table
 // import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip-radix'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import lazyFloat from '@/utils/lazyFloat'
+import formatDate from '@/utils/formatDate'
 
 export function StatusItem({ data }: { data: Status }) {
   const firstResult = data.results[0]
@@ -67,24 +68,43 @@ export function StatusItem({ data }: { data: Status }) {
                   {result.conditionResults.map((result, idx) => {
                     return (
                       <div key={idx} className='flex items-center gap-1'>
-                        <code>{result.condition}</code>
-                        <span>
-                          {result.success ? (
+                        {result.success ? (
+                          <>
                             <IconCircleCheckFilled className='size-4 fill-emerald-700' />
-                          ) : (
+                            <span className='font-mono text-sm text-emerald-700'>
+                              {result.condition}
+                            </span>
+                          </>
+                        ) : (
+                          <>
                             <IconCircleXFilled className='size-4 fill-red-700' />
-                          )}
-                        </span>
+                            <span className='font-mono text-sm fill-red-700'>
+                              {result.condition}
+                            </span>
+                          </>
+                        )}
                       </div>
                     )
                   })}
+                  <hr className='-mx-3 m-1' />
                 </div>
               ) : null}
               <div>
                 {lazyFloat(result.duration / 1000 / 1000)}ms,{' '}
                 {timeFromNow(+new Date(result.timestamp))}
               </div>
-              <div className='text-text/50 text-sm'>{result.timestamp}</div>
+              <div className='text-text/50 text-sm'>
+                {formatDate(new Date(result.timestamp), {
+                  format: {
+                    month: '2-digit',
+                    day: '2-digit',
+                    weekday: 'short',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                  },
+                })}
+              </div>
             </TooltipContent>
           </Tooltip>
         ))}
