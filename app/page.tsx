@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import clsx from 'clsx'
+import { IconRefresh } from '@tabler/icons-react'
 
 import type { Status, UptimeState } from '@/types'
 
@@ -31,7 +33,9 @@ export default function Home() {
   const { width } = useViewportSize()
 
   // const data = await getStatuses()
-  const { data, isLoading, isError } = useStatses(width < 640 ? 30 : width < 1024 ? 60 : 90)
+  const { data, isLoading, isValidating, mutate } = useStatses(
+    width < 640 ? 30 : width < 1024 ? 60 : 90
+  )
   const [resolvedData, setResolvedData] = useState<GroupedData>()
   const [globalStatus, setGlobalStatus] = useState<UptimeState>()
   const [latestTimestamp, setLatestTimestamp] = useState<number>()
@@ -122,35 +126,49 @@ export default function Home() {
       </nav>
 
       {globalStatus && latestTimestamp ? (
-        <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
+        <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
           {globalStatus === 'up' ? (
             <>
-              <div className='indicator up size-8 text-emerald-700' />
+              <div className='size-8 m-2 indicator up text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
           ) : globalStatus === 'partial' ? (
             <>
-              <div className='indicator partial size-8 text-amber-600' />
+              <div className='size-8 m-2 indicator partial text-amber-600' />
               <h1 className='m-0'>Some services are offline</h1>
             </>
           ) : globalStatus === 'down' ? (
             <>
-              <div className='indicator down size-8 text-red-700' />
+              <div className='size-8 m-2 indicator down text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
             </>
           ) : (
             <>
-              <div className='indicator unknown size-8 text-gray-600' />
+              <div className='size-8 m-2 indicator unknown text-gray-600' />
               <h1 className='m-0'>Unkown service status</h1>
             </>
           )}
-          <div>Last updated on {timeFromNow(latestTimestamp)}</div>
+          <div className='flex items-center gap-1'>
+            Updated on {timeFromNow(latestTimestamp)}
+            <button
+              onClick={() => mutate()}
+              aria-label='Refresh'
+              disabled={isLoading || isValidating}
+            >
+              <IconRefresh
+                className={clsx('size-5', (isLoading || isValidating) && 'animate-spin')}
+              />
+            </button>
+          </div>
         </div>
       ) : (
-        <div className='grid gap-2 my-10 items-center text-center justify-items-center'>
-          <Skeleton className='size-8 rounded-full' />
+        <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
+          <Skeleton className='size-10 m-1 rounded-full' />
           <Skeleton className='h-[38.4px] w-[258px] rounded-md' />
-          <Skeleton className='h-[24px] w-[215px] rounded-md' />
+          <div className='flex items-center gap-1'>
+            <Skeleton className='h-[24px] w-[215px] rounded-md' />
+            <Skeleton className='size-5 rounded-full' />
+          </div>
         </div>
       )}
 
