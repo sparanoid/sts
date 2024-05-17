@@ -30,12 +30,12 @@ interface GroupedData {
 }
 
 export default function Home() {
+  // width can be 0 when init
   const { width } = useViewportSize()
+  const resolvedWidth = width > 0 ? (width < 640 ? 30 : width < 1024 ? 60 : 90) : undefined
 
   // const data = await getStatuses()
-  const { data, isLoading, isValidating, mutate } = useStatses(
-    width < 640 ? 30 : width < 1024 ? 60 : 90
-  )
+  const { data, isLoading, isValidating, mutate } = useStatses(resolvedWidth)
   const [resolvedData, setResolvedData] = useState<GroupedData>()
   const [globalStatus, setGlobalStatus] = useState<UptimeState>()
   const [latestTimestamp, setLatestTimestamp] = useState<number>()
