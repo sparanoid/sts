@@ -8,8 +8,9 @@ import { IconCircleCheckFilled, IconCircleXFilled, IconInfoCircle } from '@table
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
 import lazyFloat from '@/utils/lazyFloat'
 import formatDate from '@/utils/formatDate'
+import { memo } from 'react'
 
-export function StatusItem({ data }: { data: Status }) {
+export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
   const firstResult = data.results[0]
   const lastResult = data.results[data.results.length - 1]
 
@@ -117,4 +118,4 @@ export function StatusItem({ data }: { data: Status }) {
       </div>
     </div>
   )
-}
+})
