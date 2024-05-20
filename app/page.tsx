@@ -149,7 +149,7 @@ export default function Home() {
             </>
           )}
           <div className='flex items-center gap-1'>
-            Updated on {timeFromNow(latestTimestamp)}
+            Updated {timeFromNow(latestTimestamp)}
             <button
               onClick={() => mutate()}
               aria-label='Refresh'
