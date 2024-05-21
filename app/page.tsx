@@ -10,6 +10,7 @@ import type { Status, UptimeState } from '@/types'
 import useStatses from '@/utils/useStatses'
 import { useViewportSize } from '@/utils/useViewportSize'
 import timeFromNow from '@/utils/timeFromNow'
+import lazyFloat from '@/utils/lazyFloat'
 
 import {
   Accordion,
@@ -42,14 +43,12 @@ export default function Home() {
 
   useEffect(() => {
     function resolveGroupStatus(statuses: Status[]): UptimeState {
-      // let allUp = statuses.every(status => status.results.every(result => result.success))
-      // let allDown = statuses.every(status => status.results.every(result => !result.success))
-      let allUp = statuses.every(status => status.results[status.results.length - 1].success)
-      let allDown = statuses.every(status => !status.results[status.results.length - 1].success)
+      const upCount = statuses.reduce((count, status) => {
+        return count + (status.results[status.results.length - 1].success ? 1 : 0)
+      }, 0)
 
-      if (allUp) return 'up'
-      if (allDown) return 'down'
-      return 'partial'
+      const total = statuses.length
+      return upCount / total
     }
 
     function resolveUptime(status: Status) {
@@ -61,7 +60,7 @@ export default function Home() {
     function processData(data: Status[]) {
       const groupedData = data.reduce((acc: GroupedData, status) => {
         const group = status.group
-        acc[group] = acc[group] || { groupStatus: 'unknown', data: [] }
+        acc[group] = acc[group] || { groupStatus: -1, data: [] }
         status.uptime = resolveUptime(status)
         acc[group].data.push(status)
         return acc
@@ -127,25 +126,20 @@ export default function Home() {
 
       {globalStatus && latestTimestamp ? (
         <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
-          {globalStatus === 'up' ? (
+          {globalStatus === 1 ? (
             <>
               <div className='size-8 m-2 indicator up text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
-          ) : globalStatus === 'partial' ? (
-            <>
-              <div className='size-8 m-2 indicator partial text-amber-600' />
-              <h1 className='m-0'>Some services are offline</h1>
-            </>
-          ) : globalStatus === 'down' ? (
+          ) : globalStatus === 0 ? (
             <>
               <div className='size-8 m-2 indicator down text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
             </>
           ) : (
             <>
-              <div className='size-8 m-2 indicator unknown text-gray-600' />
-              <h1 className='m-0'>Unkown service status</h1>
+              <div className='size-8 m-2 indicator partial text-amber-600' />
+              <h1 className='m-0'>Some services are offline</h1>
             </>
           )}
           <div className='flex items-center gap-1'>
@@ -180,25 +174,22 @@ export default function Home() {
                 <h2 className='cursor-pointer text-lg'>
                   <div className='text-left line-clamp-1'>{group}</div>
                   <div className='text-xs uppercase'>
-                    {statuses.groupStatus === 'up' ? (
+                    {statuses.groupStatus === 1 ? (
                       <div className='flex gap-1 items-center'>
                         <div className='indicator up size-2.5 text-emerald-700' />
                         <span className='text-emerald-800'>Operational</span>
                       </div>
-                    ) : statuses.groupStatus === 'partial' ? (
-                      <div className='flex gap-1 items-center'>
-                        <div className='indicator partial size-2.5 text-amber-600' />
-                        <span className='text-amber-700'>Partial</span>
-                      </div>
-                    ) : statuses.groupStatus === 'down' ? (
+                    ) : statuses.groupStatus === 0 ? (
                       <div className='flex gap-1 items-center'>
                         <div className='indicator down size-2.5 text-red-700' />
                         <span className='text-red-800'>Offline</span>
                       </div>
                     ) : (
                       <div className='flex gap-1 items-center'>
-                        <div className='indicator unknown size-2.5 text-gray-600' />
-                        <span className='text-gray-700'>Unknown</span>
+                        <div className='indicator partial size-2.5 text-amber-600' />
+                        <span className='text-amber-700'>
+                          Partial - {lazyFloat(statuses.groupStatus * 100)}%
+                        </span>
                       </div>
                     )}
                   </div>

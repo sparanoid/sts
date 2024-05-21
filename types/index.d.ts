@@ -1,4 +1,4 @@
-export type UptimeState = 'up' | 'down' | 'partial' | 'unknown'
+export type UptimeState = number
 
 export interface Status {
   /** "miscs" */
