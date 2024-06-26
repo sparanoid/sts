@@ -1,4 +1,9 @@
-export type UptimeState = number
+// export type UptimeState = number
+export interface UptimeState {
+  up: number
+  total: number
+  percent: number
+}
 
 export interface Status {
   /** "miscs" */

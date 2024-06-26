@@ -10,7 +10,6 @@ import type { Status, UptimeState } from '@/types'
 import useStatses from '@/utils/useStatses'
 import { useViewportSize } from '@/utils/useViewportSize'
 import timeFromNow from '@/utils/timeFromNow'
-import lazyFloat from '@/utils/lazyFloat'
 
 import {
   Accordion,
@@ -48,7 +47,11 @@ export default function Home() {
       }, 0)
 
       const total = statuses.length
-      return upCount / total
+      return {
+        up: upCount,
+        total: total,
+        percent: (upCount / total) * 100,
+      }
     }
 
     function resolveUptime(status: Status) {
@@ -126,12 +129,12 @@ export default function Home() {
 
       {globalStatus && latestTimestamp ? (
         <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
-          {globalStatus === 1 ? (
+          {globalStatus.percent === 100 ? (
             <>
               <div className='size-8 m-2 indicator up text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
-          ) : globalStatus === 0 ? (
+          ) : globalStatus.percent === 0 ? (
             <>
               <div className='size-8 m-2 indicator down text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
@@ -174,12 +177,12 @@ export default function Home() {
                 <h2 className='cursor-pointer text-lg'>
                   <div className='text-left line-clamp-1'>{group}</div>
                   <div className='text-xs uppercase'>
-                    {statuses.groupStatus === 1 ? (
+                    {statuses.groupStatus.percent === 100 ? (
                       <div className='flex gap-1 items-center'>
                         <div className='indicator up size-2.5 text-emerald-700' />
                         <span className='text-emerald-800'>Operational</span>
                       </div>
-                    ) : statuses.groupStatus === 0 ? (
+                    ) : statuses.groupStatus.percent === 0 ? (
                       <div className='flex gap-1 items-center'>
                         <div className='indicator down size-2.5 text-red-700' />
                         <span className='text-red-800'>Offline</span>
@@ -188,7 +191,7 @@ export default function Home() {
                       <div className='flex gap-1 items-center'>
                         <div className='indicator partial size-2.5 text-amber-600' />
                         <span className='text-amber-700'>
-                          Partial - {lazyFloat(statuses.groupStatus * 100)}%
+                          Partial - {statuses.groupStatus.up}/{statuses.data.length}
                         </span>
                       </div>
                     )}

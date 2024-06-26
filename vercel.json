@@ -24,13 +24,13 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'"
         }
       ]
     },
     {
-      "source": "/:path*(svg|jpg|jpeg|png|gif|webp)",
+      "source": "/:path*(svg|jpg|jpeg|png|gif|webp|avif|mp4)",
       "headers": [
         {
           "key": "Cache-Control",
