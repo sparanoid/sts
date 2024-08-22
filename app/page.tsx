@@ -7,7 +7,7 @@ import { IconRefresh } from '@tabler/icons-react'
 import type { Status, UptimeState } from '@/types'
 
 // import { getStatuses } from '@/lib/getStatuses'
-import useStatses from '@/utils/useStatses'
+import useStatuses from '@/utils/useStatuses'
 import { useViewportSize } from '@/utils/useViewportSize'
 import timeFromNow from '@/utils/timeFromNow'
 
@@ -35,7 +35,7 @@ export default function Home() {
   const resolvedWidth = width > 0 ? (width < 640 ? 30 : width < 1024 ? 60 : 90) : undefined
 
   // const data = await getStatuses()
-  const { data, isLoading, isValidating, mutate } = useStatses(resolvedWidth)
+  const { data, isLoading, isValidating, mutate } = useStatuses(resolvedWidth)
   const [resolvedData, setResolvedData] = useState<GroupedData>()
   const [globalStatus, setGlobalStatus] = useState<UptimeState>()
   const [latestTimestamp, setLatestTimestamp] = useState<number>()

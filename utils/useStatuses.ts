@@ -9,7 +9,7 @@ const fetcher: Fetcher<Status[]> = async (...args: Parameters<typeof fetch>) => 
   return resp.json()
 }
 
-function useStatses(size: number | undefined) {
+function useStatuses(size: number | undefined) {
   const { data, error, isValidating, mutate } = useSWR(
     size ? `/api/status?size=${size}` : null,
     fetcher,
@@ -28,4 +28,4 @@ function useStatses(size: number | undefined) {
   }
 }
 
-export default useStatses
+export default useStatuses
