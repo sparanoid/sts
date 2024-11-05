@@ -25,7 +25,7 @@
     "@types/node": "^22.9.0",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-    "eslint": "^8.57.1",
+    "eslint": "^9.14.0",
     "eslint-config-next": "15.0.2",
     "postcss": "^8.4.47",
     "postcss-nesting": "^13.0.1",

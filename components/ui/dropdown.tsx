@@ -67,6 +67,7 @@ const MenuItem = React.forwardRef<
 })
 
 interface MenuProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   label: any
   nested?: boolean
   children?: React.ReactNode
@@ -80,11 +81,6 @@ const MenuComponent = React.forwardRef<
   const [allowHover, setAllowHover] = React.useState(false)
 
   const listItemsRef = React.useRef<Array<HTMLButtonElement | null>>([])
-  const listContentRef = React.useRef(
-    React.Children.map(children, child =>
-      React.isValidElement(child) ? child.props.label : null
-    ) as Array<string | null>
-  )
 
   const tree = useFloatingTree()
   const nodeId = useFloatingNodeId()
@@ -103,7 +99,7 @@ const MenuComponent = React.forwardRef<
         padding: 10,
       }),
       size({
-        apply({ rects, elements, availableHeight }) {
+        apply({ elements, availableHeight }) {
           Object.assign(elements.floating.style, {
             maxHeight: `${availableHeight}px`,
           })
@@ -279,6 +275,7 @@ const MenuComponent = React.forwardRef<
                         listItemsRef.current[index] = node
                       },
                       onClick(event) {
+                        // @ts-expect-error react rc related
                         child.props.onClick?.(event)
                         tree?.events.emit('click')
                       },
