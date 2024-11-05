@@ -24,7 +24,7 @@
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^22.9.0",
     "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0",
     "eslint": "^9.14.0",
     "eslint-config-next": "15.0.2",
     "postcss": "^8.4.47",
@@ -36,6 +36,6 @@
   "packageManager": "bun@1.1.33",
   "overrides": {
     "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
+    "@types/react-dom": "npm:types-react-dom@19.0.0"
   }
 }
