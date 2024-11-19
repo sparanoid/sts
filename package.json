@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@floating-ui/react": "^0.26.27",
+    "@floating-ui/react": "^0.26.28",
     "@radix-ui/react-accordion": "^1.2.1",
-    "@tabler/icons-react": "^3.21.0",
+    "@tabler/icons-react": "^3.22.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "next": "15.0.3",
@@ -25,12 +25,12 @@
     "@types/node": "^22.9.0",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
-    "eslint": "^9.14.0",
+    "eslint": "^9.15.0",
     "eslint-config-next": "15.0.3",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.49",
     "postcss-nesting": "^13.0.1",
     "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.14",
+    "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3"
   },
   "packageManager": "bun@1.1.33",
