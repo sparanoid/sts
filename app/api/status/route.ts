@@ -3,6 +3,9 @@ import { getStatuses } from '@/lib/getStatuses'
 
 export const runtime = 'edge'
 
+// https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#fetchcache
+export const fetchCache = 'force-no-store'
+
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams
   const sizeString = searchParams.get('size')
