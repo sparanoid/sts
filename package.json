@@ -30,6 +30,7 @@
     "postcss": "^8.4.49",
     "postcss-nesting": "^13.0.1",
     "prettier": "^3.4.1",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.7.2"
   },

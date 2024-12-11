@@ -21,7 +21,7 @@ export default function Home() {
                 <span>{process.env.NEXT_PUBLIC_SITE_BACK_TITLE}</span>
               )}
             </Link>
-            <span className='w-[1px] h-4 bg-text/10' />
+            <span className='w-[1px] h-4 bg-fg/10' />
           </>
         ) : null}
         <Link href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>
@@ -31,7 +31,7 @@ export default function Home() {
 
       <StatusList />
 
-      <footer className='grid gap-2 justify-items-center text-center py-8 text-sm text-text/80'>
+      <footer className='grid gap-2 justify-items-center text-center py-8 text-sm text-fg/80'>
         <div>
           {process.env.NEXT_PUBLIC_FOOTER_TEXT ||
             'sts, a fully open-source status page for Gatus backend'}

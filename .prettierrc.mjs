@@ -2,7 +2,7 @@
  * @type {import('prettier').Options}
  */
 export default {
-  printWidth: 100,
+  printWidth: 120,
   trailingComma: "es5",
   tabWidth: 2,
   semi: false,
@@ -10,5 +10,6 @@ export default {
   quoteProps: 'consistent',
   jsxSingleQuote: true,
   arrowParens: "avoid",
-  endOfLine: "lf"
+  endOfLine: "lf",
+  plugins: ["prettier-plugin-tailwindcss"]
 }

@@ -20,10 +20,14 @@ const config = {
     extend: {
       // https://tailwindcss.com/docs/customizing-colors
       colors: {
-        text: 'oklch(clamp(0%, calc(var(--text-color-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
-        link: 'oklch(clamp(0%, calc(var(--link-color-l) + var(--lch-l-offset)), 100%) var(--secondary-c) var(--secondary-h) / <alpha-value>)',
-        card: 'oklch(clamp(0%, calc(var(--card-color-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
-        bg: 'oklch(clamp(0%, calc(var(--bg-color-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
+        // foreground color, usually text color
+        fg: 'oklch(clamp(0%, calc(var(--fg-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
+        // background color
+        bg: 'oklch(clamp(0%, calc(var(--bg-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
+        // accent color, usually link color
+        ac: 'oklch(clamp(0%, calc(var(--ac-l) + var(--lch-l-offset)), 100%) var(--secondary-c) var(--secondary-h) / <alpha-value>)',
+        // highlight color, an alternative accent color
+        hl: 'oklch(clamp(0%, calc(var(--hl-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h) / <alpha-value>)',
 
         // https://oklch.com/#65,0.02,262,100
         black: 'oklch(calc(0% + var(--lch-l-offset)) 0 0 / <alpha-value>)',
@@ -282,9 +286,17 @@ const config = {
           950: 'oklch(clamp(var(--lch-l-clamp-min), calc(15% + var(--lch-l-offset)), var(--lch-l-clamp-max)) var(--lch-c) var(--hue-rose) / <alpha-value>)',
         },
       },
-      boxShadow: {
-        glow: '0 10px 50px 0 rgba(0, 0, 0, 0.3)',
-      },
+      borderColor: ({ theme }) => ({
+        DEFAULT: theme('colors.fg / 30%'),
+      }),
+      boxShadow: ({ theme }) => ({
+        'border': `0 0 0 1px ${theme('colors.fg / 30%')}`,
+        'border-t': `0 -1px 0 0 ${theme('colors.fg / 30%')}`,
+        'border-b': `0 1px 0 0 ${theme('colors.fg / 30%')}`,
+        'sm': '0 1px 1px 0 rgba(0, 0, 0, 0.3)',
+        'glow': '0 10px 50px 0 rgba(0, 0, 0, 0.3)',
+        'inset-shadow': `inset 0 1px 1px ${theme('colors.black / 10%')}`,
+      }),
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',

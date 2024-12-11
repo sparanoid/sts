@@ -21,7 +21,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
         <h3 className='m-0 text-base font-semibold flex items-center gap-1'>
           <span className='line-clamp-1 '>{data.name}</span>
           {lastResult.hostname ? (
-            <span className='flex items-center text-sm font-normal text-text/50'>
+            <span className='flex items-center text-sm font-normal text-fg/50'>
               <Tooltip>
                 <TooltipTrigger>
                   <IconInfoCircle className='size-4' />
@@ -94,7 +94,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
                 {lazyFloat(result.duration / 1000 / 1000)}ms,{' '}
                 {timeFromNow(+new Date(result.timestamp))}
               </div>
-              <div className='text-text/50 text-sm'>
+              <div className='text-fg/50 text-sm'>
                 {formatDate(new Date(result.timestamp), {
                   format: {
                     month: '2-digit',
@@ -112,7 +112,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
       </div>
 
       {/* Timestamps */}
-      <div className='flex justify-between items-center text-sm text-text/80'>
+      <div className='flex justify-between items-center text-sm text-fg/80'>
         <div>{timeFromNow(+new Date(firstResult.timestamp))}</div>
         <div>{timeFromNow(+new Date(lastResult.timestamp))}</div>
       </div>

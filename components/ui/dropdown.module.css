@@ -7,7 +7,7 @@
   margin: 0;
   font-size: 1rem;
   font-family: inherit;
-  color: theme(colors.text);
+  color: theme(colors.fg);
   background: none;
   cursor: pointer;
 }
@@ -32,7 +32,7 @@
   justify-content: space-between;
   width: 100%;
   background: transparent;
-  color: theme(colors.text);
+  color: theme(colors.fg);
   border: none;
   border-radius: 4px;
   font-size: 16px;
@@ -47,7 +47,7 @@
   /* transition: color .2s ease, background .2s ease; */
 
   &.active {
-    color: theme(colors.link);
+    color: theme(colors.ac);
   }
 
   &.customAction {
@@ -62,7 +62,7 @@
 
   &.showIndicator {
     &.active {
-      color: theme(colors.link);
+      color: theme(colors.ac);
     }
   }
 }
@@ -72,7 +72,7 @@
 }
 
 hr.ItemWrap {
-  border-bottom: 1px solid theme(colors.text / 20%);
+  border-bottom: 1px solid theme(colors.fg / 20%);
   margin: 0.25rem -4px;
   padding: 0;
   width: calc(100% + 8px);
@@ -80,16 +80,16 @@ hr.ItemWrap {
 }
 
 .ItemWrap.open {
-  background: theme(colors.text / 10%);
+  background: theme(colors.fg / 10%);
 }
 
 .ItemWrap:focus,
 .ItemWrap:not([disabled]):active {
-  color: theme(colors.link);
-  background: theme(colors.link / 10%);
+  color: theme(colors.ac);
+  background: theme(colors.ac / 10%);
 }
 
 .ItemWrap:disabled {
-  color: theme(colors.text / 40%);
+  color: theme(colors.fg / 40%);
   cursor: not-allowed;
 }
