@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 import './globals.css'
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_SITE_TITLE || 'Gatus Frontend',
-  description:
-    process.env.NEXT_PUBLIC_SITE_DESC || 'A fully open-source status page for Gatus backend',
+  description: process.env.NEXT_PUBLIC_SITE_DESC || 'A fully open-source status page for Gatus backend',
   icons: process.env.NEXT_PUBLIC_SITE_LOGO || '',
 }
 
@@ -19,7 +19,9 @@ export default function RootLayout({
     // https://github.com/pacocoursey/next-themes#with-app
     <html lang='en' suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <TooltipProvider delayDuration={300}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </TooltipProvider>
       </body>
     </html>
   )

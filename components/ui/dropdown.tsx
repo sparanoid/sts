@@ -1,319 +1,194 @@
 'use client'
 
-// https://floating-ui.com/docs/react-examples#other
-// https://codesandbox.io/s/admiring-lamport-5wt3yg
 import * as React from 'react'
-import clsx from 'clsx'
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
+import { ChevronRight } from 'lucide-react'
+import { IconCheck } from '@tabler/icons-react'
 
-import {
-  useFloating,
-  offset,
-  flip,
-  shift,
-  size,
-  useListNavigation,
-  useHover,
-  // useTypeahead,
-  useInteractions,
-  useRole,
-  useClick,
-  useDismiss,
-  autoUpdate,
-  safePolygon,
-  FloatingPortal,
-  useFloatingTree,
-  useFloatingNodeId,
-  useFloatingParentNodeId,
-  useMergeRefs,
-  FloatingNode,
-  FloatingTree,
-  FloatingFocusManager,
-} from '@floating-ui/react'
+import { cn } from '@/utils/cn'
 
-import css from './dropdown.module.css'
+const DropdownMenu = DropdownMenuPrimitive.Root
 
-interface MenuItemProps {
-  label: React.ReactNode | string
-  disabled?: boolean
-  showIndicator?: boolean
-  active?: boolean
-  /**
-   * When `true`, make the item itself zero padding. Useful for `a` links inside the item
-   */
-  customAction?: boolean
-}
+const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
 
-// eslint-disable-next-line react/display-name
-const MenuItem = React.forwardRef<
-  HTMLButtonElement,
-  MenuItemProps & React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ label, disabled, showIndicator, active, customAction, ...props }, ref) => {
-  return (
-    <button
-      {...props}
-      ref={ref}
-      role='menuitem'
-      className={clsx(
-        props.className,
-        showIndicator && css.showIndicator,
-        active && css.active,
-        customAction && css.customAction
-      )}
-      disabled={disabled}
-    >
-      {label}
-    </button>
-  )
-})
+const DropdownMenuGroup = DropdownMenuPrimitive.Group
 
-interface MenuProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  label: any
-  nested?: boolean
-  children?: React.ReactNode
-}
-const MenuComponent = React.forwardRef<
-  HTMLButtonElement,
-  MenuProps & React.HTMLProps<HTMLButtonElement>
->(({ children, label, ...props }, forwardedRef) => {
-  const [open, setOpen] = React.useState(false)
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(null)
-  const [allowHover, setAllowHover] = React.useState(false)
+const DropdownMenuPortal = DropdownMenuPrimitive.Portal
 
-  const listItemsRef = React.useRef<Array<HTMLButtonElement | null>>([])
+const DropdownMenuSub = DropdownMenuPrimitive.Sub
 
-  const tree = useFloatingTree()
-  const nodeId = useFloatingNodeId()
-  const parentId = useFloatingParentNodeId()
-  const nested = parentId != null
+const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
 
-  const { x, y, strategy, refs, context } = useFloating<HTMLButtonElement>({
-    open,
-    nodeId,
-    onOpenChange: setOpen,
-    placement: nested ? 'right-start' : 'bottom-start',
-    middleware: [
-      offset({ mainAxis: 5, alignmentAxis: nested ? -4 : 0 }),
-      flip(),
-      shift({
-        padding: 10,
-      }),
-      size({
-        apply({ elements, availableHeight }) {
-          Object.assign(elements.floating.style, {
-            maxHeight: `${availableHeight}px`,
-          })
-        },
-        padding: 10,
-      }),
-    ],
-    whileElementsMounted: autoUpdate,
-  })
-
-  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
-    useHover(context, {
-      handleClose: safePolygon({
-        blockPointerEvents: true,
-      }),
-      enabled: nested && allowHover,
-      delay: { open: 75 },
-    }),
-    useClick(context, {
-      toggle: !nested || !allowHover,
-      event: 'mousedown',
-      ignoreMouse: nested,
-    }),
-    useRole(context, { role: 'menu' }),
-    useDismiss(context),
-    useListNavigation(context, {
-      listRef: listItemsRef,
-      activeIndex,
-      nested,
-      onNavigate: setActiveIndex,
-    }),
-    // https://github.com/floating-ui/floating-ui/issues/2126#issuecomment-1384533672
-    // useTypeahead(context, {
-    //   listRef: listContentRef,
-    //   onMatch: open ? setActiveIndex : undefined,
-    //   activeIndex
-    // })
-  ])
-
-  // Event emitter allows you to communicate across tree components.
-  // This effect closes all menus when an item gets clicked anywhere
-  // in the tree.
-  React.useEffect(() => {
-    function handleTreeClick() {
-      setOpen(false)
-    }
-
-    function onSubMenuOpen(event: { nodeId: string; parentId: string }) {
-      if (event.nodeId !== nodeId && event.parentId === parentId) {
-        setOpen(false)
-      }
-    }
-
-    tree?.events.on('click', handleTreeClick)
-    tree?.events.on('menuopen', onSubMenuOpen)
-
-    return () => {
-      tree?.events.off('click', handleTreeClick)
-      tree?.events.off('menuopen', onSubMenuOpen)
-    }
-  }, [tree, nodeId, parentId])
-
-  React.useEffect(() => {
-    if (open) {
-      tree?.events.emit('menuopen', {
-        parentId,
-        nodeId,
-      })
-    }
-  }, [tree, open, nodeId, parentId])
-
-  // Determine if "hover" logic can run based on the modality of input. This
-  // prevents unwanted focus synchronization as menus open and close with
-  // keyboard navigation and the cursor is resting on the menu.
-  React.useEffect(() => {
-    function onPointerMove({ pointerType }: PointerEvent) {
-      if (pointerType !== 'touch') {
-        setAllowHover(true)
-      }
-    }
-
-    function onKeyDown() {
-      setAllowHover(false)
-    }
-
-    window.addEventListener('pointermove', onPointerMove, {
-      once: true,
-      capture: true,
-    })
-    window.addEventListener('keydown', onKeyDown, true)
-    return () => {
-      window.removeEventListener('pointermove', onPointerMove, {
-        capture: true,
-      })
-      window.removeEventListener('keydown', onKeyDown, true)
-    }
-  }, [allowHover])
-
-  const referenceRef = useMergeRefs([refs.setReference, forwardedRef])
-
-  return (
-    <FloatingNode id={nodeId}>
-      <button
-        ref={referenceRef}
-        data-open={open ? '' : undefined}
-        {...getReferenceProps({
-          ...props,
-          className: clsx(nested ? css.ItemWrap : css.Root, open && css.open),
-          onClick(event) {
-            event.stopPropagation()
-          },
-          ...(nested && {
-            // Indicates this is a nested <Menu /> acting as a <MenuItem />.
-            role: 'menuitem',
-          }),
-        })}
-      >
-        {label}{' '}
-        {nested && (
-          <span aria-hidden className='ml-2'>
-            ›
-          </span>
-        )}
-      </button>
-      <FloatingPortal>
-        {open && (
-          <FloatingFocusManager
-            context={context}
-            // Prevent outside content interference.
-            modal={!nested}
-            // Only initially focus the root floating menu.
-            initialFocus={nested ? -1 : 0}
-            // Only return focus to the root menu's reference when menus close.
-            returnFocus={!nested}
-            // Allow touch screen readers to escape the modal root menu
-            // without selecting anything.
-            visuallyHiddenDismiss
-          >
-            <div
-              ref={refs.setFloating}
-              className={`${css.Menu} floating`}
-              style={{
-                position: strategy,
-                top: y ?? 0,
-                left: x ?? 0,
-                // width: "max-content"
-              }}
-              {...getFloatingProps({
-                // Pressing tab dismisses the menu due to the modal
-                // focus management on the root menu.
-                onKeyDown(event) {
-                  if (event.key === 'Tab') {
-                    setOpen(false)
-
-                    if (event.shiftKey) {
-                      event.preventDefault()
-                    }
-                  }
-                },
-              })}
-            >
-              {React.Children.map(
-                children,
-                (child, index) =>
-                  React.isValidElement(child) &&
-                  React.cloneElement(
-                    child,
-                    getItemProps({
-                      tabIndex: activeIndex === index ? 0 : -1,
-                      role: 'menuitem',
-                      className: css.ItemWrap,
-                      ref(node: HTMLButtonElement) {
-                        listItemsRef.current[index] = node
-                      },
-                      onClick(event) {
-                        // @ts-expect-error react rc related
-                        child.props.onClick?.(event)
-                        tree?.events.emit('click')
-                      },
-                      // Allow focus synchronization if the cursor did not move.
-                      onMouseEnter() {
-                        if (allowHover && open) {
-                          setActiveIndex(index)
-                        }
-                      },
-                    })
-                  )
-              )}
-            </div>
-          </FloatingFocusManager>
-        )}
-      </FloatingPortal>
-    </FloatingNode>
-  )
-})
-
-const Menu = React.forwardRef<HTMLButtonElement, MenuProps & React.HTMLProps<HTMLButtonElement>>(
-  (props, ref) => {
-    const parentId = useFloatingParentNodeId()
-
-    if (parentId == null) {
-      return (
-        <FloatingTree>
-          <MenuComponent {...props} ref={ref} />
-        </FloatingTree>
-      )
-    }
-
-    return <MenuComponent {...props} ref={ref} />
+const DropdownMenuSubTrigger = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean
   }
-)
+>(({ className, inset, children, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubTrigger
+    ref={ref}
+    className={cn(
+      'flex cursor-default select-none items-center gap-1 rounded px-2 py-1.5 outline-none focus:bg-ac/10 data-[state=open]:bg-ac/10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+      inset && 'pl-7',
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <ChevronRight className='ml-auto' />
+  </DropdownMenuPrimitive.SubTrigger>
+))
+DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName
 
-MenuItem.displayName = 'MenuItem'
-MenuComponent.displayName = 'MenuComponent'
-Menu.displayName = 'Menu'
+const DropdownMenuSubContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
+>(({ className, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubContent
+    ref={ref}
+    className={cn(
+      'bg-popover text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-lg data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      className
+    )}
+    {...props}
+  />
+))
+DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName
 
-export { MenuItem, MenuComponent, Menu }
+const DropdownMenuContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
+>(({ className, sideOffset = 4, ...props }, ref) => (
+  <DropdownMenuPrimitive.Portal>
+    <DropdownMenuPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(
+        'floating z-50 min-w-[8rem] overflow-hidden rounded-md border px-0 py-1 text-fg shadow data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        className
+      )}
+      collisionPadding={5}
+      {...props}
+    />
+  </DropdownMenuPrimitive.Portal>
+))
+DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName
+
+const DropdownMenuItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
+    inset?: boolean
+  }
+>(({ className, inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.Item
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-start gap-1 px-3 py-1.5 outline-none',
+      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+      inset && 'pl-8',
+      className
+    )}
+    {...props}
+  />
+))
+DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName
+
+const DropdownMenuCheckboxItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
+>(({ className, children, checked, ...props }, ref) => (
+  <DropdownMenuPrimitive.CheckboxItem
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-none',
+      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className
+    )}
+    checked={checked}
+    {...props}
+  >
+    <span className='absolute left-3 top-2.5 flex size-4 items-center justify-center'>
+      <DropdownMenuPrimitive.ItemIndicator asChild>
+        <IconCheck className='size-4' />
+      </DropdownMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </DropdownMenuPrimitive.CheckboxItem>
+))
+DropdownMenuCheckboxItem.displayName = DropdownMenuPrimitive.CheckboxItem.displayName
+
+const DropdownMenuRadioItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
+>(({ className, children, ...props }, ref) => (
+  <DropdownMenuPrimitive.RadioItem
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-none',
+      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className
+    )}
+    {...props}
+  >
+    <span className='absolute left-3 top-2.5 flex size-4 items-center justify-center'>
+      <DropdownMenuPrimitive.ItemIndicator asChild>
+        {/* <IconCircleDotFilled className='size-3' /> */}
+        <div className='size-1.5 rounded-full bg-current' />
+      </DropdownMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </DropdownMenuPrimitive.RadioItem>
+))
+DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName
+
+const DropdownMenuLabel = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
+    inset?: boolean
+  }
+>(({ className, inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.Label
+    ref={ref}
+    className={cn('px-3 py-2 text-xs uppercase leading-none text-fg/60', inset && 'pl-7', className)}
+    {...props}
+  />
+))
+DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName
+
+const DropdownMenuSeparator = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <DropdownMenuPrimitive.Separator ref={ref} className={cn('-mx-1 h-1 bg-fg/5', className)} {...props} />
+))
+DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName
+
+const DropdownMenuShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
+  return <span className={cn('ml-auto text-xs tracking-widest opacity-60', className)} {...props} />
+}
+DropdownMenuShortcut.displayName = 'DropdownMenuShortcut'
+
+const DropdownMenuIcon = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
+  return <span className={cn('mt-1 flex size-4 items-center justify-center', className)} {...props} />
+}
+DropdownMenuIcon.displayName = 'DropdownMenuIcon'
+
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuIcon,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+}
