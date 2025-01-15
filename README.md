@@ -13,7 +13,7 @@ sts, a fully open-source status page for Gatus backend
 ## Stack
 
 - Framework: Next.js
-- UI: Floating UI + Radix Primitives
+- UI: Radix Primitives
 - CSS: Tailwind + custom-made OKLCH color palettes
 - Data fetching: SWR
 
