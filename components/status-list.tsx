@@ -7,12 +7,7 @@ import type { Status, UptimeState } from '@/types'
 import useStatuses from '@/utils/useStatuses'
 import { useViewportSize } from '@/utils/useViewportSize'
 import timeFromNow from '@/utils/timeFromNow'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { StatusItem } from '@/components/status-item'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -86,39 +81,33 @@ export function StatusList() {
   return (
     <>
       {globalStatus && latestTimestamp ? (
-        <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
+        <div className='my-10 grid items-center justify-items-center gap-1 text-center'>
           {globalStatus.percent === 100 ? (
             <>
-              <div className='size-8 m-2 indicator up text-emerald-700' />
+              <div className='indicator up m-2 size-8 text-emerald-700' />
               <h1 className='m-0'>All services are online</h1>
             </>
           ) : globalStatus.percent === 0 ? (
             <>
-              <div className='size-8 m-2 indicator down text-red-700' />
+              <div className='indicator down m-2 size-8 text-red-700' />
               <h1 className='m-0'>All services are offline</h1>
             </>
           ) : (
             <>
-              <div className='size-8 m-2 indicator partial text-amber-600' />
+              <div className='indicator partial m-2 size-8 text-amber-600' />
               <h1 className='m-0'>Some services are offline</h1>
             </>
           )}
           <div className='flex items-center gap-1'>
             Updated {timeFromNow(latestTimestamp)}
-            <button
-              onClick={() => mutate()}
-              aria-label='Refresh'
-              disabled={isLoading || isValidating}
-            >
-              <IconRefresh
-                className={clsx('size-5', (isLoading || isValidating) && 'animate-spin')}
-              />
+            <button onClick={() => mutate()} aria-label='Refresh' disabled={isLoading || isValidating}>
+              <IconRefresh className={clsx('size-5', (isLoading || isValidating) && 'animate-spin')} />
             </button>
           </div>
         </div>
       ) : (
-        <div className='grid gap-1 my-10 items-center text-center justify-items-center'>
-          <Skeleton className='size-10 m-1 rounded-full' />
+        <div className='my-10 grid items-center justify-items-center gap-1 text-center'>
+          <Skeleton className='m-1 size-10 rounded-full' />
           <Skeleton className='h-[38.4px] w-[258px] rounded-md' />
           <div className='flex items-center gap-1'>
             <Skeleton className='h-[24px] w-[215px] rounded-md' />
@@ -133,20 +122,20 @@ export function StatusList() {
             <AccordionItem value={group} key={group}>
               <AccordionTrigger asChild>
                 <h2 className='cursor-pointer text-lg'>
-                  <div className='text-left line-clamp-1'>{group}</div>
+                  <div className='line-clamp-1 text-left'>{group}</div>
                   <div className='text-xs uppercase'>
                     {statuses.groupStatus.percent === 100 ? (
-                      <div className='flex gap-1 items-center'>
+                      <div className='flex items-center gap-1'>
                         <div className='indicator up size-2.5 text-emerald-700' />
                         <span className='text-emerald-800'>Operational</span>
                       </div>
                     ) : statuses.groupStatus.percent === 0 ? (
-                      <div className='flex gap-1 items-center'>
+                      <div className='flex items-center gap-1'>
                         <div className='indicator down size-2.5 text-red-700' />
                         <span className='text-red-800'>Offline</span>
                       </div>
                     ) : (
-                      <div className='flex gap-1 items-center'>
+                      <div className='flex items-center gap-1'>
                         <div className='indicator partial size-2.5 text-amber-600' />
                         <span className='text-amber-700'>
                           Partial - {statuses.groupStatus.up}/{statuses.data.length}
@@ -167,13 +156,11 @@ export function StatusList() {
         </Accordion>
       ) : (
         <div className='grid gap-2'>
-          {[
-            ...new Array(
-              process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3
-            ),
-          ].map((_, idx) => {
-            return <Skeleton key={idx} className='mt-[1px] h-[52px] w-full rounded-lg' />
-          })}
+          {[...new Array(process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3)].map(
+            (_, idx) => {
+              return <Skeleton key={idx} className='mt-[1px] h-[52px] w-full rounded-lg' />
+            }
+          )}
         </div>
       )}
     </>

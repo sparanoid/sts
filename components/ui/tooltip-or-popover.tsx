@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, forwardRef } from 'react'
+import { useEffect, useState } from 'react'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
@@ -30,71 +30,75 @@ interface TooltipOrPopoverProps {
   }
 }
 
-const TooltipOrPopover = forwardRef<HTMLButtonElement, TooltipOrPopoverProps>(
-  ({ children, label, triggerClassName, contentClassName, forceComponent, componentProps }, ref) => {
-    const [isTouchDevice, setIsTouchDevice] = useState(false)
+function TooltipOrPopover({
+  children,
+  label,
+  triggerClassName,
+  contentClassName,
+  forceComponent,
+  componentProps,
+}: React.ComponentProps<'button'> & TooltipOrPopoverProps) {
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
 
-    useEffect(() => {
-      // Check if device supports touch events
-      const mediaQuery = window.matchMedia('(hover: none) and (pointer: coarse)')
-      setIsTouchDevice(mediaQuery.matches)
+  useEffect(() => {
+    // Check if device supports touch events
+    const mediaQuery = window.matchMedia('(hover: none) and (pointer: coarse)')
+    setIsTouchDevice(mediaQuery.matches)
 
-      const handleChange = (e: MediaQueryListEvent) => {
-        setIsTouchDevice(e.matches)
-      }
-
-      mediaQuery.addEventListener('change', handleChange)
-
-      return () => {
-        mediaQuery.removeEventListener('change', handleChange)
-      }
-    }, [])
-
-    // Determine which component to use based on device type or force prop
-    const usePopover = forceComponent === 'popover' || (!forceComponent && isTouchDevice)
-
-    if (usePopover) {
-      return (
-        <Popover>
-          <PopoverTrigger
-            ref={ref}
-            // Make it behave like a tooltip component
-            className={cn('flex items-center', triggerClassName)}
-            {...componentProps?.popover?.trigger}
-          >
-            {children}
-          </PopoverTrigger>
-          <PopoverContent
-            className={cn('max-w-[400px] py-1.5', contentClassName)}
-            side='top'
-            {...componentProps?.popover?.content}
-          >
-            {label}
-          </PopoverContent>
-        </Popover>
-      )
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsTouchDevice(e.matches)
     }
 
+    mediaQuery.addEventListener('change', handleChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange)
+    }
+  }, [])
+
+  // Determine which component to use based on device type or force prop
+  const usePopover = forceComponent === 'popover' || (!forceComponent && isTouchDevice)
+
+  if (usePopover) {
     return (
-      <Tooltip
-        ref={ref}
-        label={label}
-        triggerOptions={{
-          className: triggerClassName,
-          ...componentProps?.tooltip?.trigger,
-        }}
-        contentOptions={{
-          className: contentClassName,
-          ...componentProps?.tooltip?.content,
-        }}
-      >
-        {children}
-      </Tooltip>
+      <Popover>
+        <PopoverTrigger
+          data-slot='tooltip-or-popover-trigger'
+          // Make it behave like a tooltip component
+          className={cn('flex items-center', triggerClassName)}
+          {...componentProps?.popover?.trigger}
+        >
+          {children}
+        </PopoverTrigger>
+        <PopoverContent
+          data-slot='tooltip-or-popover-content'
+          className={cn('max-w-[400px] py-1.5', contentClassName)}
+          side='top'
+          {...componentProps?.popover?.content}
+        >
+          {label}
+        </PopoverContent>
+      </Popover>
     )
   }
-)
 
-TooltipOrPopover.displayName = 'TooltipOrPopover'
+  return (
+    <Tooltip
+      data-slot='tooltip-or-popover'
+      label={label}
+      triggerOptions={{
+        className: triggerClassName,
+        ...componentProps?.tooltip?.trigger,
+      }}
+      contentOptions={{
+        className: contentClassName,
+        ...componentProps?.tooltip?.content,
+      }}
+    >
+      {children}
+    </Tooltip>
+  )
+}
 
 export { TooltipOrPopover }
 export type { TooltipOrPopoverProps }
