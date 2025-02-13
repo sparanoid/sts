@@ -24,9 +24,7 @@ export default function formatDate(
 ) {
   const InitFormat = format
 
-  InitFormat.timeZone = localTime
-    ? Intl.DateTimeFormat().resolvedOptions().timeZone
-    : defaultTimezone
+  InitFormat.timeZone = localTime ? Intl.DateTimeFormat().resolvedOptions().timeZone : defaultTimezone
 
   if (InitFormat?.minute && removeMinute00) {
     InitFormat.minute = new Date(timestamp).getMinutes() === 0 ? undefined : InitFormat.minute

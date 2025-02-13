@@ -31,7 +31,8 @@
     /* chrome lck color bug workaround, should be removed when bug fixed */
     --floating-ui-bg: --theme(--color-white / 90%);
     --floating-ui-backdrop: saturate(2) blur(40px);
-    --floating-ui-shadow: 0 0 0 0.5px --theme(--color-black / 40%),
+    --floating-ui-shadow:
+      0 0 0 0.5px --theme(--color-black / 40%),
       0 20px 60px 0 color-mix(in oklch, --theme(--color-ac / 20%) 60%, --theme(--color-black / 20%));
     --floating-ui-border: 1px solid --theme(--color-white / 40%);
     --form-line-height: 1.2;
