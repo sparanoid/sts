@@ -28,7 +28,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      'flex cursor-default select-none items-center gap-1 rounded px-2 py-1.5 outline-none focus:bg-ac/10 data-[state=open]:bg-ac/10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+      'flex cursor-default select-none items-center gap-1 rounded-sm px-2 py-1.5 outline-hidden focus:bg-ac/10 data-[state=open]:bg-ac/10 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
       inset && 'pl-7',
       className
     )}
@@ -83,8 +83,8 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-start gap-1 px-3 py-1.5 outline-none',
-      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-start gap-1 px-3 py-1.5 outline-hidden',
+      'focus:bg-ac/10 focus:text-ac data-disabled:pointer-events-none data-disabled:opacity-50',
       '[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
       inset && 'pl-8',
       className
@@ -101,8 +101,8 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-none',
-      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-hidden',
+      'focus:bg-ac/10 focus:text-ac data-disabled:pointer-events-none data-disabled:opacity-50',
       className
     )}
     checked={checked}
@@ -125,8 +125,8 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-none',
-      'focus:bg-ac/10 focus:text-ac data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-start py-1.5 pl-8 pr-3 outline-hidden',
+      'focus:bg-ac/10 focus:text-ac data-disabled:pointer-events-none data-disabled:opacity-50',
       className
     )}
     {...props}

@@ -4,7 +4,7 @@ import { StatusList } from '@/components/status-list'
 
 export default function Home() {
   return (
-    <main className='container mx-auto max-w-screen-md px-2 py-4 sm:px-4'>
+    <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
       <nav className='flex gap-2 items-center justify-center'>
         {process.env.NEXT_PUBLIC_SITE_BACK_URL && process.env.NEXT_PUBLIC_SITE_BACK_TITLE ? (
           <>
