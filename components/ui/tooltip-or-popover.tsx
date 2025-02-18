@@ -30,6 +30,12 @@ interface TooltipOrPopoverProps {
   }
 }
 
+// Helper function to detect touch device once
+const getIsTouchDevice = () => {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(hover: none) and (pointer: coarse)').matches
+}
+
 function TooltipOrPopover({
   children,
   label,
@@ -38,23 +44,7 @@ function TooltipOrPopover({
   forceComponent,
   componentProps,
 }: React.ComponentProps<'button'> & TooltipOrPopoverProps) {
-  const [isTouchDevice, setIsTouchDevice] = useState(false)
-
-  useEffect(() => {
-    // Check if device supports touch events
-    const mediaQuery = window.matchMedia('(hover: none) and (pointer: coarse)')
-    setIsTouchDevice(mediaQuery.matches)
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsTouchDevice(e.matches)
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange)
-    }
-  }, [])
+  const [isTouchDevice] = useState(getIsTouchDevice)
 
   // Determine which component to use based on device type or force prop
   const usePopover = forceComponent === 'popover' || (!forceComponent && isTouchDevice)
