@@ -6,6 +6,9 @@
 @import './kladewind.css';
 @import './schemes.css';
 
+/* https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @layer base {
   /*
     The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -21,28 +24,6 @@
   ::backdrop,
   ::file-selector-button {
     border-color: color-mix(in oklab, var(--color-fg) 30%, transparent);
-  }
-
-  /* Global config from my all time favorite Kladenets */
-  :root {
-    /* Floating UI */
-    --order-floating: 106;
-    /* --floating-ui-bg: theme(colors.bg / 60%); */
-    /* chrome lck color bug workaround, should be removed when bug fixed */
-    --floating-ui-bg: --theme(--color-white / 90%);
-    --floating-ui-backdrop: saturate(2) blur(40px);
-    --floating-ui-shadow:
-      0 0 0 0.5px --theme(--color-black / 40%),
-      0 20px 60px 0 color-mix(in oklch, --theme(--color-ac / 20%) 60%, --theme(--color-black / 20%));
-    --floating-ui-border: 1px solid --theme(--color-white / 40%);
-    --form-line-height: 1.2;
-  }
-
-  &[data-theme='dark'] {
-    --floating-ui-bg: --theme(--color-bg / 20%);
-    --floating-ui-backdrop: brightness(0.5) saturate(2) contrast(0.9) blur(40px);
-    --floating-ui-shadow: 0 0 0 0.5px --theme(--color-black / 80%), 0 20px 60px 0 --theme(--color-black / 60%);
-    --floating-ui-border: 1px solid --theme(--color-fg / 20%);
   }
 
   html,
@@ -237,16 +218,6 @@
       background: --theme(--color-fg / 80%);
     }
   }
-}
-
-.floating {
-  background: var(--floating-ui-bg);
-  box-shadow: var(--floating-ui-shadow);
-  border: var(--floating-ui-border);
-  /* width: max-content; */
-  -webkit-backdrop-filter: var(--floating-ui-backdrop);
-  backdrop-filter: var(--floating-ui-backdrop);
-  z-index: var(--order-floating);
 }
 
 ::selection {

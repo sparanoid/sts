@@ -4,7 +4,6 @@
 
 import * as React from 'react'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
-
 import { cn } from '@/utils/cn'
 
 const Popover = PopoverPrimitive.Root
@@ -28,7 +27,7 @@ function PopoverContent({
         sideOffset={sideOffset}
         collisionPadding={5}
         className={cn(
-          'floating text-fg z-50 w-fit rounded-md p-3 text-base outline-hidden',
+          'floating text-fg w-fit rounded-md p-3 text-base outline-hidden',
           'max-h-[var(--radix-popover-content-available-height)] overflow-y-auto',
           'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
           '[&>hr]:-mx-3 [&>hr]:my-2',

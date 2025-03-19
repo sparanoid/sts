@@ -19,9 +19,9 @@ export default function RootLayout({
     // https://github.com/pacocoursey/next-themes#with-app
     <html lang='en' suppressHydrationWarning>
       <body>
-        <TooltipProvider delayDuration={300}>
-          <ThemeProvider>{children}</ThemeProvider>
-        </TooltipProvider>
+        <ThemeProvider attribute='data-theme'>
+          <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

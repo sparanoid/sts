@@ -1,8 +1,7 @@
 'use client'
 
-import * as TooltipPrimitive from '@radix-ui/react-tooltip'
-
 import { cn } from '@/utils/cn'
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
 const TooltipProvider = TooltipPrimitive.Provider
 
@@ -35,7 +34,7 @@ function Tooltip({ children, label, triggerOptions, contentOptions }: TooltipPro
           sideOffset={4}
           data-slot='tooltip-content'
           className={cn(
-            'floating text-fg z-50 max-w-[400px] overflow-hidden rounded-md border px-3 py-1.5 text-base font-normal',
+            'floating text-fg max-w-[400px] overflow-hidden rounded-md border px-3 py-1.5 text-base font-normal',
             'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
             contentClassName
           )}
