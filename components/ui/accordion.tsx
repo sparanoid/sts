@@ -20,7 +20,7 @@ function AccordionItem({ className, ...props }: React.ComponentProps<typeof Acco
 
 function AccordionTrigger({ className, children, ...props }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
   return (
-    <AccordionPrimitive.Header className='m-0 flex' asChild>
+    <AccordionPrimitive.Header className='flex' asChild>
       <AccordionPrimitive.Trigger
         data-slot='accordion-trigger'
         className={clsx(

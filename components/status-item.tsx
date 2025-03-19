@@ -17,7 +17,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
     <div className='mx-4 grid gap-1'>
       {/* Title */}
       <div className='flex items-center justify-between'>
-        <h3 className='m-0 flex items-center gap-1 text-base font-semibold'>
+        <h3 className='flex items-center gap-1 text-base font-semibold'>
           <span className='line-clamp-1'>{data.name}</span>
           {lastResult.hostname ? (
             <span className='text-fg/50 flex items-center text-sm font-normal'>
