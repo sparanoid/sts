@@ -6,7 +6,6 @@ import { useTheme } from 'next-themes'
 
 import { colorSchemes } from '@/lib/const'
 
-import { IconCircleHalfStrokeSolidRotated } from '@/components/ui/icons'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +13,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown'
+import { IconBrightnessFilled } from '@tabler/icons-react'
 
 export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme()
@@ -21,7 +21,7 @@ export const ThemeSwitch = () => {
   return (
     <DropdownMenu aria-label='Change Theme'>
       <DropdownMenuTrigger asChild>
-        <IconCircleHalfStrokeSolidRotated className={'size-4 cursor-pointer fill-current'} />
+        <IconBrightnessFilled className={'size-4 rotate-45 cursor-pointer fill-current'} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
