@@ -85,17 +85,17 @@ export function StatusList() {
           {globalStatus.percent === 100 ? (
             <>
               <div className='indicator up m-2 size-8 text-emerald-700' />
-              <h1 className='m-0'>All services are online</h1>
+              <h1 className='text-2xl font-bold'>All services are online</h1>
             </>
           ) : globalStatus.percent === 0 ? (
             <>
               <div className='indicator down m-2 size-8 text-red-700' />
-              <h1 className='m-0'>All services are offline</h1>
+              <h1 className='text-2xl font-bold'>All services are offline</h1>
             </>
           ) : (
             <>
               <div className='indicator partial m-2 size-8 text-amber-600' />
-              <h1 className='m-0'>Some services are offline</h1>
+              <h1 className='text-2xl font-bold'>Some services are offline</h1>
             </>
           )}
           <div className='flex items-center gap-1'>
@@ -108,9 +108,9 @@ export function StatusList() {
       ) : (
         <div className='my-10 grid items-center justify-items-center gap-1 text-center'>
           <Skeleton className='m-1 size-10 rounded-full' />
-          <Skeleton className='h-[38.4px] w-[258px] rounded-md' />
+          <Skeleton className='h-8 w-[258px] rounded-md' />
           <div className='flex items-center gap-1'>
-            <Skeleton className='h-[24px] w-[215px] rounded-md' />
+            <Skeleton className='h-6 w-[215px] rounded-md' />
             <Skeleton className='size-5 rounded-full' />
           </div>
         </div>
