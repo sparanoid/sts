@@ -19,8 +19,8 @@ export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme()
 
   return (
-    <DropdownMenu aria-label='Change Theme'>
-      <DropdownMenuTrigger asChild>
+    <DropdownMenu>
+      <DropdownMenuTrigger aria-label='Change Theme' className='focus-ring rounded-full'>
         <IconBrightnessFilled className={'size-4 rotate-45 cursor-pointer fill-current'} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
