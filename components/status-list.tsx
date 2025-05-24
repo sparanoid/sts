@@ -84,12 +84,12 @@ export function StatusList() {
         <div className='my-10 grid items-center justify-items-center gap-1 text-center'>
           {globalStatus.percent === 100 ? (
             <>
-              <div className='indicator up m-2 size-8 text-emerald-700' />
+              <div className='indicator up m-2 size-8 text-emerald-600' />
               <h1 className='text-2xl font-bold'>All services are online</h1>
             </>
           ) : globalStatus.percent === 0 ? (
             <>
-              <div className='indicator down m-2 size-8 text-red-700' />
+              <div className='indicator down m-2 size-8 text-red-600' />
               <h1 className='text-2xl font-bold'>All services are offline</h1>
             </>
           ) : (
@@ -126,13 +126,13 @@ export function StatusList() {
                   <div className='text-xs uppercase'>
                     {statuses.groupStatus.percent === 100 ? (
                       <div className='flex items-center gap-1'>
-                        <div className='indicator up size-2.5 text-emerald-700' />
-                        <span className='text-emerald-800'>Operational</span>
+                        <div className='indicator up size-2.5 text-emerald-600' />
+                        <span className='text-emerald-700'>Operational</span>
                       </div>
                     ) : statuses.groupStatus.percent === 0 ? (
                       <div className='flex items-center gap-1'>
-                        <div className='indicator down size-2.5 text-red-700' />
-                        <span className='text-red-800'>Offline</span>
+                        <div className='indicator down size-2.5 text-red-600' />
+                        <span className='text-red-700'>Offline</span>
                       </div>
                     ) : (
                       <div className='flex items-center gap-1'>

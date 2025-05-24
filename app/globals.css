@@ -1,7 +1,5 @@
 @import 'tailwindcss';
-
-/* Need migration */
-@plugin 'tailwindcss-animate';
+@import 'tw-animate-css';
 
 @import './kladewind.css';
 @import './schemes.css';
@@ -27,7 +25,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: color-mix(in oklab, var(--color-fg) 30%, transparent);
+    border-color: color-mix(in oklch, var(--color-fg) 30%, transparent);
   }
 
   html,

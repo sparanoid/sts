@@ -32,12 +32,12 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
             className={clsx(
               'text-right text-sm text-nowrap',
               data.uptime > 90
-                ? 'text-emerald-800'
+                ? 'text-emerald-700'
                 : data.uptime > 75
-                  ? 'text-yellow-800'
+                  ? 'text-yellow-700'
                   : data.uptime > 50
                     ? 'text-amber-700'
-                    : 'text-red-800'
+                    : 'text-red-700'
             )}
           >
             {data.uptime?.toFixed(2)}% uptime
@@ -59,13 +59,13 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
                         <div key={idx} className='flex items-center gap-1'>
                           {result.success ? (
                             <>
-                              <IconCircleCheckFilled className='size-4 fill-emerald-700' />
-                              <span className='font-mono text-sm text-emerald-700'>{result.condition}</span>
+                              <IconCircleCheckFilled className='size-4 fill-emerald-600' />
+                              <span className='font-mono text-sm text-emerald-600'>{result.condition}</span>
                             </>
                           ) : (
                             <>
-                              <IconCircleXFilled className='size-4 fill-red-700' />
-                              <span className='fill-red-700 font-mono text-sm'>{result.condition}</span>
+                              <IconCircleXFilled className='size-4 fill-red-600' />
+                              <span className='fill-red-600 font-mono text-sm'>{result.condition}</span>
                             </>
                           )}
                         </div>
@@ -95,7 +95,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
             <span
               className={clsx(
                 'h-8 w-full',
-                result.success ? 'bg-emerald-700 hover:bg-emerald-500' : 'bg-red-700 hover:bg-red-500'
+                result.success ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-red-600 hover:bg-red-500'
               )}
             />
           </TooltipOrPopover>
