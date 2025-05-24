@@ -9,29 +9,28 @@ sts, a fully open-source status page for Gatus backend
 
 ## ✨ Features
 
-- **Gatus Integration**: Seamlessly connects with [Gatus](https://github.com/TwiN/gatus) backend for reliable monitoring
-- **Beautiful UI**: Clean, modern interface with perfect Lighthouse scores (100 in all categories)
-- **Fully Responsive**: Optimized experience on all devices from mobile to desktop
-- **Dark Mode Support**: Automatic theme detection with manual toggle
-- **Real-time Updates**: Auto-refreshing status information with SWR
-- **Customizable**: Easy configuration of site title, description, logo, and more
+- **Gatus Integration**: Works with [Gatus](https://github.com/TwiN/gatus) backend for monitoring.
+- **Beautiful UI**: A modern UI with perfect Lighthouse results (100 in every category).
+- **Fully Responsive**: Great experience on all devices from mobile to desktop.
+- **Supports Dark Mode**: Theme detection with an option to toggle manually.
+- **Status Updates on Real-time**: Status information is automatically updated using SWR.
+- **Customizable**: Easily update the site title, description, logo and more.
 - **Brand-free Footer**: No attribution required
 
 ## 🛠️ Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
-- **UI**: [Radix UI Primitives](https://www.radix-ui.com/) for accessible components
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with custom OKLCH color palettes
-- **Data Fetching**: [SWR](https://swr.vercel.app/) for efficient, real-time updates
-- **Icons**: [Tabler Icons](https://tabler-icons.io/)
-- **Package Manager**: [Bun](https://bun.sh/) for faster installations and builds
+- **Framework**: [Next.js 15](https://nextjs.org/) (with App Router).
+- **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible.
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with custom OKLCH colour palettes.
+- **Data Fetching**: [SWR](https://swr.vercel.app/) for effective real-time updates.
+- **Icons**: [Tabler Icons](https://tabler-icons.io/).
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- [Bun](https://bun.sh/) (default) or Node.js
-- [Gatus](https://github.com/TwiN/gatus) backend
+- [Bun](https://bun.sh/) (default) or Node.js.
+- [Gatus](https://github.com/TwiN/gatus) backend.
 
 ### Installation
 
@@ -40,21 +39,21 @@ sts, a fully open-source status page for Gatus backend
 git clone https://github.com/sparanoid/sts.git
 cd sts
 
-# Install dependencies
+# Install dependencies.
 bun install
 
-# Set up environment variables (create .env.local)
+# Set environment variables (create .env.local)
 echo "GATUS_API_BASE=https://your-gatus-instance.com/api/v1" > .env.local
 
-# Start the development server
+# Run the development server
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with a browser to see the output.
 
 ## ⚙️ Configuration
 
-Configure STS using environment variables:
+You can configure sts with environment variables:
 
 | Variable                      | Description                                                   | Required |
 | ----------------------------- | ------------------------------------------------------------- | -------- |
