@@ -50,6 +50,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
         {data.results.map(result => (
           <TooltipOrPopover
             key={result.timestamp}
+            triggerClassName='w-full'
             label={
               <div className='grid'>
                 {result.conditionResults?.length ? (
