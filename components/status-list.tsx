@@ -100,7 +100,12 @@ export function StatusList() {
           )}
           <div className='flex items-center gap-1'>
             Updated {timeFromNow(latestTimestamp)}
-            <button onClick={() => mutate()} aria-label='Refresh' disabled={isLoading || isValidating}>
+            <button
+              onClick={() => mutate()}
+              aria-label='Refresh'
+              disabled={isLoading || isValidating}
+              className='focus-ring rounded-full'
+            >
               <IconRefresh className={clsx('size-5', (isLoading || isValidating) && 'animate-spin')} />
             </button>
           </div>
