@@ -70,10 +70,9 @@ bun run build
 bun dev
 # Execute server production
 bun start
-
-
-
 ```
+Open [http://localhost:3000/frontend](http://localhost:3000/frontend) with a browser to see the output
+
 ## ⚙️ Configuration
 
 You can configure sts with environment variables:
