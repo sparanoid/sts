@@ -16,6 +16,7 @@ sts, a fully open-source status page for Gatus backend
 - **Status Updates on Real-time**: Status information is automatically updated using SWR.
 - **Customizable**: Easily update the site title, description, logo and more.
 - **Brand-free Footer**: No attribution required
+- **Subpath Deployment Ready**: Easily deploy under a subpath (e.g., `/frontend`) ideal for reverse proxies and Kubernetes.
 
 ## 🛠️ Stack
 
@@ -64,7 +65,7 @@ You can configure sts with environment variables:
 | `NEXT_PUBLIC_SITE_BACK_TITLE` | Title for back link                                           | ❌       |
 | `NEXT_PUBLIC_SITE_BACK_URL`   | URL for back link                                             | ❌       |
 | `NEXT_PUBLIC_FOOTER_TEXT`     | Custom footer text                                            | ❌       |
-
+| `NEXT_PUBLIC_API_BASE_PATH`   | Custom Base path for application (e.g. `/frontend` )          | ❌       |
 ## 🌐 Deployment
 
 ### Deploy on Vercel
