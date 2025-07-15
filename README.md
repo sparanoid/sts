@@ -52,6 +52,28 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with a browser to see the output.
 
+### Installation with subpath
+```bash
+# Clone the repository
+git clone https://github.com/sparanoid/sts.git
+cd sts
+
+# Install dependencies.
+bun install
+
+# Set environment variables (create .env.local)
+echo "GATUS_API_BASE=https://your-gatus-instance.com/api/v1" > .env.local
+echo "NEXT_PUBLIC_API_BASE_PATH=/frontend" >> .env.local
+# Build the app server
+bun run build
+# Execute server development
+bun dev
+# Execute server production
+bun start
+
+
+
+```
 ## ⚙️ Configuration
 
 You can configure sts with environment variables:
