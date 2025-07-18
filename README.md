@@ -62,8 +62,9 @@ cd sts
 bun install
 
 # Set environment variables (create .env.local)
-echo "GATUS_API_BASE=https://your-gatus-instance.com/api/v1" > .env.local
 echo "NEXT_PUBLIC_API_BASE_PATH=/frontend" >> .env.local
+echo "GATUS_API_BASE=https://your-gatus-instance.com/frontend/api/v1" > .env.local
+
 # Build the app server
 bun run build
 # Execute server development
