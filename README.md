@@ -16,6 +16,7 @@ sts, a fully open-source status page for Gatus backend
 - **Status Updates on Real-time**: Status information is automatically updated using SWR.
 - **Customizable**: Easily update the site title, description, logo and more.
 - **Brand-free Footer**: No attribution required
+- **Subpath Deployment Ready**: Easily deploy under a subpath (e.g., `/frontend`) ideal for reverse proxies and Kubernetes.
 
 ## 🛠️ Stack
 
@@ -51,6 +52,28 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with a browser to see the output.
 
+### Installation with subpath
+```bash
+# Clone the repository
+git clone https://github.com/sparanoid/sts.git
+cd sts
+
+# Install dependencies.
+bun install
+
+# Set environment variables (create .env.local)
+echo "NEXT_PUBLIC_API_BASE_PATH=/frontend" >> .env.local
+echo "GATUS_API_BASE=https://your-gatus-instance.com/frontend/api/v1" > .env.local
+
+# Build the app server
+bun run build
+# Execute server development
+bun dev
+# Execute server production
+bun start
+```
+Open [http://localhost:3000/frontend](http://localhost:3000/frontend) with a browser to see the output
+
 ## ⚙️ Configuration
 
 You can configure sts with environment variables:
@@ -64,7 +87,7 @@ You can configure sts with environment variables:
 | `NEXT_PUBLIC_SITE_BACK_TITLE` | Title for back link                                           | ❌       |
 | `NEXT_PUBLIC_SITE_BACK_URL`   | URL for back link                                             | ❌       |
 | `NEXT_PUBLIC_FOOTER_TEXT`     | Custom footer text                                            | ❌       |
-
+| `NEXT_PUBLIC_API_BASE_PATH`   | Custom Base path for application (e.g. `/frontend` )          | ❌       |
 ## 🌐 Deployment
 
 ### Deploy on Vercel
