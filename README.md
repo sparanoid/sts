@@ -53,6 +53,7 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with a browser to see the output.
 
 ### Installation with subpath
+
 ```bash
 # Clone the repository
 git clone https://github.com/sparanoid/sts.git
@@ -72,6 +73,7 @@ bun dev
 # Execute server production
 bun start
 ```
+
 Open [http://localhost:3000/frontend](http://localhost:3000/frontend) with a browser to see the output
 
 ## ⚙️ Configuration
@@ -88,6 +90,8 @@ You can configure sts with environment variables:
 | `NEXT_PUBLIC_SITE_BACK_URL`   | URL for back link                                             | ❌       |
 | `NEXT_PUBLIC_FOOTER_TEXT`     | Custom footer text                                            | ❌       |
 | `NEXT_PUBLIC_API_BASE_PATH`   | Custom Base path for application (e.g. `/frontend` )          | ❌       |
+| `NEXT_PUBLIC_GROUP_SIZE`      | Loading skeleton group size (Default: `3` )                   | ❌       |
+
 ## 🌐 Deployment
 
 ### Deploy on Vercel
