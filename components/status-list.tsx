@@ -1,14 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import clsx from 'clsx'
 import { IconRefresh } from '@tabler/icons-react'
+import clsx from 'clsx'
+import { useEffect, useState } from 'react'
+
 import type { Status, UptimeState } from '@/types'
+
+import timeFromNow from '@/utils/timeFromNow'
 import useStatuses from '@/utils/useStatuses'
 import { useViewportSize } from '@/utils/useViewportSize'
-import timeFromNow from '@/utils/timeFromNow'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+
 import { StatusItem } from '@/components/status-item'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Skeleton } from '@/components/ui/skeleton'
 
 interface GroupedData {

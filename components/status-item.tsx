@@ -1,13 +1,14 @@
-import { memo } from 'react'
-import clsx from 'clsx'
-
-import { Status } from '@/types'
-import timeFromNow from '@/utils/timeFromNow'
 import { IconCircleCheckFilled, IconCircleXFilled, IconInfoCircle } from '@tabler/icons-react'
-import { TooltipOrPopover } from '@/components/ui/tooltip-or-popover'
+import clsx from 'clsx'
+import { memo } from 'react'
 
-import lazyFloat from '@/utils/lazyFloat'
+import type { Status } from '@/types'
+
 import formatDate from '@/utils/formatDate'
+import lazyFloat from '@/utils/lazyFloat'
+import timeFromNow from '@/utils/timeFromNow'
+
+import { TooltipOrPopover } from '@/components/ui/tooltip-or-popover'
 
 export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
   const firstResult = data.results[0]

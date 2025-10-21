@@ -1,12 +1,13 @@
 'use client'
 
+import type * as PopoverPrimitive from '@radix-ui/react-popover'
+import type * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import { useState } from 'react'
-import * as PopoverPrimitive from '@radix-ui/react-popover'
-import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 
 import { cn } from '@/utils/cn'
+
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Tooltip } from '@/components/ui/tooltip'
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
 
 interface TooltipOrPopoverProps {
   children: React.ReactNode

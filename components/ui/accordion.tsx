@@ -1,9 +1,8 @@
 'use client'
 
-import * as React from 'react'
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
-
 import clsx from 'clsx'
+import type * as React from 'react'
 
 const Accordion = AccordionPrimitive.Root
 

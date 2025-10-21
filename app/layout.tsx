@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
+
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 import './globals.css'

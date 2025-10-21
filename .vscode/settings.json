@@ -1,5 +1,31 @@
 {
-  "files.associations": {
-    "*.css": "tailwindcss"
-  }
+  "editor.formatOnSave": true,
+  // https://biomejs.dev/reference/vscode/
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  // "files.associations": {
+  //   "*.css": "tailwindcss"
+  // },
+  // https://cva.style/docs/getting-started/installation
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

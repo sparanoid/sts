@@ -2,6 +2,7 @@
 
 // https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
 
+import { IconBrightnessFilled } from '@tabler/icons-react'
 import { useTheme } from 'next-themes'
 
 import { colorSchemes } from '@/lib/const'
@@ -13,7 +14,6 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown'
-import { IconBrightnessFilled } from '@tabler/icons-react'
 
 export const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme()

@@ -4,6 +4,6 @@ const config = {
     '@tailwindcss/postcss': {},
     'postcss-nesting': {},
   },
-};
+}
 
-export default config;
+export default config

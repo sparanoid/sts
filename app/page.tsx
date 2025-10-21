@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { ThemeSwitch } from '@/components/theme-switch'
+
 import { StatusList } from '@/components/status-list'
+import { ThemeSwitch } from '@/components/theme-switch'
 
 export default function Home() {
   return (
