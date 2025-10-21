@@ -1,8 +1,9 @@
 'use client'
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
-import clsx from 'clsx'
 import type * as React from 'react'
+
+import { cn } from '@/utils/cn'
 
 const Accordion = AccordionPrimitive.Root
 
@@ -10,7 +11,7 @@ function AccordionItem({ className, ...props }: React.ComponentProps<typeof Acco
   return (
     <AccordionPrimitive.Item
       data-slot='accordion-item'
-      className={clsx('[&[data-state=open]+[data-state=open]]:border-text/10 border-t border-transparent', className)}
+      className={cn('[&[data-state=open]+[data-state=open]]:border-text/10 border-t border-transparent', className)}
       {...props}
     />
   )
@@ -21,7 +22,7 @@ function AccordionTrigger({ className, children, ...props }: React.ComponentProp
     <AccordionPrimitive.Header className='flex' asChild>
       <AccordionPrimitive.Trigger
         data-slot='accordion-trigger'
-        className={clsx(
+        className={cn(
           'data-[state=closed]:bg-fg/5 flex flex-1 items-center justify-between px-4 py-3 font-semibold transition-all data-[state=closed]:rounded-lg [&[data-state=open]>svg]:rotate-180',
           className
         )}
@@ -41,7 +42,7 @@ function AccordionContent({ className, children, ...props }: React.ComponentProp
       className='data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all'
       {...props}
     >
-      <div className={clsx('pb-2', className)}>{children}</div>
+      <div className={cn('pb-2', className)}>{children}</div>
     </AccordionPrimitive.Content>
   )
 }

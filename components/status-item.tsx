@@ -47,7 +47,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
       </div>
 
       {/* Charts */}
-      <div className='flex gap-[1px] overflow-hidden rounded-sm'>
+      <div className='flex gap-px overflow-hidden rounded-sm'>
         {data.results.map(result => (
           <TooltipOrPopover
             key={result.timestamp}

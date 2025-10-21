@@ -1,12 +1,12 @@
 /* https://tailwindcss.com/docs/theme#default-theme-variable-reference */
+
 /* prettier-ignore */
+/* biome-ignore format: keep long lines for better readability */
 @theme inline static {
   /* Typography */
-  --font-sans:
-    ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-sans: ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   /* Colors */
   --color-fg: oklch(clamp(0%, calc(var(--fg-l) + var(--lch-l-offset)), 100%) var(--primary-c) var(--primary-h));
@@ -16,39 +16,17 @@
   --color-black: oklch(calc(0% + var(--lch-l-offset)) 0 0);
   --color-white: oklch(calc(100% + var(--lch-l-offset)) 0 0);
 
-  --color-gray-50: oklch(
-    clamp(var(--lch-l-clamp-min), calc(99% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-100: oklch(
-    clamp(var(--lch-l-clamp-min), calc(97% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-200: oklch(
-    clamp(var(--lch-l-clamp-min), calc(95% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-300: oklch(
-    clamp(var(--lch-l-clamp-min), calc(90% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-400: oklch(
-    clamp(var(--lch-l-clamp-min), calc(85% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-500: oklch(
-    clamp(var(--lch-l-clamp-min), calc(75% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-600: oklch(
-    clamp(var(--lch-l-clamp-min), calc(65% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-700: oklch(
-    clamp(var(--lch-l-clamp-min), calc(55% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-800: oklch(
-    clamp(var(--lch-l-clamp-min), calc(45% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-900: oklch(
-    clamp(var(--lch-l-clamp-min), calc(25% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
-  --color-gray-950: oklch(
-    clamp(var(--lch-l-clamp-min), calc(15% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray)
-  );
+  --color-gray-50: oklch(clamp(var(--lch-l-clamp-min), calc(99% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-100: oklch(clamp(var(--lch-l-clamp-min), calc(97% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-200: oklch(clamp(var(--lch-l-clamp-min), calc(95% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-300: oklch(clamp(var(--lch-l-clamp-min), calc(90% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-400: oklch(clamp(var(--lch-l-clamp-min), calc(85% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-500: oklch(clamp(var(--lch-l-clamp-min), calc(75% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-600: oklch(clamp(var(--lch-l-clamp-min), calc(65% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-700: oklch(clamp(var(--lch-l-clamp-min), calc(55% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-800: oklch(clamp(var(--lch-l-clamp-min), calc(45% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-900: oklch(clamp(var(--lch-l-clamp-min), calc(25% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
+  --color-gray-950: oklch(clamp(var(--lch-l-clamp-min), calc(15% + var(--lch-l-offset)), var(--lch-l-clamp-max)) 0.02 var(--hue-gray));
 
   --color-red-50: color-mix(in oklch, oklch(0.971 0.013 17.38) var(--mix-factor), var(--mix-base));
   --color-red-100: color-mix(in oklch, oklch(0.936 0.032 17.717) var(--mix-factor), var(--mix-base));
@@ -315,20 +293,12 @@
   --color-stone-950: color-mix(in oklch, oklch(0.147 0.004 49.25) var(--mix-factor), var(--mix-base));
 
   /* Shadows */
-  --shadow-2xs: 0 1px color-mix(in oklch, var(--color-fg) 5%, var(--color-ac) 2.5%);
-  --shadow-xs: 0 1px 2px 0 color-mix(in oklch, var(--color-fg) 5%, var(--color-ac) 2.5%);
-  --shadow-sm:
-    0 1px 3px 0 color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 1px 2px -1px
-    color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
-  --shadow-md:
-    0 4px 6px -1px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 2px 4px -2px
-    color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
-  --shadow-lg:
-    0 10px 15px -3px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 4px 6px -4px
-    color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
-  --shadow-xl:
-    0 20px 25px -5px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 8px 10px -6px
-    color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
+  --shadow-2xs: 0 1px color-mix(in oklch, var(--color-black) 5%, var(--color-ac) 2.5%);
+  --shadow-xs: 0 1px 2px 0 color-mix(in oklch, var(--color-black) 7.5%, var(--color-ac) 2.5%);
+  --shadow-sm: 0 1px 3px 0 color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 1px 2px -1px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
+  --shadow-md: 0 4px 6px -1px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 2px 4px -2px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
+  --shadow-lg: 0 10px 15px -3px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 4px 6px -4px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
+  --shadow-xl: 0 20px 25px -5px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%), 0 8px 10px -6px color-mix(in oklch, var(--color-fg) 10%, var(--color-ac) 5%);
   --shadow-2xl: 0 25px 50px -12px color-mix(in oklch, var(--color-fg) 25%, var(--color-ac) 17.5%);
 
   --inset-shadow-2xs: inset 0 1px color-mix(in oklch, var(--color-fg) 10%, transparent);

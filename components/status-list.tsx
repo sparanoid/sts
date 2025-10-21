@@ -66,7 +66,7 @@ export function StatusList() {
       return groupedData
     }
 
-    if (data && data.length) {
+    if (data?.length) {
       setResolvedData(processData(data))
       setGlobalStatus(resolveGroupStatus(data))
       setLatestTimestamp(
@@ -104,6 +104,7 @@ export function StatusList() {
           <div className='flex items-center gap-1'>
             Updated {timeFromNow(latestTimestamp)}
             <button
+              type='button'
               onClick={() => mutate()}
               aria-label='Refresh'
               disabled={isLoading || isValidating}
@@ -129,7 +130,7 @@ export function StatusList() {
           {Object.entries(resolvedData).map(([group, statuses]) => (
             <AccordionItem value={group} key={group}>
               <AccordionTrigger asChild>
-                <h2 className='cursor-pointer text-lg'>
+                <h2 className='cursor-pointer text-lg font-medium'>
                   <div className='line-clamp-1 text-left'>{group}</div>
                   <div className='text-xs uppercase'>
                     {statuses.groupStatus.percent === 100 ? (
@@ -166,7 +167,7 @@ export function StatusList() {
         <div className='grid gap-2'>
           {[...new Array(process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3)].map(
             (_, idx) => {
-              return <Skeleton key={idx} className='mt-[1px] h-[52px] w-full rounded-lg' />
+              return <Skeleton key={idx} className='mt-px h-[52px] w-full rounded-lg' />
             }
           )}
         </div>
