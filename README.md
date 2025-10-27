@@ -21,13 +21,13 @@ sts, a fully open-source status page with Gatus backend and Payload CMS
 
 ## 🛠️ Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (with App Router).
-- **CMS**: [Payload CMS](https://payloadcms.com/) for incident management.
-- **Database**: SQLite (with [Turso](https://turso.tech/) support) for incident storage.
-- **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible.
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with custom OKLCH colour palettes.
-- **Data Fetching**: [SWR](https://swr.vercel.app/) for effective real-time updates.
-- **Icons**: [Tabler Icons](https://tabler-icons.io/).
+- **Framework**: [Next.js](https://nextjs.org/)
+- **CMS**: [Payload CMS](https://payloadcms.com/) for incident management
+- **Database**: SQLite (with [Turso](https://turso.tech/) support) for incident storage
+- **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom OKLCH colour palettes
+- **Data Fetching**: [SWR](https://swr.vercel.app/) for effective real-time updates
+- **Icons**: [Tabler Icons](https://tabler.io/icons).
 
 ## 📢 Incident Management
 
