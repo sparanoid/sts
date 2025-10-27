@@ -7,8 +7,10 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "start:db": "payload migrate && next start",
     "lint": "biome check",
     "format": "biome format --write",
+    "migrate": "payload migrate",
     "generate-types": "payload generate:types"
   },
   "dependencies": {
