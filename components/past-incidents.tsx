@@ -41,9 +41,8 @@ export function PastIncidents() {
 
   return (
     <section className='space-y-2 mt-8'>
-      <IncidentList type='past' incidents={pastIncidents} showAllUpdates={false} />
-
-      <div className='text-center pt-4'>
+      <div className='flex flex-wrap items-center justify-between'>
+        <h2 className='text-xl font-semibold'>Past Incidents</h2>
         <Button asChild>
           <Link href='/history'>
             Incident History
@@ -51,6 +50,8 @@ export function PastIncidents() {
           </Link>
         </Button>
       </div>
+
+      <IncidentList type='past' incidents={pastIncidents} showAllUpdates={false} />
     </section>
   )
 }

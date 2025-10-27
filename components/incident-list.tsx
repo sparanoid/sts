@@ -35,27 +35,17 @@ export function IncidentList({ type, incidents, showAllUpdates = false }: Incide
     <div className='space-y-6'>
       {sortedDates.map(date => (
         <div key={date} className='space-y-2'>
-          <div className='flex flex-wrap items-center justify-between gap-2'>
-            <div className='flex items-center gap-2'>
-              {type === 'current' && <div className='w-3 h-3 bg-rose-500 rounded-full animate-pulse' />}
-              {type === 'current' ? (
-                <h2 className='text-xl font-semibold text-rose-600'>Active Incidents</h2>
-              ) : (
-                <h2 className='text-xl font-semibold'>Past Incidents</h2>
-              )}
-            </div>
-            {type === 'current' && (
-              <h3 className='text-sm font-semibold text-fg/60'>
-                {formatDate(new Date(date), {
-                  format: {
-                    year: 'numeric',
-                    month: 'long',
-                    day: '2-digit',
-                  },
-                })}
-              </h3>
-            )}
-          </div>
+          {type !== 'current' && (
+            <h3 className='font-semibold text-fg/60'>
+              {formatDate(new Date(date), {
+                format: {
+                  year: 'numeric',
+                  month: 'long',
+                  day: '2-digit',
+                },
+              })}
+            </h3>
+          )}
           <div className='space-y-3'>
             {groupedIncidents[date].map(incident => (
               <IncidentItem key={incident.id} incident={incident} showAllUpdates={showAllUpdates} />

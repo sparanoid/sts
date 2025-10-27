@@ -1,4 +1,4 @@
-import { IconRss } from '@tabler/icons-react'
+import { IconChevronLeft, IconRss } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -44,28 +44,29 @@ export default async function HistoryPage({ searchParams }: PageProps) {
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-      <div className='mb-6'>
-        <Link href='/' className='inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900'>
-          <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <title>Arrow left</title>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 19l-7-7 7-7' />
-          </svg>
-          Back to Status
-        </Link>
-      </div>
-
-      <div className='flex items-center justify-between mb-6'>
-        <h1 className='text-2xl font-bold'>Incident History</h1>
-        <Button asChild>
-          <Link href='/history.atom' target='_blank'>
-            <IconRss />
-            Subscribe
+      <div>
+        <Button asChild variant='outline'>
+          <Link href='/'>
+            <IconChevronLeft />
+            Back to Status
           </Link>
         </Button>
       </div>
 
-      <div className='mb-4 text-sm text-gray-600'>
-        Showing incidents from {endDate.format('MMM D')} to {startDate.format('MMM D, YYYY')}
+      <div className='space-y-2 py-6'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-2xl font-bold'>Incident History</h1>
+          <Button asChild tint='orange'>
+            <Link href='/history.atom' target='_blank'>
+              <IconRss />
+              Subscribe
+            </Link>
+          </Button>
+        </div>
+
+        <div className='text-sm text-gray-600'>
+          Showing incidents from {endDate.format('MMM D')} to {startDate.format('MMM D, YYYY')}
+        </div>
       </div>
 
       {pageIncidents.length > 0 ? (

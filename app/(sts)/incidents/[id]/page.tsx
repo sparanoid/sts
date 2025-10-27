@@ -1,3 +1,4 @@
+import { IconChevronLeft } from '@tabler/icons-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -10,6 +11,7 @@ import { timeFromNow } from '@/utils/timeFromNow'
 
 import { Footer } from '@/components/footer'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
+import { Button } from '@/components/ui/button'
 
 const statusStyles = {
   investigating: 'bg-rose-500',
@@ -69,13 +71,12 @@ export default async function IncidentPage({ params }: PageProps) {
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4 space-y-6'>
       <div>
-        <Link href='/' className='inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900'>
-          <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <title>Arrow left</title>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 19l-7-7 7-7' />
-          </svg>
-          Back to Status
-        </Link>
+        <Button asChild variant='outline'>
+          <Link href='/'>
+            <IconChevronLeft />
+            Back to Status
+          </Link>
+        </Button>
       </div>
 
       {/* Incident Header */}

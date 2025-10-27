@@ -16,11 +16,11 @@ interface IncidentItemProps {
 }
 
 const statusStyles = {
-  investigating: 'bg-red-500',
+  investigating: 'bg-rose-500',
   identified: 'bg-orange-500',
   monitoring: 'bg-yellow-500',
   update: 'bg-blue-500',
-  resolved: 'bg-green-500',
+  resolved: 'bg-emerald-500',
 }
 
 const statusLabels = {
