@@ -108,7 +108,7 @@ export default async function IncidentPage({ params }: PageProps) {
                 {/* Timeline dot */}
                 <div
                   className={cn(
-                    'absolute -left-2.5 top-4.5 size-5 rounded-full border-2 border-bg',
+                    'absolute -left-3 top-4.5 size-5.5 rounded-full border-2 border-bg',
                     statusStyles[update.type]
                   )}
                 />
