@@ -8,6 +8,7 @@ import { cn } from '@/utils/cn'
 import { renderLexicalContent } from '@/utils/renderLexicalContent'
 import { timeFromNow } from '@/utils/timeFromNow'
 
+import { Footer } from '@/components/footer'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
 
 const statusStyles = {
@@ -135,6 +136,8 @@ export default async function IncidentPage({ params }: PageProps) {
           <p className='text-fg/60'>No updates available</p>
         )}
       </section>
+
+      <Footer />
     </main>
   )
 }

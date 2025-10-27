@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { queryIncidents } from '@/lib/queryIncidents'
 
+import { Footer } from '@/components/footer'
 import { HistoryPagination } from '@/components/history-pagination'
 import { IncidentList } from '@/components/incident-list'
 
@@ -65,6 +66,8 @@ export default async function HistoryPage({ searchParams }: PageProps) {
 
       {/* Pagination */}
       <HistoryPagination currentPage={page} totalPages={totalPages} />
+
+      <Footer />
     </main>
   )
 }
