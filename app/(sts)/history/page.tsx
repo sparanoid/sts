@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { queryIncidents } from '@/lib/queryIncidents'
 
+import { HistoryPagination } from '@/components/history-pagination'
 import { IncidentList } from '@/components/incident-list'
 
 export const metadata: Metadata = {
@@ -33,8 +34,10 @@ export default async function HistoryPage({ searchParams }: PageProps) {
     return incidentDate.isBefore(startDate) && incidentDate.isAfter(endDate)
   })
 
-  const hasNextPage = incidents.some(incident => dayjs(incident.createdAt).isBefore(endDate))
-  const hasPrevPage = page > 1
+  // Calculate total pages based on oldest incident
+  const oldestIncident = incidents[incidents.length - 1]
+  const daysSinceOldest = oldestIncident ? dayjs().diff(dayjs(oldestIncident.createdAt), 'day') : 0
+  const totalPages = Math.max(1, Math.ceil(daysSinceOldest / INCIDENTS_PER_PAGE))
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
@@ -61,29 +64,7 @@ export default async function HistoryPage({ searchParams }: PageProps) {
       )}
 
       {/* Pagination */}
-      <div className='flex items-center justify-between mt-8'>
-        <Link
-          href={`/history?page=${page + 1}`}
-          className={`px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors ${
-            !hasNextPage ? 'opacity-50 pointer-events-none' : ''
-          }`}
-          aria-disabled={!hasNextPage}
-        >
-          ← Older Incidents
-        </Link>
-
-        <span className='text-sm text-gray-600'>Page {page}</span>
-
-        <Link
-          href={hasPrevPage ? `/history?page=${page - 1}` : '/history'}
-          className={`px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors ${
-            !hasPrevPage ? 'opacity-50 pointer-events-none' : ''
-          }`}
-          aria-disabled={!hasPrevPage}
-        >
-          Newer Incidents →
-        </Link>
-      </div>
+      <HistoryPagination currentPage={page} totalPages={totalPages} />
     </main>
   )
 }

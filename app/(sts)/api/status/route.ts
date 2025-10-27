@@ -1,4 +1,5 @@
 import type { NextRequest } from 'next/server'
+
 import { getStatuses } from '@/lib/getStatuses'
 
 export const runtime = 'edge'

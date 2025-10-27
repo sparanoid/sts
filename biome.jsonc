@@ -17,7 +17,9 @@
       "!out",
       "!public",
       "!references",
-      "!storybook-static"
+      "!storybook-static",
+      "!payload-types.ts",
+      "!app/(payload)/admin/importMap.js"
     ]
   },
   "formatter": {

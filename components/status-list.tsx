@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react'
 import type { Status, UptimeState } from '@/types'
 
 import { timeFromNow } from '@/utils/timeFromNow'
-import useStatuses from '@/utils/useStatuses'
-import { useViewportSize } from '@/utils/useViewportSize'
+
+import useStatuses from '@/hooks/useStatuses'
+import { useViewportSize } from '@/hooks/useViewportSize'
 
 import { StatusItem } from '@/components/status-item'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
@@ -165,11 +166,11 @@ export function StatusList() {
         </Accordion>
       ) : (
         <div className='grid gap-2'>
-          {[...new Array(process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE) : 3)].map(
-            (_, idx) => {
-              return <Skeleton key={idx} className='mt-px h-[52px] w-full rounded-lg' />
-            }
-          )}
+          {[
+            ...new Array(process.env.NEXT_PUBLIC_GROUP_SIZE ? parseInt(process.env.NEXT_PUBLIC_GROUP_SIZE, 10) : 3),
+          ].map((_, idx) => {
+            return <Skeleton key={idx} className='mt-px h-[52px] w-full rounded-lg' />
+          })}
         </div>
       )}
     </>

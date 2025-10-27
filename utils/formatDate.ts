@@ -13,7 +13,7 @@ export function formatDate(
     // Use client local time by default
     localTime = true,
     removeMinute00 = false,
-    defaultTimezone = 'Asia/Shanghai',
+    defaultTimezone = 'UTC',
     format = {
       year: 'numeric',
       month: '2-digit',

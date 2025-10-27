@@ -1,6 +1,6 @@
 'use client'
 
-import { useIncidents } from '@/utils/useIncidents'
+import { useIncidents } from '@/hooks/useIncidents'
 
 import { IncidentList } from './incident-list'
 import { Skeleton } from './ui/skeleton'

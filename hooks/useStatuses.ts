@@ -1,5 +1,6 @@
-import { Status } from '@/types'
-import useSWR, { Fetcher } from 'swr'
+import useSWR, { type Fetcher } from 'swr'
+
+import type { Status } from '@/types'
 
 const API_BASE_PATH = process.env.NEXT_PUBLIC_API_BASE_PATH || ''
 

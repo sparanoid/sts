@@ -1,4 +1,4 @@
-import { Status } from '@/types'
+import type { Status } from '@/types'
 
 export async function getStatuses(size: number) {
   const apiBase = process.env.GATUS_API_BASE

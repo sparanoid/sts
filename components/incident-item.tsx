@@ -5,8 +5,10 @@ import Link from 'next/link'
 import type { Incident } from '@/payload-types'
 
 import { cn } from '@/utils/cn'
-import { formatDate } from '@/utils/formatDate'
 import { renderLexicalContent } from '@/utils/renderLexicalContent'
+import { timeFromNow } from '@/utils/timeFromNow'
+
+import { TimestampTooltip } from '@/components/timestamp-tooltip'
 
 interface IncidentItemProps {
   incident: Incident
@@ -44,7 +46,10 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
           </Link>
           <p className='text-sm text-gray-600 mt-1'>{incident.description}</p>
         </div>
-        <time className='text-sm text-gray-500 whitespace-nowrap'>{formatDate(incident.createdAt)}</time>
+
+        <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
+          <div className='text-fg/60 text-sm font-normal'>{timeFromNow(+new Date(incident.createdAt))}</div>
+        </TimestampTooltip>
       </div>
 
       {updatesToShow.length > 0 && (
@@ -56,7 +61,10 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
                 <span className='text-sm font-medium'>{statusLabels[update.type]}</span>
               </div>
               <div className='flex-1 text-sm text-gray-700'>{renderLexicalContent(update.content) || 'No content'}</div>
-              <time className='text-sm text-gray-500 whitespace-nowrap'>{formatDate(update.timestamp)}</time>
+
+              <TimestampTooltip timestamp={+new Date(update.timestamp)}>
+                <div className='text-fg/60 text-sm font-normal'>{timeFromNow(+new Date(update.timestamp))}</div>
+              </TimestampTooltip>
             </div>
           ))}
         </div>

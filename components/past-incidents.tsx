@@ -1,12 +1,14 @@
 'use client'
 
+import { IconChevronRight } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 
-import { useIncidents } from '@/utils/useIncidents'
+import { useIncidents } from '@/hooks/useIncidents'
 
-import { IncidentList } from './incident-list'
-import { Skeleton } from './ui/skeleton'
+import { IncidentList } from '@/components/incident-list'
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function PastIncidents() {
   const { incidents, isLoading, isError } = useIncidents()
@@ -44,16 +46,12 @@ export function PastIncidents() {
 
       {/* Incident History Button */}
       <div className='text-center py-4'>
-        <Link
-          href='/history'
-          className='inline-flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors'
-        >
-          Incident History
-          <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-            <title>Arrow right</title>
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-          </svg>
-        </Link>
+        <Button asChild>
+          <Link href='/history'>
+            Incident History
+            <IconChevronRight />
+          </Link>
+        </Button>
       </div>
     </section>
   )
