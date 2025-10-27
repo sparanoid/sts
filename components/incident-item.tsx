@@ -40,8 +40,8 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
   return (
     <div
       className={cn(
-        'border rounded-lg p-4 space-y-2',
-        isResolved ? 'border-gray-200' : 'border-rose-500 bg-rose-500/5'
+        'border rounded-lg p-4 space-y-2 shadow-xs',
+        isResolved ? 'border-fg/20' : 'border-rose-500 bg-rose-500/5'
       )}
     >
       <div className='flex items-start justify-between gap-4'>

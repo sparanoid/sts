@@ -78,7 +78,7 @@ export default async function IncidentPage({ params }: PageProps) {
       </div>
 
       {/* Incident Header */}
-      <div className={cn('border rounded-lg p-6', isResolved ? 'border-fg/20' : 'border-rose-500 bg-rose-500/5')}>
+      <div className={cn('rounded-lg p-6', !isResolved && 'bg-rose-500/5')}>
         <div className='flex items-start justify-between gap-4'>
           <div className='space-y-2'>
             <h1 className='text-2xl font-bold'>{incident.title}</h1>
