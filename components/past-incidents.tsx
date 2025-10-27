@@ -44,7 +44,7 @@ export function PastIncidents() {
       <IncidentList type='past' incidents={pastIncidents} showAllUpdates={false} />
 
       {/* Incident History Button */}
-      <div className='text-center py-4'>
+      <div className='text-center pt-4'>
         <Button asChild>
           <Link href='/history'>
             Incident History
