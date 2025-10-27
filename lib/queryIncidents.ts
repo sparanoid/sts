@@ -13,7 +13,7 @@ export async function queryIncidentById(id: number): Promise<Incident | null> {
       collection: 'incidents',
       id,
     })
-    return incident as Incident
+    return incident
   } catch {
     return null
   }
@@ -29,5 +29,5 @@ export async function queryIncidents(options?: { limit?: number; sort?: string }
     limit: options?.limit || 1000,
     sort: options?.sort || '-createdAt',
   })
-  return result.docs as Incident[]
+  return result.docs
 }
