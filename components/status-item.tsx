@@ -4,9 +4,9 @@ import { memo } from 'react'
 
 import type { Status } from '@/types'
 
-import formatDate from '@/utils/formatDate'
-import lazyFloat from '@/utils/lazyFloat'
-import timeFromNow from '@/utils/timeFromNow'
+import { formatDate } from '@/utils/formatDate'
+import { lazyFloat } from '@/utils/lazyFloat'
+import { timeFromNow } from '@/utils/timeFromNow'
 
 import { TooltipOrPopover } from '@/components/ui/tooltip-or-popover'
 

@@ -5,7 +5,7 @@
 @import './schemes.css';
 
 /* https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually */
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /* Extends tailwind css layers */
 /* https://tailwindcss.com/docs/preflight */
@@ -37,10 +37,6 @@
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  ::selection {
-    background: --theme(--color-fg / 30%);
   }
 }
 

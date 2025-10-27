@@ -10,6 +10,7 @@ sts, a fully open-source status page for Gatus backend
 ## ✨ Features
 
 - **Gatus Integration**: Works with [Gatus](https://github.com/TwiN/gatus) backend for monitoring.
+- **Incident Management**: Built-in CMS for managing and displaying service incidents with status updates. Powered by [Payload CMS 3](https://payloadcms.com/).
 - **Beautiful UI**: A modern UI with perfect Lighthouse results (100 in every category).
 - **Fully Responsive**: Great experience on all devices from mobile to desktop.
 - **Supports Dark Mode**: Theme detection with an option to toggle manually.
@@ -21,10 +22,44 @@ sts, a fully open-source status page for Gatus backend
 ## 🛠️ Stack
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (with App Router).
+- **CMS**: [Payload CMS 3](https://payloadcms.com/) for incident management.
+- **Database**: SQLite (with [Turso](https://turso.tech/) support) for incident storage.
 - **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible.
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with custom OKLCH colour palettes.
 - **Data Fetching**: [SWR](https://swr.vercel.app/) for effective real-time updates.
 - **Icons**: [Tabler Icons](https://tabler-icons.io/).
+
+## 📢 Incident Management
+
+sts includes a built-in CMS for managing service incidents and status updates.
+
+### How It Works
+
+- **Active Incidents**: Displayed prominently at the top of the status page
+- **Status Updates**: Track incident progress with update types (Investigating, Identified, Monitoring, Update, Resolved)
+- **Timeline View**: Each incident shows all updates in chronological order
+- **Public Access**: Incidents are publicly visible; management requires authentication
+- **History**: View past incidents for up to 30 days with pagination
+
+### Managing Incidents
+
+1. Access the admin panel at `/admin`
+2. Create your first admin user
+3. Navigate to "Incidents" in the sidebar
+4. Create a new incident with:
+   - Title and description
+   - Multiple status updates with timestamps
+   - Rich text content for detailed explanations
+
+### Status Update Types
+
+- **Investigating**: Issue identified, investigation in progress
+- **Identified**: Root cause found
+- **Monitoring**: Fix applied, monitoring the situation
+- **Update**: General progress update
+- **Resolved**: Issue completely resolved
+
+Active incidents appear at the top of your status page until marked as "Resolved".
 
 ## 🚀 Getting Started
 
@@ -45,12 +80,14 @@ bun install
 
 # Set environment variables (create .env.local)
 echo "GATUS_API_BASE=https://your-gatus-instance.com/api/v1" > .env.local
+echo "PAYLOAD_SECRET=your-secret-key" >> .env.local
 
 # Run the development server
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with a browser to see the output.
+Open [http://localhost:3000](http://localhost:3000) to view the status page.
+Open [http://localhost:3000/admin](http://localhost:3000/admin) to access the incident management admin panel.
 
 ### Installation with subpath
 
@@ -65,6 +102,7 @@ bun install
 # Set environment variables (create .env.local)
 echo "NEXT_PUBLIC_API_BASE_PATH=/frontend" >> .env.local
 echo "GATUS_API_BASE=https://your-gatus-instance.com/frontend/api/v1" > .env.local
+echo "PAYLOAD_SECRET=your-secret-key-min-32-characters" >> .env.local
 
 # Build the app server
 bun run build
@@ -83,6 +121,10 @@ You can configure sts with environment variables:
 | Variable                      | Description                                                   | Required |
 | ----------------------------- | ------------------------------------------------------------- | -------- |
 | `GATUS_API_BASE`              | Gatus API base URL (e.g. `https://status.example.com/api/v1`) | ✅       |
+| `PAYLOAD_SECRET`              | Secret key for Payload CMS (min. 32 characters)               | ✅       |
+| `DATABASE_URI`                | Database connection string (optional, defaults to SQLite)     | ❌       |
+| `TURSO_DATABASE_URL`          | Or `DATABASE_URI` for Turso database URL (for cloud SQLite)   | ❌       |
+| `TURSO_AUTH_TOKEN`            | Or `AUTH_TOKEN` for Turso authentication token                | ❌       |
 | `NEXT_PUBLIC_SITE_TITLE`      | Site title                                                    | ❌       |
 | `NEXT_PUBLIC_SITE_DESC`       | Site description                                              | ❌       |
 | `NEXT_PUBLIC_SITE_LOGO`       | Site logo URL                                                 | ❌       |

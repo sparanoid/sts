@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 import type { Status, UptimeState } from '@/types'
 
-import timeFromNow from '@/utils/timeFromNow'
+import { timeFromNow } from '@/utils/timeFromNow'
 import useStatuses from '@/utils/useStatuses'
 import { useViewportSize } from '@/utils/useViewportSize'
 

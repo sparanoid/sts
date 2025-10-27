@@ -2,7 +2,7 @@
   :root {
     /* Colors */
     /* Currently, browsers like Canary have a bug when processing OKLCH colors.bg at 100% brightness, the recommended value is 0.04 */
-    --primary-c: 0.01;
+    --primary-c: 0;
     --primary-h: 160;
     --secondary-c: 0.08;
     --secondary-h: 180;

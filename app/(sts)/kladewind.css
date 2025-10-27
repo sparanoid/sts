@@ -2,7 +2,7 @@
 
 /* prettier-ignore */
 /* biome-ignore format: keep long lines for better readability */
-@theme inline static {
+@theme {
   /* Typography */
   --font-sans: ui-sans-serif, system-ui, 'Helvetica Neue', Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;

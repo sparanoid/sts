@@ -6,7 +6,7 @@ type FormatDateOptions = {
   format?: Intl.DateTimeFormatOptions
 }
 
-export default function formatDate(
+export function formatDate(
   timestamp: Date | string = new Date(),
   {
     locale = 'en-US',

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { CurrentIncidents } from '@/components/current-incidents'
+import { PastIncidents } from '@/components/past-incidents'
 import { StatusList } from '@/components/status-list'
 import { ThemeSwitch } from '@/components/theme-switch'
 
@@ -28,7 +30,13 @@ export default function Home() {
         <Link href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>{process.env.NEXT_PUBLIC_SITE_TITLE}</Link>
       </nav>
 
+      {/* Active incidents appear first, before service status */}
+      <CurrentIncidents />
+
       <StatusList />
+
+      {/* Past incidents appear after service status */}
+      <PastIncidents />
 
       <footer className='text-fg/80 grid justify-items-center gap-2 py-8 text-center text-sm'>
         <div>{process.env.NEXT_PUBLIC_FOOTER_TEXT || 'sts, a fully open-source status page for Gatus backend'}</div>

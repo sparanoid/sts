@@ -5,7 +5,7 @@ type RelativeTimeProps = {
   locale?: string
 }
 
-export default function timeFromNow(time: number, { locale = 'en-US' }: RelativeTimeProps = {}) {
+export function timeFromNow(time: number, { locale = 'en-US' }: RelativeTimeProps = {}) {
   dayjs.locale(locale)
   dayjs.extend(relativeTime)
   return dayjs(time).fromNow()
