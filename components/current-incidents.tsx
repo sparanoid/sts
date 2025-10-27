@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { useIncidents } from '@/hooks/useIncidents'
 
-import { IncidentList } from './incident-list'
+import { IncidentList } from '@/components/incident-list'
 
 export function CurrentIncidents() {
   const { incidents, isLoading, isError } = useIncidents()
