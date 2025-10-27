@@ -58,7 +58,7 @@ export default async function HistoryPage({ searchParams }: PageProps) {
       </div>
 
       {pageIncidents.length > 0 ? (
-        <IncidentList incidents={pageIncidents} showAllUpdates={false} />
+        <IncidentList type='past' incidents={pageIncidents} showAllUpdates={false} />
       ) : (
         <div className='text-center text-gray-500 py-16'>No incidents found for this time period</div>
       )}
