@@ -38,17 +38,22 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
   const updatesToShow = showAllUpdates ? updates : latestUpdate ? [latestUpdate] : []
 
   return (
-    <div className={cn('border rounded-lg p-4 space-y-3', isResolved ? 'border-gray-200' : 'border-red-200 bg-red-50')}>
+    <div
+      className={cn(
+        'border rounded-lg p-4 space-y-2',
+        isResolved ? 'border-gray-200' : 'border-rose-500 bg-rose-500/5'
+      )}
+    >
       <div className='flex items-start justify-between gap-4'>
         <div className='flex-1'>
           <Link href={`/incidents/${incident.id}`} className='text-lg font-semibold hover:underline'>
             {incident.title}
           </Link>
-          <p className='text-sm text-gray-600 mt-1'>{incident.description}</p>
+          <p className='text-sm text-fg/60 mt-1'>{incident.description}</p>
         </div>
 
         <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
-          <div className='text-fg/60 text-sm font-normal'>{timeFromNow(+new Date(incident.createdAt))}</div>
+          <div className='text-fg/60'>{timeFromNow(+new Date(incident.createdAt))}</div>
         </TimestampTooltip>
       </div>
 
@@ -57,13 +62,13 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
           {updatesToShow.map((update, index) => (
             <div key={update.id || index} className='flex items-start gap-3'>
               <div className='flex items-center gap-2 min-w-fit'>
-                <div className={cn('w-2 h-2 rounded-full', statusStyles[update.type])} />
+                <div className={cn('size-2 rounded-full', statusStyles[update.type])} />
                 <span className='text-sm font-medium'>{statusLabels[update.type]}</span>
               </div>
-              <div className='flex-1 text-sm text-gray-700'>{renderLexicalContent(update.content) || 'No content'}</div>
+              <div className='flex-1 text-sm text-fg/60'>{renderLexicalContent(update.content) || 'No content'}</div>
 
               <TimestampTooltip timestamp={+new Date(update.timestamp)}>
-                <div className='text-fg/60 text-sm font-normal'>{timeFromNow(+new Date(update.timestamp))}</div>
+                <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(update.timestamp))}</div>
               </TimestampTooltip>
             </div>
           ))}
@@ -71,7 +76,7 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
       )}
 
       {!showAllUpdates && updates.length > 1 && (
-        <Link href={`/incidents/${incident.id}`} className='text-sm text-blue-600 hover:underline'>
+        <Link href={`/incidents/${incident.id}`} className='text-sm hover:underline'>
           View all {updates.length} updates →
         </Link>
       )}

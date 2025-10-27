@@ -4,7 +4,9 @@ import dayjs from 'dayjs'
 
 import type { Incident } from '@/payload-types'
 
-import { IncidentItem } from './incident-item'
+import { formatDate } from '@/utils/formatDate'
+
+import { IncidentItem } from '@/components/incident-item'
 
 interface IncidentListProps {
   incidents: Incident[]
@@ -25,14 +27,22 @@ export function IncidentList({ incidents, showAllUpdates = false }: IncidentList
   const sortedDates = Object.keys(groupedIncidents).sort((a, b) => b.localeCompare(a))
 
   if (incidents.length === 0) {
-    return <div className='text-center text-gray-500 py-8'>No incidents to display</div>
+    return <div className='text-center text-fg/60 py-8'>No incidents to display</div>
   }
 
   return (
     <div className='space-y-6'>
       {sortedDates.map(date => (
-        <div key={date}>
-          <h3 className='text-sm font-semibold text-gray-700 mb-3'>{dayjs(date).format('MMMM D, YYYY')}</h3>
+        <div key={date} className='space-y-2'>
+          <h3 className='text-sm font-semibold text-fg/60'>
+            {formatDate(new Date(date), {
+              format: {
+                year: 'numeric',
+                month: 'long',
+                day: '2-digit',
+              },
+            })}
+          </h3>
           <div className='space-y-3'>
             {groupedIncidents[date].map(incident => (
               <IncidentItem key={incident.id} incident={incident} showAllUpdates={showAllUpdates} />

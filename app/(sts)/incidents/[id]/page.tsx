@@ -5,8 +5,10 @@ import { notFound } from 'next/navigation'
 import { queryIncidentById } from '@/lib/queryIncidents'
 
 import { cn } from '@/utils/cn'
-import { formatDate } from '@/utils/formatDate'
 import { renderLexicalContent } from '@/utils/renderLexicalContent'
+import { timeFromNow } from '@/utils/timeFromNow'
+
+import { TimestampTooltip } from '@/components/timestamp-tooltip'
 
 const statusStyles = {
   investigating: 'bg-red-500',
@@ -64,8 +66,8 @@ export default async function IncidentPage({ params }: PageProps) {
   const isResolved = latestUpdate?.type === 'resolved'
 
   return (
-    <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-      <div className='mb-6'>
+    <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4 space-y-6'>
+      <div>
         <Link href='/' className='inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900'>
           <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             <title>Arrow left</title>
@@ -76,49 +78,49 @@ export default async function IncidentPage({ params }: PageProps) {
       </div>
 
       {/* Incident Header */}
-      <div className={cn('border rounded-lg p-6 mb-6', isResolved ? 'border-gray-200' : 'border-red-200 bg-red-50')}>
-        <div className='flex items-start justify-between gap-4 mb-4'>
-          <div>
-            <h1 className='text-2xl font-bold mb-2'>{incident.title}</h1>
-            <p className='text-gray-600'>{incident.description}</p>
+      <div className={cn('border rounded-lg p-6', isResolved ? 'border-fg/20' : 'border-rose-500 bg-rose-500/5')}>
+        <div className='flex items-start justify-between gap-4'>
+          <div className='space-y-2'>
+            <h1 className='text-2xl font-bold'>{incident.title}</h1>
+            <p className='text-fg/60'>{incident.description}</p>
           </div>
-          <div className='text-right'>
-            <time className='text-sm text-gray-500'>Created {formatDate(incident.createdAt)}</time>
+          <div className='text-right space-y-2'>
+            <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
+              <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(incident.createdAt))}</div>
+            </TimestampTooltip>
+
             {isResolved && (
-              <div className='mt-2'>
-                <span className='inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 rounded text-sm'>
-                  <div className='w-2 h-2 bg-green-500 rounded-full' />
-                  Resolved
-                </span>
-              </div>
+              <span className='inline-flex items-center gap-1 px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded text-sm'>
+                <div className='w-2 h-2 bg-emerald-500 rounded-full' />
+                Resolved
+              </span>
             )}
           </div>
         </div>
       </div>
 
       {/* Updates Timeline */}
-      <section>
-        <h2 className='text-xl font-semibold mb-4'>Updates</h2>
+      <section className='space-y-2'>
+        <h2 className='text-xl font-semibold'>Updates</h2>
         {updates.length > 0 ? (
-          <div className='space-y-4'>
+          <div className='space-y-6'>
             {updates.map((update, index) => (
-              <div key={update.id || index} className='border-l-2 border-gray-200 pl-6 pb-6 relative'>
+              <div key={update.id || index} className='border-l-2 border-fg/20 pl-6 ml-2.5 relative'>
                 {/* Timeline dot */}
                 <div
-                  className={cn(
-                    'absolute -left-[9px] w-4 h-4 rounded-full border-2 border-white',
-                    statusStyles[update.type]
-                  )}
+                  className={cn('absolute -left-2.5 size-5 rounded-full border-2 border-bg', statusStyles[update.type])}
                 />
 
                 {/* Update content */}
                 <div className='space-y-2'>
-                  <div className='flex items-center gap-3 flex-wrap'>
+                  <div className='flex items-center gap-3 flex-wrap justify-between'>
                     <span className='font-semibold'>{statusLabels[update.type]}</span>
-                    <time className='text-sm text-gray-500'>{formatDate(update.timestamp)}</time>
+                    <TimestampTooltip timestamp={+new Date(update.timestamp)}>
+                      <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(update.timestamp))}</div>
+                    </TimestampTooltip>
                   </div>
 
-                  <div className='text-gray-700 prose prose-sm max-w-none'>
+                  <div className='text-fg/80 prose prose-sm max-w-none'>
                     {renderLexicalContent(update.content)
                       .split('\n')
                       .map((para, pIndex) => para.trim() && <p key={pIndex}>{para}</p>)}
@@ -128,7 +130,7 @@ export default async function IncidentPage({ params }: PageProps) {
             ))}
           </div>
         ) : (
-          <p className='text-gray-500'>No updates available</p>
+          <p className='text-fg/60'>No updates available</p>
         )}
       </section>
     </main>
