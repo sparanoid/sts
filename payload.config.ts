@@ -27,4 +27,5 @@ export default buildConfig({
   // This is optional - if you don't need to do these things,
   // you don't need it!
   sharp,
+  telemetry: false,
 })
