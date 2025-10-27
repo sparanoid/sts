@@ -15,9 +15,9 @@ export function PastIncidents() {
 
   if (isLoading) {
     return (
-      <div className='space-y-4 mt-8'>
-        <Skeleton className='h-6 w-40' />
-        <Skeleton className='h-24 w-full' />
+      <div className='space-y-2 mt-8'>
+        <Skeleton className='h-7 w-36' />
+        <Skeleton className='h-30.5 w-full' />
       </div>
     )
   }
@@ -43,7 +43,6 @@ export function PastIncidents() {
     <section className='space-y-2 mt-8'>
       <IncidentList type='past' incidents={pastIncidents} showAllUpdates={false} />
 
-      {/* Incident History Button */}
       <div className='text-center pt-4'>
         <Button asChild>
           <Link href='/history'>
