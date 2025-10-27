@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "build:db": "payload migrate && next build --turbopack",
     "start": "next start",
-    "start:db": "payload migrate && next start",
     "lint": "biome check",
     "format": "biome format --write",
     "migrate": "payload migrate",
