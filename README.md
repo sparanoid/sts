@@ -139,7 +139,7 @@ You can configure sts with environment variables:
 
 The easiest way to deploy sts is with Vercel:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsparanoid%2Fsts&env=NEXT_PUBLIC_SITE_TITLE,NEXT_PUBLIC_SITE_DESC,NEXT_PUBLIC_SITE_LOGO,NEXT_PUBLIC_SITE_BACK_TITLE,NEXT_PUBLIC_SITE_BACK_URL,NEXT_PUBLIC_FOOTER_TEXT,GATUS_API_BASE&envDescription=%60GATUS_API_BASE%60%20is%20required%2C%20ie.%20%60https%3A%2F%2Fstatus.twin.sh%2Fapi%2Fv1%60&project-name=sts&repository-name=sts)
+[![Deploy with Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsparanoid%2Fsts&env=GATUS_API_BASE,PAYLOAD_SECRET,TURSO_DATABASE_URL,TURSO_AUTH_TOKEN,NEXT_PUBLIC_SITE_TITLE,NEXT_PUBLIC_SITE_DESC&envDescription=Gatus%20API%20base%20is%20required&envLink=https%3A%2F%2Fgithub.com%2Fsparanoid%2Fsts)
 
 ### Self-hosting
 
