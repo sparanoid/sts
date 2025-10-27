@@ -10,7 +10,7 @@ sts, a fully open-source status page for Gatus backend
 ## ✨ Features
 
 - **Gatus Integration**: Works with [Gatus](https://github.com/TwiN/gatus) backend for monitoring.
-- **Incident Management**: Built-in CMS for managing and displaying service incidents with status updates. Powered by [Payload CMS 3](https://payloadcms.com/).
+- **Incident Management**: Built-in CMS for managing and displaying service incidents with status updates. Powered by [Payload CMS](https://payloadcms.com/).
 - **Beautiful UI**: A modern UI with perfect Lighthouse results (100 in every category).
 - **Fully Responsive**: Great experience on all devices from mobile to desktop.
 - **Supports Dark Mode**: Theme detection with an option to toggle manually.
@@ -22,7 +22,7 @@ sts, a fully open-source status page for Gatus backend
 ## 🛠️ Stack
 
 - **Framework**: [Next.js 15](https://nextjs.org/) (with App Router).
-- **CMS**: [Payload CMS 3](https://payloadcms.com/) for incident management.
+- **CMS**: [Payload CMS](https://payloadcms.com/) for incident management.
 - **Database**: SQLite (with [Turso](https://turso.tech/) support) for incident storage.
 - **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible.
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/) with custom OKLCH colour palettes.
