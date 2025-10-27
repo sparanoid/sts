@@ -102,12 +102,15 @@ export default async function IncidentPage({ params }: PageProps) {
       <section className='space-y-2'>
         <h2 className='text-xl font-semibold'>Updates</h2>
         {updates.length > 0 ? (
-          <div className='space-y-6'>
+          <div>
             {updates.map((update, index) => (
-              <div key={update.id || index} className='border-l-2 border-fg/20 pl-6 ml-2.5 relative'>
+              <div key={update.id || index} className='border-l-2 border-fg/20 pl-6 py-4 ml-2.5 relative'>
                 {/* Timeline dot */}
                 <div
-                  className={cn('absolute -left-2.5 size-5 rounded-full border-2 border-bg', statusStyles[update.type])}
+                  className={cn(
+                    'absolute -left-2.5 top-4.5 size-5 rounded-full border-2 border-bg',
+                    statusStyles[update.type]
+                  )}
                 />
 
                 {/* Update content */}
