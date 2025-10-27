@@ -41,8 +41,7 @@ export function PastIncidents() {
 
   return (
     <section className='space-y-2 mt-8'>
-      <h2 className='text-xl font-semibold'>Past Incidents</h2>
-      <IncidentList incidents={pastIncidents} showAllUpdates={false} />
+      <IncidentList type='past' incidents={pastIncidents} showAllUpdates={false} />
 
       {/* Incident History Button */}
       <div className='text-center py-4'>

@@ -10,7 +10,7 @@ export function CurrentIncidents() {
 
   if (isLoading) {
     return (
-      <div className='space-y-4 mt-8'>
+      <div className='space-y-3 mt-8'>
         <Skeleton className='h-6 w-40' />
         <Skeleton className='h-32 w-full' />
       </div>
@@ -33,12 +33,8 @@ export function CurrentIncidents() {
   }
 
   return (
-    <section className='space-y-2 mt-8'>
-      <div className='flex items-center gap-2'>
-        <div className='w-3 h-3 bg-rose-500 rounded-full animate-pulse' />
-        <h2 className='text-xl font-semibold text-rose-600'>Active Incidents</h2>
-      </div>
-      <IncidentList incidents={currentIncidents} showAllUpdates={true} />
+    <section className='mt-8'>
+      <IncidentList type='current' incidents={currentIncidents} showAllUpdates={true} />
     </section>
   )
 }
