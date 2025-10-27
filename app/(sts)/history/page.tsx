@@ -1,38 +1,28 @@
-'use client'
-
 import dayjs from 'dayjs'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { useState } from 'react'
 
-import { useIncidents } from '@/utils/useIncidents'
+import { queryIncidents } from '@/lib/queryIncidents'
 
 import { IncidentList } from '@/components/incident-list'
-import { Skeleton } from '@/components/ui/skeleton'
+
+export const metadata: Metadata = {
+  title: 'Incident History',
+  description: 'View past service incidents and status updates',
+}
 
 const INCIDENTS_PER_PAGE = 30
 
-export default function HistoryPage() {
-  const [page, setPage] = useState(1)
-  const { incidents, isLoading, isError } = useIncidents()
+interface PageProps {
+  searchParams: Promise<{ page?: string }>
+}
 
-  if (isLoading) {
-    return (
-      <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-        <div className='space-y-4'>
-          <Skeleton className='h-8 w-48' />
-          <Skeleton className='h-96 w-full' />
-        </div>
-      </main>
-    )
-  }
+export default async function HistoryPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  const page = Number(params.page) || 1
 
-  if (isError) {
-    return (
-      <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-        <p className='text-red-600'>Failed to load incidents</p>
-      </main>
-    )
-  }
+  // Fetch all incidents using query helper
+  const incidents = await queryIncidents()
 
   // Filter incidents by date range for current page
   const startDate = dayjs().subtract((page - 1) * INCIDENTS_PER_PAGE, 'day')
@@ -44,6 +34,7 @@ export default function HistoryPage() {
   })
 
   const hasNextPage = incidents.some(incident => dayjs(incident.createdAt).isBefore(endDate))
+  const hasPrevPage = page > 1
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
@@ -71,25 +62,27 @@ export default function HistoryPage() {
 
       {/* Pagination */}
       <div className='flex items-center justify-between mt-8'>
-        <button
-          type='button'
-          onClick={() => setPage(page + 1)}
-          disabled={!hasNextPage}
-          className='px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+        <Link
+          href={`/history?page=${page + 1}`}
+          className={`px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors ${
+            !hasNextPage ? 'opacity-50 pointer-events-none' : ''
+          }`}
+          aria-disabled={!hasNextPage}
         >
           ← Older Incidents
-        </button>
+        </Link>
 
         <span className='text-sm text-gray-600'>Page {page}</span>
 
-        <button
-          type='button'
-          onClick={() => setPage(page - 1)}
-          disabled={page === 1}
-          className='px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+        <Link
+          href={hasPrevPage ? `/history?page=${page - 1}` : '/history'}
+          className={`px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors ${
+            !hasPrevPage ? 'opacity-50 pointer-events-none' : ''
+          }`}
+          aria-disabled={!hasPrevPage}
         >
           Newer Incidents →
-        </button>
+        </Link>
       </div>
     </main>
   )

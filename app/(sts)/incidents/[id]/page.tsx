@@ -1,14 +1,12 @@
-'use client'
-
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { notFound } from 'next/navigation'
+
+import { queryIncidentById } from '@/lib/queryIncidents'
 
 import { cn } from '@/utils/cn'
 import { formatDate } from '@/utils/formatDate'
 import { renderLexicalContent } from '@/utils/renderLexicalContent'
-import { useIncident } from '@/utils/useIncidents'
-
-import { Skeleton } from '@/components/ui/skeleton'
 
 const statusStyles = {
   investigating: 'bg-red-500',
@@ -26,35 +24,43 @@ const statusLabels = {
   resolved: 'Resolved',
 }
 
-export default function IncidentPage() {
-  const params = useParams()
-  const id = params?.id as string
-  const { incident, isLoading, isError } = useIncident(id)
+interface PageProps {
+  params: Promise<{ id: string }>
+}
 
-  if (isLoading) {
-    return (
-      <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-        <div className='space-y-4'>
-          <Skeleton className='h-8 w-64' />
-          <Skeleton className='h-24 w-full' />
-          <Skeleton className='h-96 w-full' />
-        </div>
-      </main>
-    )
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  const incident = await queryIncidentById(Number(id))
+
+  if (!incident) {
+    return {
+      title: 'Incident Not Found',
+      description: 'The requested incident could not be found.',
+    }
   }
 
-  if (isError || !incident) {
-    return (
-      <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-        <p className='text-red-600'>Failed to load incident</p>
-        <Link href='/' className='text-blue-600 hover:underline mt-4 inline-block'>
-          ← Back to Status
-        </Link>
-      </main>
-    )
+  const updates = incident.updates || []
+  const latestUpdate = updates[0]
+  const status = latestUpdate?.type || 'unknown'
+
+  return {
+    title: `${incident.title} - Incident Status`,
+    description: incident.description || `Incident status: ${status}`,
+  }
+}
+
+export default async function IncidentPage({ params }: PageProps) {
+  const { id } = await params
+
+  // Fetch incident using query helper
+  const incident = await queryIncidentById(Number(id))
+
+  if (!incident) {
+    notFound()
   }
 
-  const latestUpdate = incident.updates?.[0]
+  const updates = incident.updates || []
+  const latestUpdate = updates[0]
   const isResolved = latestUpdate?.type === 'resolved'
 
   return (
@@ -93,9 +99,9 @@ export default function IncidentPage() {
       {/* Updates Timeline */}
       <section>
         <h2 className='text-xl font-semibold mb-4'>Updates</h2>
-        {incident.updates && incident.updates.length > 0 ? (
+        {updates.length > 0 ? (
           <div className='space-y-4'>
-            {incident.updates.map((update, index) => (
+            {updates.map((update, index) => (
               <div key={update.id || index} className='border-l-2 border-gray-200 pl-6 pb-6 relative'>
                 {/* Timeline dot */}
                 <div

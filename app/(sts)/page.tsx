@@ -24,7 +24,7 @@ export default function Home() {
                 <span>{process.env.NEXT_PUBLIC_SITE_BACK_TITLE}</span>
               )}
             </Link>
-            <span className='bg-fg/10 h-4 w-[1px]' />
+            <span className='bg-fg/10 h-4 w-px' />
           </>
         ) : null}
         <Link href={process.env.NEXT_PUBLIC_SITE_URL || '/'}>{process.env.NEXT_PUBLIC_SITE_TITLE}</Link>
