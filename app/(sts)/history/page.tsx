@@ -8,7 +8,7 @@ import { HistoryPagination } from '@/components/history-pagination'
 import { IncidentList } from '@/components/incident-list'
 
 export const metadata: Metadata = {
-  title: 'Incident History',
+  title: `Incident History - ${process.env.NEXT_PUBLIC_SITE_TITLE}`,
   description: 'View past service incidents and status updates',
 }
 

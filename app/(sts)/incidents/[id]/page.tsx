@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const status = latestUpdate?.type || 'unknown'
 
   return {
-    title: `${incident.title} - Incident Status`,
+    title: `${incident.title} - Incident Status - ${process.env.NEXT_PUBLIC_SITE_TITLE}`,
     description: incident.description || `Incident status: ${status}`,
   }
 }
