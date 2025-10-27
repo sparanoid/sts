@@ -1,3 +1,4 @@
+import { IconRss } from '@tabler/icons-react'
 import dayjs from 'dayjs'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -7,6 +8,7 @@ import { queryIncidents } from '@/lib/queryIncidents'
 import { Footer } from '@/components/footer'
 import { HistoryPagination } from '@/components/history-pagination'
 import { IncidentList } from '@/components/incident-list'
+import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
   title: `Incident History - ${process.env.NEXT_PUBLIC_SITE_TITLE}`,
@@ -52,7 +54,15 @@ export default async function HistoryPage({ searchParams }: PageProps) {
         </Link>
       </div>
 
-      <h1 className='text-2xl font-bold mb-6'>Incident History</h1>
+      <div className='flex items-center justify-between mb-6'>
+        <h1 className='text-2xl font-bold'>Incident History</h1>
+        <Button asChild>
+          <Link href='/history.atom' target='_blank'>
+            <IconRss />
+            Subscribe
+          </Link>
+        </Button>
+      </div>
 
       <div className='mb-4 text-sm text-gray-600'>
         Showing incidents from {endDate.format('MMM D')} to {startDate.format('MMM D, YYYY')}
