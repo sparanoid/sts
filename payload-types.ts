@@ -146,7 +146,7 @@ export interface UserAuthOperations {
 export interface Incident {
   id: number;
   title: string;
-  description: string;
+  description?: string | null;
   updates?: IncidentUpdate;
   updatedAt: string;
   createdAt: string;

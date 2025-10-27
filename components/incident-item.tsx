@@ -45,11 +45,13 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
       )}
     >
       <div className='flex items-start justify-between gap-4'>
-        <div className='flex-1'>
-          <Link href={`/incidents/${incident.id}`} className='text-lg font-semibold hover:underline'>
-            {incident.title}
-          </Link>
-          <p className='text-sm text-fg/60 mt-1'>{incident.description}</p>
+        <div className='space-y-1'>
+          <div>
+            <Link href={`/incidents/${incident.id}`} className='text-lg font-semibold hover:underline'>
+              {incident.title}
+            </Link>
+          </div>
+          {incident.description && <p className='text-sm text-fg/60'>{incident.description}</p>}
         </div>
 
         <TimestampTooltip timestamp={+new Date(incident.createdAt)}>

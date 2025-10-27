@@ -24,7 +24,7 @@ export const Incidents: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
-      required: true,
+      required: false,
       label: 'Incident Description',
     },
     {

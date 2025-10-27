@@ -78,24 +78,23 @@ export default async function IncidentPage({ params }: PageProps) {
       </div>
 
       {/* Incident Header */}
-      <div className={cn('rounded-lg p-6', !isResolved && 'bg-rose-500/5')}>
+      <div className='space-y-2'>
+        {isResolved && (
+          <span className='inline-flex items-center gap-1 px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded text-sm'>
+            <div className='w-2 h-2 bg-emerald-500 rounded-full' />
+            Resolved
+          </span>
+        )}
         <div className='flex items-start justify-between gap-4'>
           <div className='space-y-2'>
-            <h1 className='text-2xl font-bold'>{incident.title}</h1>
-            <p className='text-fg/60'>{incident.description}</p>
+            <h1 className={cn('text-2xl font-bold', !isResolved && 'text-rose-500')}>{incident.title}</h1>
+            {incident.description && <p className='text-fg/60'>{incident.description}</p>}
           </div>
-          <div className='text-right space-y-2'>
-            <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
-              <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(incident.createdAt))}</div>
-            </TimestampTooltip>
-
-            {isResolved && (
-              <span className='inline-flex items-center gap-1 px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded text-sm'>
-                <div className='w-2 h-2 bg-emerald-500 rounded-full' />
-                Resolved
-              </span>
-            )}
-          </div>
+        </div>
+        <div className='flex'>
+          <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
+            <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(incident.createdAt))}</div>
+          </TimestampTooltip>
         </div>
       </div>
 
