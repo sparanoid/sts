@@ -19,6 +19,7 @@
       "!references",
       "!storybook-static",
       "!payload-types.ts",
+      "!payload-generated-schema.ts",
       "!app/(payload)/admin/importMap.js"
     ]
   },
