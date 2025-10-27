@@ -7,7 +7,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: process.env.NEXT_PUBLIC_SITE_TITLE || 'Gatus Frontend',
-  description: process.env.NEXT_PUBLIC_SITE_DESC || 'A fully open-source status page for Gatus backend',
+  description: process.env.NEXT_PUBLIC_SITE_DESC || 'A fully open-source status page with Gatus and Payload',
   icons: process.env.NEXT_PUBLIC_SITE_LOGO || '',
   alternates: {
     types: {
