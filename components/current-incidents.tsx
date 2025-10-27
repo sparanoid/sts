@@ -1,25 +1,14 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
 import { useIncidents } from '@/hooks/useIncidents'
 
 import { IncidentList } from './incident-list'
-import { Skeleton } from './ui/skeleton'
 
 export function CurrentIncidents() {
   const { incidents, isLoading, isError } = useIncidents()
-
-  if (isLoading) {
-    return (
-      <div className='space-y-3 mt-8'>
-        <Skeleton className='h-6 w-40' />
-        <Skeleton className='h-32 w-full' />
-      </div>
-    )
-  }
-
-  if (isError) {
-    return null
-  }
+  const [shouldRender, setShouldRender] = useState(false)
 
   // Filter for current (unresolved) incidents only
   const currentIncidents = incidents.filter(incident => {
@@ -28,13 +17,29 @@ export function CurrentIncidents() {
     return latestUpdate?.type !== 'resolved'
   })
 
-  if (currentIncidents.length === 0) {
+  useEffect(() => {
+    if (!isLoading && !isError && currentIncidents.length > 0) {
+      requestAnimationFrame(() => {
+        setShouldRender(true)
+      })
+    }
+  }, [isLoading, isError, currentIncidents.length])
+
+  if (isLoading || isError || currentIncidents.length === 0) {
     return null
   }
 
   return (
-    <section className='mt-8'>
-      <IncidentList type='current' incidents={currentIncidents} showAllUpdates={true} />
+    <section
+      className='mt-8 grid transition-all duration-500 ease-out'
+      style={{
+        gridTemplateRows: shouldRender ? '1fr' : '0fr',
+        opacity: shouldRender ? 1 : 0,
+      }}
+    >
+      <div className='overflow-hidden'>
+        <IncidentList type='current' incidents={currentIncidents} showAllUpdates={true} />
+      </div>
     </section>
   )
 }
