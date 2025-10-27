@@ -122,7 +122,6 @@ You can configure sts with environment variables:
 | ----------------------------- | ------------------------------------------------------------- | -------- |
 | `GATUS_API_BASE`              | Gatus API base URL (e.g. `https://status.example.com/api/v1`) | ✅       |
 | `PAYLOAD_SECRET`              | Secret key for Payload CMS (min. 32 characters)               | ✅       |
-| `DATABASE_URI`                | Database connection string (optional, defaults to SQLite)     | ❌       |
 | `TURSO_DATABASE_URL`          | Or `DATABASE_URI` for Turso database URL (for cloud SQLite)   | ❌       |
 | `TURSO_AUTH_TOKEN`            | Or `AUTH_TOKEN` for Turso authentication token                | ❌       |
 | `NEXT_PUBLIC_SITE_TITLE`      | Site title                                                    | ❌       |
