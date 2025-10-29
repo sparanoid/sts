@@ -6,6 +6,10 @@ import sharp from 'sharp'
 import { Incidents } from '@/collections/Incidents'
 
 export default buildConfig({
+  admin: {
+    autoRefresh: true,
+  },
+
   // If you'd like to use Rich Text, pass your editor here
   editor: lexicalEditor(),
 
