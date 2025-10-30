@@ -1,6 +1,6 @@
 'use client'
 
-import { IconMaximize, IconMinimize, IconRefresh, IconSearch } from '@tabler/icons-react'
+import { IconMenuOrder, IconRefresh, IconSearch, IconX } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 
@@ -13,7 +13,7 @@ import { useViewportSize } from '@/hooks/useViewportSize'
 
 import { StatusItem } from '@/components/status-item'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@/components/ui/input-group'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Toggle } from '@/components/ui/toggle'
 
@@ -170,6 +170,13 @@ export function StatusList() {
               value={filterText}
               onChange={e => setFilterText(e.target.value)}
             />
+            {filterText && (
+              <InputGroupAddon align='inline-end'>
+                <InputGroupButton size='icon-xs' onClick={() => setFilterText('')}>
+                  <IconX />
+                </InputGroupButton>
+              </InputGroupAddon>
+            )}
           </InputGroup>
           <Toggle
             pressed={isExpandAll}
@@ -179,7 +186,7 @@ export function StatusList() {
             size='icon'
             variant='outline'
           >
-            {isExpandAll ? <IconMinimize /> : <IconMaximize />}
+            <IconMenuOrder />
           </Toggle>
         </div>
       )}
