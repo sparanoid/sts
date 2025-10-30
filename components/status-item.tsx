@@ -8,7 +8,7 @@ import { lazyFloat } from '@/utils/lazyFloat'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { FormattedTimestampDisplay } from '@/components/timestamp-display'
-import { TooltipOrPopover } from '@/components/ui/tooltip-or-popover'
+import { TooltipContent, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
 
 export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
   const firstResult = data.results[0]
@@ -22,9 +22,12 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
           <span className='line-clamp-1'>{data.name}</span>
           {lastResult.hostname ? (
             <span className='text-fg/50 flex items-center text-sm font-normal'>
-              <TooltipOrPopover label={lastResult.hostname}>
-                <IconInfoCircle className='size-4' />
-              </TooltipOrPopover>
+              <TooltipRoot>
+                <TooltipTrigger className='focus-ring rounded-full'>
+                  <IconInfoCircle className='size-4' />
+                </TooltipTrigger>
+                <TooltipContent>{lastResult.hostname}</TooltipContent>
+              </TooltipRoot>
             </span>
           ) : null}
         </h3>
@@ -48,49 +51,51 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
 
       {/* Charts */}
       <div className='flex gap-px overflow-hidden rounded-sm'>
-        {data.results.map(result => (
-          <TooltipOrPopover
-            key={result.timestamp}
-            triggerClassName='w-full'
-            label={
-              <div className='space-y-1'>
-                {result.conditionResults?.length ? (
-                  <div>
-                    {result.conditionResults.map((result, idx) => {
-                      return (
-                        <div key={idx} className='flex items-center gap-1'>
-                          {result.success ? (
-                            <>
-                              <IconCircleCheckFilled className='size-4 fill-emerald-600' />
-                              <span className='font-mono text-sm text-emerald-600'>{result.condition}</span>
-                            </>
-                          ) : (
-                            <>
-                              <IconCircleXFilled className='size-4 fill-red-600' />
-                              <span className='fill-red-600 font-mono text-sm'>{result.condition}</span>
-                            </>
-                          )}
-                        </div>
-                      )
-                    })}
-                    <hr className='m-1 -mx-3' />
+        {data.results.map(result => {
+          return (
+            <TooltipRoot key={result.timestamp}>
+              <TooltipTrigger asChild>
+                <button
+                  type='button'
+                  className={clsx(
+                    'h-8 w-full',
+                    result.success ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-red-600 hover:bg-red-500'
+                  )}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <div className='space-y-1'>
+                  {result.conditionResults?.length ? (
+                    <div>
+                      {result.conditionResults.map((result, idx) => {
+                        return (
+                          <div key={idx} className='flex items-center gap-1'>
+                            {result.success ? (
+                              <>
+                                <IconCircleCheckFilled className='size-4 fill-emerald-600' />
+                                <span className='font-mono text-sm text-emerald-600'>{result.condition}</span>
+                              </>
+                            ) : (
+                              <>
+                                <IconCircleXFilled className='size-4 fill-red-600' />
+                                <span className='fill-red-600 font-mono text-sm'>{result.condition}</span>
+                              </>
+                            )}
+                          </div>
+                        )
+                      })}
+                      <hr className='m-1 -mx-3' />
+                    </div>
+                  ) : null}
+                  <div className='text-fg/60'>
+                    {lazyFloat(result.duration / 1000 / 1000)}ms, {timeFromNow(+new Date(result.timestamp))}
                   </div>
-                ) : null}
-                <div className='text-fg/60'>
-                  {lazyFloat(result.duration / 1000 / 1000)}ms, {timeFromNow(+new Date(result.timestamp))}
+                  <FormattedTimestampDisplay timestamp={+new Date(result.timestamp)} />
                 </div>
-                <FormattedTimestampDisplay timestamp={+new Date(result.timestamp)} />
-              </div>
-            }
-          >
-            <span
-              className={clsx(
-                'h-8 w-full',
-                result.success ? 'bg-emerald-600 hover:bg-emerald-500' : 'bg-red-600 hover:bg-red-500'
-              )}
-            />
-          </TooltipOrPopover>
-        ))}
+              </TooltipContent>
+            </TooltipRoot>
+          )
+        })}
       </div>
 
       {/* Timestamps */}

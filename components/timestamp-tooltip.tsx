@@ -27,7 +27,7 @@ export function TimestampTooltip({ timestamp, children, side, className }: Times
   })
 
   return (
-    <TooltipRoot onOpenChange={setIsTooltipOpen}>
+    <TooltipRoot onOpenChange={setIsTooltipOpen} disableHoverableContent>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent side={side} className={className}>
         <div className='space-y-1'>

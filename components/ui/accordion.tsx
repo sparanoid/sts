@@ -23,7 +23,7 @@ function AccordionTrigger({ className, children, ...props }: React.ComponentProp
       <AccordionPrimitive.Trigger
         data-slot='accordion-trigger'
         className={cn(
-          'data-[state=closed]:bg-fg/5 flex flex-1 items-center justify-between px-4 py-3 font-semibold transition-all data-[state=closed]:rounded-lg [&[data-state=open]>svg]:rotate-180',
+          'data-[state=closed]:bg-fg/5 data-[state=open]:shadow-border flex flex-1 items-center justify-between px-4 py-3 font-semibold transition-all rounded-lg [&[data-state=open]>svg]:rotate-180',
           className
         )}
         {...props}
@@ -42,7 +42,7 @@ function AccordionContent({ className, children, ...props }: React.ComponentProp
       className='data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden transition-all'
       {...props}
     >
-      <div className={cn('pb-2', className)}>{children}</div>
+      <div className={cn('pt-4 pb-2', className)}>{children}</div>
     </AccordionPrimitive.Content>
   )
 }
