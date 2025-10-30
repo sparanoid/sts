@@ -2,8 +2,6 @@ import type { NextRequest } from 'next/server'
 
 import { getStatuses } from '@/lib/getStatuses'
 
-export const runtime = 'edge'
-
 // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#fetchcache
 export const fetchCache = 'force-no-store'
 
