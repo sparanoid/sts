@@ -10,6 +10,7 @@ import { renderLexicalContent } from '@/utils/renderLexicalContent'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
 import { Button } from '@/components/ui/button'
 
@@ -70,17 +71,19 @@ export default async function IncidentPage({ params }: PageProps) {
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4 space-y-6'>
-      <div>
-        <Button asChild variant='outline'>
-          <Link href='/'>
-            <IconChevronLeft />
-            Back to Status
-          </Link>
-        </Button>
-      </div>
+      <Header />
 
       {/* Incident Header */}
       <div className='space-y-2'>
+        <div>
+          <Button asChild variant='link' className='p-0! -ml-1'>
+            <Link href='/history'>
+              <IconChevronLeft />
+              Back to Incident History
+            </Link>
+          </Button>
+        </div>
+
         {isResolved && (
           <span className='inline-flex items-center gap-1 px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded text-sm'>
             <div className='w-2 h-2 bg-emerald-500 rounded-full' />

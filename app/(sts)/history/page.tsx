@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { queryIncidents } from '@/lib/queryIncidents'
 
 import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
 import { HistoryPagination } from '@/components/history-pagination'
 import { IncidentList } from '@/components/incident-list'
 import { Button } from '@/components/ui/button'
@@ -44,16 +45,18 @@ export default async function HistoryPage({ searchParams }: PageProps) {
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
-      <div>
-        <Button asChild variant='outline'>
-          <Link href='/'>
-            <IconChevronLeft />
-            Back to Status
-          </Link>
-        </Button>
-      </div>
+      <Header />
 
       <div className='space-y-2 py-6'>
+        <div>
+          <Button asChild variant='link' className='p-0! -ml-1'>
+            <Link href='/'>
+              <IconChevronLeft />
+              Back to Status
+            </Link>
+          </Button>
+        </div>
+
         <div className='flex items-center justify-between'>
           <h1 className='text-2xl font-bold'>Incident History</h1>
           <Button asChild tint='orange'>
