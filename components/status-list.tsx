@@ -120,7 +120,7 @@ export function StatusList() {
           <Skeleton className='m-1 size-10 rounded-full' />
           <Skeleton className='h-8 w-[258px] rounded-md' />
           <div className='flex items-center gap-1'>
-            <Skeleton className='h-6 w-[215px] rounded-md' />
+            <Skeleton className='h-6 w-50 rounded-md' />
             <Skeleton className='size-5 rounded-full' />
           </div>
         </div>

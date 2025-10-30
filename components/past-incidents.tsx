@@ -16,7 +16,8 @@ export function PastIncidents() {
   if (isLoading) {
     return (
       <div className='space-y-2 mt-8'>
-        <Skeleton className='h-7 w-36' />
+        <Skeleton className='h-8 w-36' />
+        <Skeleton className='h-6 w-40' />
         <Skeleton className='h-30.5 w-full' />
       </div>
     )
