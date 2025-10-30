@@ -12,6 +12,7 @@ import { timeFromNow } from '@/utils/timeFromNow'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 const statusStyles = {
@@ -85,10 +86,9 @@ export default async function IncidentPage({ params }: PageProps) {
         </div>
 
         {isResolved && (
-          <span className='inline-flex items-center gap-1 px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded text-sm'>
-            <div className='w-2 h-2 bg-emerald-500 rounded-full' />
+          <Badge variant='dot' tint='emerald' size='lg'>
             Resolved
-          </span>
+          </Badge>
         )}
         <div className='flex items-start justify-between gap-4'>
           <div className='space-y-2'>
@@ -127,7 +127,7 @@ export default async function IncidentPage({ params }: PageProps) {
                     </TimestampTooltip>
                   </div>
 
-                  <div className='text-fg/80 prose prose-sm max-w-none'>
+                  <div className='text-fg/80 prose max-w-none'>
                     <RichText data={update.content} disableContainer />
                   </div>
                 </div>

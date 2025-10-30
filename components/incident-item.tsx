@@ -3,24 +3,25 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 
-import type { Incident } from '@/payload-types'
+import type { Incident, IncidentUpdate } from '@/payload-types'
 
 import { cn } from '@/utils/cn'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
+import { Badge, type BadgeProps } from '@/components/ui/badge'
 
 interface IncidentItemProps {
   incident: Incident
   showAllUpdates?: boolean
 }
 
-const statusStyles = {
-  investigating: 'bg-rose-500',
-  identified: 'bg-orange-500',
-  monitoring: 'bg-yellow-500',
-  update: 'bg-blue-500',
-  resolved: 'bg-emerald-500',
+const statusTints: Record<NonNullable<IncidentUpdate>[number]['type'], BadgeProps['tint']> = {
+  investigating: 'rose',
+  identified: 'orange',
+  monitoring: 'yellow',
+  update: 'blue',
+  resolved: 'emerald',
 }
 
 const statusLabels = {
@@ -63,11 +64,10 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
         <div className='space-y-2'>
           {updatesToShow.map((update, index) => (
             <div key={update.id || index} className='flex items-start gap-3'>
-              <div className='flex items-center gap-2 min-w-fit'>
-                <div className={cn('size-2 rounded-full', statusStyles[update.type])} />
-                <span className='text-sm font-medium'>{statusLabels[update.type]}</span>
-              </div>
-              <div className='flex-1 text-sm text-fg/60'>
+              <Badge variant='dot' tint={statusTints[update.type]}>
+                {statusLabels[update.type]}
+              </Badge>
+              <div className='flex-1 text-fg/60 prose prose-sm max-w-none'>
                 <RichText data={update.content} disableContainer />
               </div>
 

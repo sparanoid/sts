@@ -4,6 +4,8 @@
 @import './kladewind.css';
 @import './schemes.css';
 
+@plugin '@tailwindcss/typography';
+
 /* https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually */
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
@@ -83,5 +85,28 @@
       opacity: 0;
       transform: scale(2);
     }
+  }
+}
+
+@layer utilities {
+  /* Tailwind Typography */
+  /* https://github.com/tailwindlabs/tailwindcss-typography#adding-custom-color-themes */
+  .prose {
+    --tw-prose-body: var(--color-fg);
+    --tw-prose-headings: var(--color-fg);
+    --tw-prose-lead: var(--color-fg);
+    --tw-prose-links: var(--color-ac);
+    --tw-prose-bold: var(--color-fg);
+    --tw-prose-counters: color-mix(in oklch, var(--color-ac) 40%, transparent);
+    --tw-prose-bullets: color-mix(in oklch, var(--color-ac) 40%, transparent);
+    --tw-prose-hr: color-mix(in oklch, var(--color-fg) 20%, transparent);
+    --tw-prose-quotes: var(--color-ac);
+    --tw-prose-quote-borders: color-mix(in oklch, var(--color-ac) 40%, transparent);
+    --tw-prose-captions: var(--color-fg);
+    --tw-prose-code: var(--color-orange-500);
+    --tw-prose-pre-code: var(--color-orange-500);
+    --tw-prose-pre-bg: color-mix(in oklch, var(--color-orange-500) 10%, transparent);
+    --tw-prose-th-borders: color-mix(in oklch, var(--color-fg) 20%, transparent);
+    --tw-prose-td-borders: color-mix(in oklch, var(--color-fg) 20%, transparent);
   }
 }
