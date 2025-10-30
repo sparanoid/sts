@@ -4,10 +4,10 @@ import { memo } from 'react'
 
 import type { Status } from '@/types'
 
-import { formatDate } from '@/utils/formatDate'
 import { lazyFloat } from '@/utils/lazyFloat'
 import { timeFromNow } from '@/utils/timeFromNow'
 
+import { FormattedTimestampDisplay } from '@/components/timestamp-display'
 import { TooltipOrPopover } from '@/components/ui/tooltip-or-popover'
 
 export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
@@ -53,7 +53,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
             key={result.timestamp}
             triggerClassName='w-full'
             label={
-              <div className='grid'>
+              <div className='space-y-1'>
                 {result.conditionResults?.length ? (
                   <div>
                     {result.conditionResults.map((result, idx) => {
@@ -76,21 +76,10 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
                     <hr className='m-1 -mx-3' />
                   </div>
                 ) : null}
-                <div>
+                <div className='text-fg/60'>
                   {lazyFloat(result.duration / 1000 / 1000)}ms, {timeFromNow(+new Date(result.timestamp))}
                 </div>
-                <div className='text-fg/50 text-sm'>
-                  {formatDate(new Date(result.timestamp), {
-                    format: {
-                      month: '2-digit',
-                      day: '2-digit',
-                      weekday: 'short',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      second: '2-digit',
-                    },
-                  })}
-                </div>
+                <FormattedTimestampDisplay timestamp={+new Date(result.timestamp)} />
               </div>
             }
           >
