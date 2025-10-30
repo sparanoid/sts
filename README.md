@@ -67,6 +67,7 @@ Active incidents appear at the top of your status page until marked as "Resolved
 
 - [Bun](https://bun.sh/) (default) or Node.js.
 - [Gatus](https://github.com/TwiN/gatus) backend.
+- A SQLite database (or Turso)
 
 ### Installation
 
