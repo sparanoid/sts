@@ -1,3 +1,4 @@
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import { IconChevronLeft } from '@tabler/icons-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -6,7 +7,6 @@ import { notFound } from 'next/navigation'
 import { queryIncidentById } from '@/lib/queryIncidents'
 
 import { cn } from '@/utils/cn'
-import { renderLexicalContent } from '@/utils/renderLexicalContent'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { Footer } from '@/components/footer'
@@ -128,9 +128,7 @@ export default async function IncidentPage({ params }: PageProps) {
                   </div>
 
                   <div className='text-fg/80 prose prose-sm max-w-none'>
-                    {renderLexicalContent(update.content)
-                      .split('\n')
-                      .map((para, pIndex) => para.trim() && <p key={pIndex}>{para}</p>)}
+                    <RichText data={update.content} disableContainer />
                   </div>
                 </div>
               </div>

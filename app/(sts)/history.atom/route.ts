@@ -1,7 +1,6 @@
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-
-import type { Incident } from '@/payload-types'
 
 import { queryIncidents } from '@/lib/queryIncidents'
 
@@ -32,23 +31,6 @@ function formatDisplayDate(date: string): string {
   return dayjs(date).utc().format('MMM D, HH:mm')
 }
 
-function renderLexicalToText(content: NonNullable<NonNullable<Incident['updates']>[number]>['content']): string {
-  if (!content?.root?.children) return ''
-
-  return content.root.children
-    .map(node => {
-      if ('children' in node && Array.isArray(node.children)) {
-        return node.children
-          .map(child => ('text' in child ? child.text : ''))
-          .filter(Boolean)
-          .join(' ')
-      }
-      return ''
-    })
-    .filter(Boolean)
-    .join('\n')
-}
-
 export async function GET() {
   const siteTitle = process.env.NEXT_PUBLIC_SITE_TITLE || 'Status Page'
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://status.example.com'
@@ -70,10 +52,10 @@ export async function GET() {
       const updateContent = updates
         .map(update => {
           const status = statusLabels[update.type]
-          const text = renderLexicalToText(update.content)
+          const contentHtml = convertLexicalToHTML({ data: update.content })
           const timestamp = formatDisplayDate(update.timestamp)
 
-          return `<p><small>${timestamp} UTC</small><br><strong>${status}</strong> - ${escapeXml(text)}</p>`
+          return `<div><h3>${timestamp} UTC - ${status}</h3>${contentHtml}</div>`
         })
         .join('')
 
@@ -84,7 +66,7 @@ export async function GET() {
       <published>${formatAtomDate(incident.createdAt)}</published>
       <updated>${formatAtomDate(latestUpdate?.timestamp || incident.updatedAt)}</updated>
       <link rel="alternate" type="text/html" href="${incidentUrl}"/>
-      <content type="html">${escapeXml(updateContent)}</content>
+      <content type="html"><![CDATA[${updateContent}]]></content>
     </entry>`
     })
     .join('')

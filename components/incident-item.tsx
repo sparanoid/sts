@@ -1,11 +1,11 @@
 'use client'
 
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 
 import type { Incident } from '@/payload-types'
 
 import { cn } from '@/utils/cn'
-import { renderLexicalContent } from '@/utils/renderLexicalContent'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
@@ -67,7 +67,9 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
                 <div className={cn('size-2 rounded-full', statusStyles[update.type])} />
                 <span className='text-sm font-medium'>{statusLabels[update.type]}</span>
               </div>
-              <div className='flex-1 text-sm text-fg/60'>{renderLexicalContent(update.content) || 'No content'}</div>
+              <div className='flex-1 text-sm text-fg/60'>
+                <RichText data={update.content} disableContainer />
+              </div>
 
               <TimestampTooltip timestamp={+new Date(update.timestamp)}>
                 <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(update.timestamp))}</div>
