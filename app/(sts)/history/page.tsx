@@ -67,7 +67,7 @@ export default async function HistoryPage({ searchParams }: PageProps) {
           </Button>
         </div>
 
-        <div className='text-sm text-gray-600'>
+        <div className='text-sm text-fg/60'>
           Showing incidents from {endDate.format('MMM D')} to {startDate.format('MMM D, YYYY')}
         </div>
       </div>
@@ -75,7 +75,7 @@ export default async function HistoryPage({ searchParams }: PageProps) {
       {pageIncidents.length > 0 ? (
         <IncidentList type='past' incidents={pageIncidents} showAllUpdates={false} />
       ) : (
-        <div className='text-center text-gray-500 py-16'>No incidents found for this time period</div>
+        <div className='text-center text-fg/60 py-16'>No incidents found for this time period</div>
       )}
 
       {/* Pagination */}
