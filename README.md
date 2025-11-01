@@ -2,22 +2,13 @@
 
 sts, a fully open-source status page with Gatus backend and Payload CMS
 
-[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=for-the-badge&logo=radix-ui&logoColor=white)](https://www.radix-ui.com/)
-[![Bun](https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh/)
-
 ## ✨ Features
 
 - **Gatus Integration**: Works with [Gatus](https://github.com/TwiN/gatus) backend for monitoring.
 - **Incident Management**: Built-in CMS for managing and displaying service incidents with status updates. Powered by [Payload CMS](https://payloadcms.com/).
-- **Beautiful UI**: A modern UI with perfect Lighthouse results (100 in every category).
-- **Fully Responsive**: Great experience on all devices from mobile to desktop.
-- **Supports Dark Mode**: Theme detection with an option to toggle manually.
 - **Status Updates on Real-time**: Status information is automatically updated using SWR.
 - **Customizable**: Easily update the site title, description, logo and more.
 - **Brand-free Footer**: No attribution required
-- **Subpath Deployment Ready**: Easily deploy under a subpath (e.g., `/frontend`) ideal for reverse proxies and Kubernetes.
 
 ## 🛠️ Stack
 
@@ -27,7 +18,6 @@ sts, a fully open-source status page with Gatus backend and Payload CMS
 - **UI**: [Radix UI Primitives](https://www.radix-ui.com/), so everything is accessible
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) with custom OKLCH colour palettes
 - **Data Fetching**: [SWR](https://swr.vercel.app/) for effective real-time updates
-- **Icons**: [Tabler Icons](https://tabler.io/icons).
 
 ## 📢 Incident Management
 
