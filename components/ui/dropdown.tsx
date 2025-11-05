@@ -62,7 +62,7 @@ function DropdownMenuItem({
       data-inset={inset}
       data-tint={tint}
       className={cn(
-        'focus:bg-ac/10 focus:text-ac relative flex cursor-default gap-1.5 px-3 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8',
+        'focus:bg-ac/10 focus:text-ac font-normal relative flex cursor-default gap-1.5 px-3 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8',
 
         // Icon
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg]:mt-0.5 [&_svg]:-ml-0.5",
@@ -207,13 +207,14 @@ function DropdownMenuSubTrigger({
         'data-[state=open]:data-[highlighted]:bg-ac/10 data-[state=open]:data-[highlighted]:text-ac',
 
         // Icon
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg]:mt-0.5 [&_svg]:-ml-0.5",
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg]:mt-0.5",
+        "[&_svg:not([data-slot='dropdown-menu-sub-trigger-icon'])]:-ml-0.5",
         className
       )}
       {...props}
     >
       {children}
-      <IconChevronRight className='ml-auto size-4' />
+      <IconChevronRight data-slot='dropdown-menu-sub-trigger-icon' className='ml-auto size-4' />
     </DropdownMenuPrimitive.SubTrigger>
   )
 }

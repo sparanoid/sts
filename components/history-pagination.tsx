@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import { Pagination } from '@/components/ui/pagination'
+import { ButtonPaginationSingleton } from '@/components/ui/pagination'
 
 interface HistoryPaginationProps {
   currentPage: number
@@ -22,7 +22,7 @@ export function HistoryPagination({ currentPage, totalPages }: HistoryPagination
 
   return (
     <div className='flex justify-center mt-8'>
-      <Pagination value={currentPage} onPageChange={handlePageChange} total={totalPages} siblings={2} />
+      <ButtonPaginationSingleton value={currentPage} onPageChange={handlePageChange} total={totalPages} siblings={2} />
     </div>
   )
 }

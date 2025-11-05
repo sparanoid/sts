@@ -5,14 +5,14 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/utils/cn'
 
-import { Loading } from '@/components/ui/loading'
+import { Loading } from './loading'
 
 const buttonVariantsConfig = {
   // Should match Input, Toggle
   size: {
-    sm: 'text-xs rounded-sm h-6 px-2 has-[>svg]:px-1.5 [&>svg]:size-3',
-    default: 'text-sm rounded-md h-8 px-3 has-[>svg]:px-2 [&>svg]:size-4',
-    lg: 'text-base rounded-md gap-2 h-10 px-4 has-[>svg]:px-3 [&>svg]:size-5',
+    sm: 'text-xs rounded-sm h-6 px-1.5 [&>svg]:size-3',
+    default: 'text-sm rounded-md h-8 px-2.5 [&>svg]:size-4 [&>svg]:-mx-0.5',
+    lg: 'text-base rounded-md gap-2 h-10 px-3.5 [&>svg]:size-5 [&>svg]:-mx-1',
     'icon-sm': 'rounded-sm size-6 [&>svg]:size-4',
     icon: 'rounded-md size-8 [&>svg]:size-5',
     'icon-lg': 'rounded-md size-10 [&>svg]:size-6',
@@ -107,7 +107,7 @@ const buttonVariants = cva(
       { variant: 'solid', tint: 'black', className: 'bg-black text-white not-disabled:hover:bg-black/80' },
 
       // Outline
-      { variant: 'outline', tint: 'default', className: 'border-fg/30 not-disabled:hover:bg-fg/5 data-[state=open]:bg-fg/5', },
+      { variant: 'outline', tint: 'default', className: 'border-fg/30 not-disabled:hover:bg-fg/5 data-[state=open]:bg-fg/5 focus-visible:border-ac focus-visible:ring-ac/30', },
       { variant: 'outline', tint: 'accent', className: 'border-ac not-disabled:hover:bg-ac/10', },
       { variant: 'outline', tint: 'gray', className: 'border-gray-500 not-disabled:hover:bg-gray-400/10', },
       { variant: 'outline', tint: 'red', className: 'border-red-500 not-disabled:hover:bg-red-400/10', },
@@ -131,7 +131,7 @@ const buttonVariants = cva(
       { variant: 'outline', tint: 'black', className: 'border-black not-disabled:hover:bg-black/10', },
 
       // Ghost
-      { variant: 'ghost', tint: 'default', className: 'not-disabled:hover:text-ac not-disabled:hover:bg-ac/10 data-[state=open]:bg-ac/10 data-[state=open]:text-ac' },
+      { variant: 'ghost', tint: 'default', className: 'not-disabled:hover:text-ac not-disabled:hover:bg-ac/10 data-[state=open]:bg-ac/10 data-[state=open]:text-ac focus-visible:ring-ac/30' },
       { variant: 'ghost', tint: 'accent', className: 'not-disabled:hover:text-ac/80 not-disabled:hover:bg-ac/10' },
       { variant: 'ghost', tint: 'gray', className: 'not-disabled:hover:text-gray-500 not-disabled:hover:bg-gray-500/10', },
       { variant: 'ghost', tint: 'red', className: 'not-disabled:hover:text-red-500 not-disabled:hover:bg-red-500/10' },
