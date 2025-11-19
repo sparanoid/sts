@@ -54,10 +54,6 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
           </div>
           {incident.description && <p className='text-sm text-fg/60'>{incident.description}</p>}
         </div>
-
-        <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
-          <div className='text-fg/60'>{timeFromNow(+new Date(incident.createdAt))}</div>
-        </TimestampTooltip>
       </div>
 
       {updatesToShow.length > 0 && (

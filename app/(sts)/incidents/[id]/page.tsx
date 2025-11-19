@@ -96,11 +96,6 @@ export default async function IncidentPage({ params }: PageProps) {
             {incident.description && <p className='text-fg/60'>{incident.description}</p>}
           </div>
         </div>
-        <div className='flex'>
-          <TimestampTooltip timestamp={+new Date(incident.createdAt)}>
-            <div className='text-fg/60 text-sm'>{timeFromNow(+new Date(incident.createdAt))}</div>
-          </TimestampTooltip>
-        </div>
       </div>
 
       {/* Updates Timeline */}
