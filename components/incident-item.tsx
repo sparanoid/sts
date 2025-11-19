@@ -60,10 +60,12 @@ export function IncidentItem({ incident, showAllUpdates = false }: IncidentItemP
         <div className='space-y-2'>
           {updatesToShow.map((update, index) => (
             <div key={update.id || index} className='flex items-start gap-3'>
-              <Badge variant='dot' tint={statusTints[update.type]}>
-                {statusLabels[update.type]}
-              </Badge>
-              <div className='flex-1 text-fg/60 prose prose-sm max-w-none'>
+              <div className='min-w-32 flex'>
+                <Badge variant='dot' tint={statusTints[update.type]}>
+                  {statusLabels[update.type]}
+                </Badge>
+              </div>
+              <div className='flex-1 -mt-0.5 text-fg/60 prose prose-sm max-w-none'>
                 <RichText data={update.content} disableContainer />
               </div>
 
