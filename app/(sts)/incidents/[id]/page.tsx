@@ -1,7 +1,5 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { IconChevronLeft } from '@tabler/icons-react'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { queryIncidentById } from '@/lib/queryIncidents'
@@ -13,7 +11,14 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
 
 const statusStyles = {
   investigating: 'bg-rose-500',
@@ -76,14 +81,21 @@ export default async function IncidentPage({ params }: PageProps) {
 
       {/* Incident Header */}
       <div className='space-y-2'>
-        <div>
-          <Button asChild variant='link' className='p-0! -ml-1'>
-            <Link href='/history'>
-              <IconChevronLeft />
-              Back to Incident History
-            </Link>
-          </Button>
-        </div>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/history'>History</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Incident Details</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
         {isResolved && (
           <Badge variant='dot' tint='emerald' size='lg'>
