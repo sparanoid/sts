@@ -12,7 +12,7 @@ export async function getStatuses(size: number) {
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=${size}`
   const res = await fetch(url, {
     headers: {
-      'User-Agent': `sts/${version}`,
+      'User-Agent': `sparanoid-sts/${version}`,
     },
     next: { revalidate: 10 },
   })
