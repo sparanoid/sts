@@ -1,5 +1,7 @@
 import type { Status } from '@/types'
 
+import { version } from '@/package.json'
+
 export async function getStatuses(size: number) {
   const apiBase = process.env.GATUS_API_BASE
 
@@ -9,6 +11,9 @@ export async function getStatuses(size: number) {
 
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=${size}`
   const res = await fetch(url, {
+    headers: {
+      'User-Agent': `sts/${version}`,
+    },
     next: { revalidate: 10 },
   })
 
