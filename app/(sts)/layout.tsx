@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body>
         <ThemeProvider attribute='data-theme'>
-          <TooltipProvider delayDuration={300}>{children}</TooltipProvider>
+          <TooltipProvider delay={200}>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

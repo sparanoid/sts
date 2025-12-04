@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "build:db": "payload migrate && next build --turbopack",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "build:db": "payload migrate && next build --webpack",
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
@@ -14,6 +14,7 @@
     "generate-types": "payload generate:types"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-rc.0",
     "@payloadcms/db-sqlite": "^3.66.0",
     "@payloadcms/next": "^3.66.0",
     "@payloadcms/richtext-lexical": "^3.66.0",

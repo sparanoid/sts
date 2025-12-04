@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRelativeTime } from '@/hooks/useRelativeTime'
 
 import { FormattedTimestampDisplay } from '@/components/timestamp-display'
-import { TooltipContent, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
+import { TooltipContent, TooltipPositioner, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface TimestampTooltipProps {
   timestamp: number
@@ -27,14 +27,16 @@ export function TimestampTooltip({ timestamp, children, side, className }: Times
   })
 
   return (
-    <TooltipRoot onOpenChange={setIsTooltipOpen} disableHoverableContent>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
-      <TooltipContent side={side} className={className}>
-        <div className='space-y-1'>
-          <div className='text-fg/60 tabular-nums'>{relativeTime}</div>
-          <FormattedTimestampDisplay timestamp={timestamp} />
-        </div>
-      </TooltipContent>
+    <TooltipRoot onOpenChange={setIsTooltipOpen}>
+      <TooltipTrigger>{children}</TooltipTrigger>
+      <TooltipPositioner side={side}>
+        <TooltipContent className={className}>
+          <div className='space-y-1'>
+            <div className='text-fg/60 tabular-nums'>{relativeTime}</div>
+            <FormattedTimestampDisplay timestamp={timestamp} />
+          </div>
+        </TooltipContent>
+      </TooltipPositioner>
     </TooltipRoot>
   )
 }
