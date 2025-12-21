@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "analyze": "next experimental-analyze",
     "dev": "next dev",
     "build": "next build",
     "build:db": "payload migrate && next build",
