@@ -1,7 +1,6 @@
 'use client'
 
 import { IconChevronRight } from '@tabler/icons-react'
-import dayjs from 'dayjs'
 import Link from 'next/link'
 
 import { useIncidents } from '@/hooks/useIncidents'
@@ -9,6 +8,8 @@ import { useIncidents } from '@/hooks/useIncidents'
 import { IncidentList } from '@/components/incident-list'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+
+const MAX_INCIDENTS = 5
 
 export function PastIncidents() {
   const { incidents, isLoading, isError } = useIncidents()
@@ -23,18 +24,18 @@ export function PastIncidents() {
     )
   }
 
-  if (isError) {
+  if (isError || incidents.length === 0) {
     return null
   }
 
-  // Filter for resolved incidents from last 14 days
-  const pastIncidents = incidents.filter(incident => {
-    const updates = incident.updates || []
-    const latestUpdate = updates[0]
-    const isResolved = latestUpdate?.type === 'resolved'
-    const isRecent = dayjs().diff(dayjs(incident.createdAt), 'day') <= 14
-    return isResolved && isRecent
-  })
+  // Filter for resolved incidents only, then take the most recent ones
+  const pastIncidents = incidents
+    .filter(incident => {
+      const updates = incident.updates || []
+      const latestUpdate = updates[0]
+      return latestUpdate?.type === 'resolved'
+    })
+    .slice(0, MAX_INCIDENTS)
 
   if (pastIncidents.length === 0) {
     return null
