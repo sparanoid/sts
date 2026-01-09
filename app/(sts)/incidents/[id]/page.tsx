@@ -5,8 +5,10 @@ import { notFound } from 'next/navigation'
 import { queryIncidentById } from '@/lib/queryIncidents'
 
 import { cn } from '@/utils/cn'
+import { formatDuration } from '@/utils/formatDuration'
 import { timeFromNow } from '@/utils/timeFromNow'
 
+import { DurationTooltip } from '@/components/duration-tooltip'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { TimestampTooltip } from '@/components/timestamp-tooltip'
@@ -75,6 +77,20 @@ export default async function IncidentPage({ params }: PageProps) {
   const latestUpdate = updates[0]
   const isResolved = latestUpdate?.type === 'resolved'
 
+  // Calculate resolution duration (from first update to resolved update)
+  const resolutionInfo = (() => {
+    if (!isResolved || updates.length < 1) return null
+    const resolvedUpdate = updates[0] // First update is the most recent (resolved)
+    const firstUpdate = updates[updates.length - 1] // Last in array is the oldest
+    const startTime = +new Date(firstUpdate.timestamp)
+    const endTime = +new Date(resolvedUpdate.timestamp)
+    return {
+      duration: formatDuration(startTime, endTime),
+      startTime,
+      endTime,
+    }
+  })()
+
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4 space-y-6'>
       <Header />
@@ -98,9 +114,18 @@ export default async function IncidentPage({ params }: PageProps) {
         </Breadcrumb>
 
         {isResolved && (
-          <Badge variant='dot' tint='emerald' size='lg'>
-            Resolved
-          </Badge>
+          <div className='flex items-center gap-2 flex-wrap'>
+            <Badge variant='dot' tint='emerald' size='lg'>
+              Resolved
+            </Badge>
+            {resolutionInfo && (
+              <DurationTooltip startTime={resolutionInfo.startTime} endTime={resolutionInfo.endTime}>
+                <span className='text-fg/60 text-sm cursor-help border-b border-dashed border-fg/30'>
+                  in {resolutionInfo.duration}
+                </span>
+              </DurationTooltip>
+            )}
+          </div>
         )}
         <div className='flex items-start justify-between gap-4'>
           <div className='space-y-2'>
