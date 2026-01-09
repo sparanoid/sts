@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: 'View past service incidents and status updates',
 }
 
-const INCIDENTS_PER_PAGE = 30
+const INCIDENTS_PER_PAGE = 10
 
 interface PageProps {
   searchParams: Promise<{ page?: string }>
@@ -37,19 +37,20 @@ export default async function HistoryPage({ searchParams }: PageProps) {
   // Fetch all incidents using query helper
   const incidents = await queryIncidents()
 
-  // Filter incidents by date range for current page
-  const startDate = dayjs().subtract((page - 1) * INCIDENTS_PER_PAGE, 'day')
-  const endDate = dayjs().subtract(page * INCIDENTS_PER_PAGE - 1, 'day')
+  // Calculate pagination based on actual incidents
+  const totalIncidents = incidents.length
+  const totalPages = Math.max(1, Math.ceil(totalIncidents / INCIDENTS_PER_PAGE))
 
-  const pageIncidents = incidents.filter(incident => {
-    const incidentDate = dayjs(incident.createdAt)
-    return incidentDate.isBefore(startDate) && incidentDate.isAfter(endDate)
-  })
+  // Get incidents for current page
+  const startIndex = (page - 1) * INCIDENTS_PER_PAGE
+  const endIndex = startIndex + INCIDENTS_PER_PAGE
+  const pageIncidents = incidents.slice(startIndex, endIndex)
 
-  // Calculate total pages based on oldest incident
-  const oldestIncident = incidents[incidents.length - 1]
-  const daysSinceOldest = oldestIncident ? dayjs().diff(dayjs(oldestIncident.createdAt), 'day') : 0
-  const totalPages = Math.max(1, Math.ceil(daysSinceOldest / INCIDENTS_PER_PAGE))
+  // Get date range from actual incidents on this page
+  const newestIncident = pageIncidents[0]
+  const oldestIncident = pageIncidents[pageIncidents.length - 1]
+  const startDate = newestIncident ? dayjs(newestIncident.createdAt) : null
+  const endDate = oldestIncident ? dayjs(oldestIncident.createdAt) : null
 
   return (
     <main className='container mx-auto max-w-(--breakpoint-md) px-2 py-4 sm:px-4'>
@@ -78,15 +79,19 @@ export default async function HistoryPage({ searchParams }: PageProps) {
           </Button>
         </div>
 
-        <div className='text-sm text-fg/60'>
-          Showing incidents from {endDate.format('MMM D')} to {startDate.format('MMM D, YYYY')}
-        </div>
+        {startDate && endDate && (
+          <div className='text-sm text-fg/60'>
+            {startDate.isSame(endDate, 'day')
+              ? `Showing incidents from ${startDate.format('MMM D, YYYY')}`
+              : `Showing incidents from ${endDate.format('MMM D')} to ${startDate.format('MMM D, YYYY')}`}
+          </div>
+        )}
       </div>
 
       {pageIncidents.length > 0 ? (
         <IncidentList type='past' incidents={pageIncidents} showAllUpdates={false} />
       ) : (
-        <div className='text-center text-fg/60 py-16'>No incidents found for this time period</div>
+        <div className='text-center text-fg/60 py-16'>No incidents found</div>
       )}
 
       {/* Pagination */}
