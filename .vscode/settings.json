@@ -23,9 +23,12 @@
   // "files.associations": {
   //   "*.css": "tailwindcss"
   // },
-  // https://cva.style/docs/getting-started/installation
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  "tailwindCSS.classFunctions": [
+    // https://cva.style/docs/getting-started/installation
+    "cva",
+    "cx",
+
+    // https://www.tailwind-variants.org/docs/getting-started#intellisense-setup-optional
+    "tv"
   ]
 }
