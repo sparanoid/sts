@@ -1,5 +1,5 @@
-import { Slot, Slottable } from 'radix-ui'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Slot } from 'radix-ui'
 import type { HTMLAttributes } from 'react'
 
 import { cn } from '@/utils/cn'
@@ -153,7 +153,7 @@ function Badge({
   children,
   ...props
 }: BadgeProps) {
-  const Comp = asChild ? Slot : 'div'
+  const Comp = asChild ? Slot.Root : 'div'
 
   return (
     <Comp
@@ -162,7 +162,7 @@ function Badge({
       {...props}
     >
       {variant === 'dot' && <span className={dotVariants({ size, tint })} />}
-      <Slottable>{children}</Slottable>
+      <Slot.Slottable>{children}</Slot.Slottable>
     </Comp>
   )
 }
