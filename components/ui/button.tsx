@@ -1,7 +1,7 @@
 'use client'
 
-import { Slot, Slottable } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Slot } from 'radix-ui'
 
 import { cn } from '@/utils/cn'
 
@@ -221,7 +221,7 @@ function Button({
   children,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : 'button'
+  const Comp = asChild ? Slot.Root : 'button'
   return (
     <Comp
       data-slot='button'
@@ -232,7 +232,7 @@ function Button({
         <div className={cn('flex items-center justify-center', leftSectionClassName)}>{leftSection}</div>
       ) : null}
 
-      <Slottable>{children}</Slottable>
+      <Slot.Slottable>{children}</Slot.Slottable>
 
       {loading && <Loading />}
       {rightSection ? (

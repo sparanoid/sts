@@ -1,6 +1,6 @@
-import { Slot } from '@radix-ui/react-slot'
 import { IconChevronRight, IconDots } from '@tabler/icons-react'
 import Link from 'next/link'
+import { Slot } from 'radix-ui'
 import type * as React from 'react'
 
 import { cn } from '@/utils/cn'
@@ -30,7 +30,7 @@ function BreadcrumbLink({
 }: React.ComponentProps<typeof Link> & {
   asChild?: boolean
 }) {
-  const Comp = asChild ? Slot : Link
+  const Comp = asChild ? Slot.Root : Link
 
   return <Comp data-slot='breadcrumb-link' className={cn('hover:text-fg', className)} {...props} />
 }
