@@ -57,4 +57,4 @@ function TooltipContent({ className, children, ...props }: TooltipPrimitive.Popu
   )
 }
 
-export { Tooltip, TooltipRoot, TooltipTrigger, TooltipContent, TooltipProvider, TooltipPositioner }
+export { Tooltip, TooltipContent, TooltipPositioner, TooltipPrimitive, TooltipProvider, TooltipRoot, TooltipTrigger }
