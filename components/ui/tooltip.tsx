@@ -6,11 +6,11 @@ function TooltipProvider({ delay = 0, ...props }: TooltipPrimitive.Provider.Prop
   return <TooltipPrimitive.Provider data-slot='tooltip-provider' delay={delay} {...props} />
 }
 
-function TooltipRoot({ disableHoverablePopup = true, ...props }: TooltipPrimitive.Root.Props) {
+function TooltipRoot<Payload>({ disableHoverablePopup = true, ...props }: TooltipPrimitive.Root.Props<Payload>) {
   return <TooltipPrimitive.Root data-slot='tooltip-root' disableHoverablePopup={disableHoverablePopup} {...props} />
 }
 
-function Tooltip({ disableHoverablePopup = true, ...props }: TooltipPrimitive.Root.Props) {
+function Tooltip<Payload>({ disableHoverablePopup = true, ...props }: TooltipPrimitive.Root.Props<Payload>) {
   return (
     <TooltipProvider>
       <TooltipRoot data-slot='tooltip' disableHoverablePopup={disableHoverablePopup} {...props} />
@@ -18,7 +18,7 @@ function Tooltip({ disableHoverablePopup = true, ...props }: TooltipPrimitive.Ro
   )
 }
 
-function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {
+function TooltipTrigger<Payload>(props: TooltipPrimitive.Trigger.Props<Payload>) {
   return <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props} />
 }
 
@@ -28,7 +28,14 @@ function TooltipPositioner({ className, ...props }: TooltipPrimitive.Positioner.
       <TooltipPrimitive.Positioner
         data-slot='tooltip-positioner'
         sideOffset={8}
-        className={cn('z-50', className)}
+        // `w-(--positioner-width)`/`h-(--positioner-height)` are required by Base UI when sharing
+        // one Root across multiple (detached) Triggers. The auto-resize logic anchors the Popup
+        // with `position: absolute; bottom: 0; left: 0` and writes the measured popup size into
+        // these CSS vars on the Positioner. Without them the Positioner is 0×0, which shifts the
+        // Popup off-center and shrinks `--available-width`. For single-trigger usages the vars
+        // stay unset and the declarations fall back to `auto` (no behavioral change).
+        // See https://github.com/mui/base-ui/issues/3681#issuecomment-2575014069
+        className={cn('z-50 w-(--positioner-width) h-(--positioner-height)', className)}
         {...props}
       />
     </TooltipPrimitive.Portal>
