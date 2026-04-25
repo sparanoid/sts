@@ -3,7 +3,7 @@
 import { formatDurationPrecise } from '@/utils/formatDuration'
 
 import { FormattedTimestampDisplay } from '@/components/timestamp-display'
-import { TooltipContent, TooltipPositioner, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
+import { TooltipContent, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface DurationTooltipProps {
   startTime: number
@@ -21,24 +21,22 @@ export function DurationTooltip({ startTime, endTime, children, side }: Duration
   return (
     <TooltipRoot>
       <TooltipTrigger>{children}</TooltipTrigger>
-      <TooltipPositioner side={side}>
-        <TooltipContent>
-          <div className='space-y-3'>
-            <div className='space-y-1'>
-              <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Duration</div>
-              <div>{preciseDuration}</div>
-            </div>
-            <div className='space-y-1'>
-              <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Started</div>
-              <FormattedTimestampDisplay timestamp={startTime} />
-            </div>
-            <div className='space-y-1'>
-              <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Resolved</div>
-              <FormattedTimestampDisplay timestamp={endTime} />
-            </div>
+      <TooltipContent side={side}>
+        <div className='space-y-3'>
+          <div className='space-y-1'>
+            <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Duration</div>
+            <div>{preciseDuration}</div>
           </div>
-        </TooltipContent>
-      </TooltipPositioner>
+          <div className='space-y-1'>
+            <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Started</div>
+            <FormattedTimestampDisplay timestamp={startTime} />
+          </div>
+          <div className='space-y-1'>
+            <div className='text-xs font-medium text-fg/60 uppercase tracking-wide'>Resolved</div>
+            <FormattedTimestampDisplay timestamp={endTime} />
+          </div>
+        </div>
+      </TooltipContent>
     </TooltipRoot>
   )
 }

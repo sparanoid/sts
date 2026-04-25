@@ -10,13 +10,7 @@ import { lazyFloat } from '@/utils/lazyFloat'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { FormattedTimestampDisplay } from '@/components/timestamp-display'
-import {
-  TooltipContent,
-  TooltipPositioner,
-  TooltipPrimitive,
-  TooltipRoot,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+import { TooltipContent, TooltipPrimitive, TooltipRoot, TooltipTrigger } from '@/components/ui/tooltip'
 
 export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
   const firstResult = data.results[0]
@@ -41,9 +35,7 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
                 <TooltipTrigger className='focus-ring rounded-full'>
                   <IconInfoCircle className='size-4' />
                 </TooltipTrigger>
-                <TooltipPositioner>
-                  <TooltipContent>{lastResult.hostname}</TooltipContent>
-                </TooltipPositioner>
+                <TooltipContent>{lastResult.hostname}</TooltipContent>
               </TooltipRoot>
             </span>
           ) : null}
@@ -89,38 +81,36 @@ export const StatusItem = memo(function StatusItem({ data }: { data: Status }) {
       {/* Single Root for all chart bars; content is driven by active trigger's payload */}
       <TooltipRoot handle={chartTooltip}>
         {({ payload: result }) => (
-          <TooltipPositioner>
-            <TooltipContent>
-              {result ? (
-                <div className='space-y-1'>
-                  {result.conditionResults?.length ? (
-                    <div>
-                      {result.conditionResults.map((condition, idx) => (
-                        <div key={idx} className='flex items-center gap-1'>
-                          {condition.success ? (
-                            <>
-                              <IconCircleCheckFilled className='size-4 fill-emerald-600' />
-                              <span className='font-mono text-sm text-emerald-600'>{condition.condition}</span>
-                            </>
-                          ) : (
-                            <>
-                              <IconCircleXFilled className='size-4 fill-red-600' />
-                              <span className='fill-red-600 font-mono text-sm'>{condition.condition}</span>
-                            </>
-                          )}
-                        </div>
-                      ))}
-                      <hr className='m-1 border-fg/30 -mx-3' />
-                    </div>
-                  ) : null}
-                  <div className='text-fg/60'>
-                    {lazyFloat(result.duration / 1000 / 1000)}ms, {timeFromNow(+new Date(result.timestamp))}
+          <TooltipContent>
+            {result ? (
+              <div className='space-y-1'>
+                {result.conditionResults?.length ? (
+                  <div>
+                    {result.conditionResults.map((condition, idx) => (
+                      <div key={idx} className='flex items-center gap-1'>
+                        {condition.success ? (
+                          <>
+                            <IconCircleCheckFilled className='size-4 fill-emerald-600' />
+                            <span className='font-mono text-sm text-emerald-600'>{condition.condition}</span>
+                          </>
+                        ) : (
+                          <>
+                            <IconCircleXFilled className='size-4 fill-red-600' />
+                            <span className='fill-red-600 font-mono text-sm'>{condition.condition}</span>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                    <hr className='m-1 border-fg/30 -mx-3' />
                   </div>
-                  <FormattedTimestampDisplay timestamp={+new Date(result.timestamp)} />
+                ) : null}
+                <div className='text-fg/60'>
+                  {lazyFloat(result.duration / 1000 / 1000)}ms, {timeFromNow(+new Date(result.timestamp))}
                 </div>
-              ) : null}
-            </TooltipContent>
-          </TooltipPositioner>
+                <FormattedTimestampDisplay timestamp={+new Date(result.timestamp)} />
+              </div>
+            ) : null}
+          </TooltipContent>
         )}
       </TooltipRoot>
 

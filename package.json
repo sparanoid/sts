@@ -15,7 +15,7 @@
     "generate-types": "payload generate:types"
   },
   "dependencies": {
-    "@base-ui-components/react": "^1.0.0-rc.0",
+    "@base-ui/react": "^1.4.1",
     "@payloadcms/db-sqlite": "^3.83.0",
     "@payloadcms/next": "^3.83.0",
     "@payloadcms/richtext-lexical": "^3.83.0",
