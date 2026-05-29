@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 
-import { formatDate } from '@/utils/formatDate'
-import { getLocalTimezoneAbbr } from '@/utils/getTimezoneAbbr'
+import { formatDate, getLocalTimezoneAbbr } from '@/utils/formatDate'
 
 interface FormattedTimestampDisplayProps {
   timestamp: number
