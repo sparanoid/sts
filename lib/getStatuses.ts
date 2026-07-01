@@ -10,7 +10,7 @@ export async function getStatuses(size: number) {
   }
 
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=${size}`
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "User-Agent": `sparanoid-sts/${version}`,
   };
 
