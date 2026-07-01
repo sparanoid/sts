@@ -109,20 +109,22 @@ Open [http://localhost:3000/frontend](http://localhost:3000/frontend) with a bro
 
 You can configure sts with environment variables:
 
-| Variable                      | Description                                                   | Required |
-| ----------------------------- | ------------------------------------------------------------- | -------- |
-| `GATUS_API_BASE`              | Gatus API base URL (e.g. `https://status.example.com/api/v1`) | ✅       |
-| `PAYLOAD_SECRET`              | Secret key for Payload CMS (min. 32 characters)               | ✅       |
-| `TURSO_DATABASE_URL`          | Or `DATABASE_URI` for Turso database URL (for cloud SQLite)   | ❌       |
-| `TURSO_AUTH_TOKEN`            | Or `AUTH_TOKEN` for Turso authentication token                | ❌       |
-| `NEXT_PUBLIC_SITE_TITLE`      | Site title                                                    | ❌       |
-| `NEXT_PUBLIC_SITE_DESC`       | Site description                                              | ❌       |
-| `NEXT_PUBLIC_SITE_LOGO`       | Site logo URL                                                 | ❌       |
-| `NEXT_PUBLIC_SITE_BACK_TITLE` | Title for back link                                           | ❌       |
-| `NEXT_PUBLIC_SITE_BACK_URL`   | URL for back link                                             | ❌       |
-| `NEXT_PUBLIC_FOOTER_TEXT`     | Custom footer text                                            | ❌       |
-| `NEXT_PUBLIC_API_BASE_PATH`   | Custom Base path for application (e.g. `/frontend` )          | ❌       |
-| `NEXT_PUBLIC_GROUP_SIZE`      | Loading skeleton group size (Default: `3` )                   | ❌       |
+| Variable                      | Description                                                    | Required |
+| ----------------------------- | -------------------------------------------------------------- | -------- |
+| `GATUS_API_BASE`              | Gatus API base URL (e.g., `https://status.example.com/api/v1`) | ✅       |
+| `GATUS_API_USERNAME`          | Username for Gatus API                                         | ❌       |
+| `GATUS_API_PASSWORD`          | Password for Gatus API                                         | ❌       |
+| `PAYLOAD_SECRET`              | Secret key for Payload CMS (min. 32 characters)                | ✅       |
+| `TURSO_DATABASE_URL`          | Or `DATABASE_URI` for Turso database URL (for cloud SQLite)    | ❌       |
+| `TURSO_AUTH_TOKEN`            | Or `AUTH_TOKEN` for Turso authentication token                 | ❌       |
+| `NEXT_PUBLIC_SITE_TITLE`      | Site title                                                     | ❌       |
+| `NEXT_PUBLIC_SITE_DESC`       | Site description                                               | ❌       |
+| `NEXT_PUBLIC_SITE_LOGO`       | Site logo URL                                                  | ❌       |
+| `NEXT_PUBLIC_SITE_BACK_TITLE` | Title for back link                                            | ❌       |
+| `NEXT_PUBLIC_SITE_BACK_URL`   | URL for back link                                              | ❌       |
+| `NEXT_PUBLIC_FOOTER_TEXT`     | Custom footer text                                             | ❌       |
+| `NEXT_PUBLIC_API_BASE_PATH`   | Custom Base path for application (e.g. `/frontend` )           | ❌       |
+| `NEXT_PUBLIC_GROUP_SIZE`      | Loading skeleton group size (Default: `3` )                    | ❌       |
 
 ## 🌐 Deployment
 
