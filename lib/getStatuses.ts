@@ -10,10 +10,17 @@ export async function getStatuses(size: number) {
   }
 
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=${size}`
+  const headers: HeadersInit = {
+    "User-Agent": `sparanoid-sts/${version}`,
+  };
+
+  const { GATUS_API_USERNAME, GATUS_API_PASSWORD } = process.env;
+  if (GATUS_API_USERNAME && GATUS_API_PASSWORD) {
+    headers.Authorization = `Basic ${Buffer.from(`${GATUS_API_USERNAME}:${GATUS_API_PASSWORD}`).toString("base64")}`;
+  }
+
   const res = await fetch(url, {
-    headers: {
-      'User-Agent': `sparanoid-sts/${version}`,
-    },
+    headers,
     next: { revalidate: 10 },
   })
 
