@@ -143,17 +143,17 @@ export function StatusList() {
           {/* Title */}
           <div className='my-10 grid items-center justify-items-center gap-1 text-center'>
             <Skeleton className='m-1 size-10 rounded-full' />
-            <Skeleton className='h-8 w-[258px] rounded-md' />
+            <Skeleton className='h-8 w-[258px]' />
             <div className='flex items-center gap-1'>
-              <Skeleton className='h-6 w-50 rounded-md' />
+              <Skeleton className='h-6 w-50' />
               <Skeleton className='size-5 rounded-full' />
             </div>
           </div>
 
           {/* Input */}
           <div className='mb-4 flex gap-2 justify-center'>
-            <Skeleton className='h-8 max-w-70 rounded-md' />
-            <Skeleton className='size-8 rounded-md' />
+            <Skeleton className='h-8 max-w-70' />
+            <Skeleton className='size-8' />
           </div>
         </div>
       )}
