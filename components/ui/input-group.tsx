@@ -11,12 +11,10 @@ import { Textarea } from '@/components/ui/textarea'
 
 function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (
-    // biome-ignore lint/a11y/useSemanticElements: legit role use
     <div
       data-slot='input-group'
-      role='group'
       className={cn(
-        'group/input-group relative flex w-full items-center rounded-md border border-fg/30 shadow-xs outline-none transition-[color,box-shadow]',
+        'group/input-group relative flex w-full items-center rounded-lg border border-fg/30 shadow-xs outline-none transition-[color,box-shadow]',
         'h-8 min-w-0 has-[>textarea]:h-auto',
 
         // Variants based on alignment.
@@ -40,7 +38,7 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 const inputGroupAddonVariants = cva(
-  "flex h-auto cursor-text select-none items-center justify-center gap-1 py-1.5 font-medium text-fg/60 text-sm group-data-[disabled=true]/input-group:opacity-50 [&>svg:not([class*='size-'])]:size-4",
+  "flex h-auto cursor-text select-none items-center justify-center gap-1 py-1.5 font-medium text-fg/60 text-sm group-data-disabled/input-group:opacity-50 [&>svg:not([class*='size-'])]:size-4",
   {
     variants: {
       align: {
@@ -71,7 +69,16 @@ function InputGroupAddon({
       data-align={align}
       className={cn(inputGroupAddonVariants({ align }), className)}
       onClick={e => {
-        if ((e.target as HTMLElement).closest('button')) {
+        // This addon can host React-portaled descendants (e.g. a dropdown menu
+        // anchored to an addon button). Their clicks bubble here through React's
+        // tree even though they render outside this addon in the DOM. Focusing
+        // the input for those would steal focus from the portaled UI and dismiss
+        // it (e.g. collapsing a nested submenu), so only react to clicks that
+        // physically originate inside the addon.
+        if (!(e.target instanceof Node) || !e.currentTarget.contains(e.target)) {
+          return
+        }
+        if (e.target instanceof HTMLElement && e.target.closest('button')) {
           return
         }
         e.currentTarget.parentElement?.querySelector('input')?.focus()
@@ -84,10 +91,10 @@ function InputGroupAddon({
 const inputGroupButtonVariants = cva('flex items-center gap-2 text-sm shadow-none', {
   variants: {
     size: {
-      xs: "h-6 gap-1 rounded-sm px-2 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
-      sm: 'h-8 gap-1.5 rounded px-2.5 has-[>svg]:px-2.5',
-      'icon-xs': 'size-6 rounded-sm p-0 has-[>svg]:p-0',
-      'icon-sm': 'size-8 rounded p-0 has-[>svg]:p-0',
+      xs: "h-6 gap-1 rounded-md px-2 has-[>svg]:px-2 [&>svg:not([class*='size-'])]:size-3.5",
+      sm: 'h-8 gap-1.5 rounded-md px-2.5 has-[>svg]:px-2.5',
+      'icon-xs': 'size-6 rounded-md p-0 has-[>svg]:p-0',
+      'icon-sm': 'size-8 rounded-md p-0 has-[>svg]:p-0',
     },
   },
   defaultVariants: {

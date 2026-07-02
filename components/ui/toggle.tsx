@@ -7,7 +7,7 @@ import type * as React from 'react'
 import { cn } from '@/utils/cn'
 
 const toggleVariants = cva(
-  'focus-ring inline-flex items-center justify-center gap-1 rounded-md font-medium hover:bg-fg/5 hover:text-ac disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-ac/10 data-[state=on]:text-ac [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'focus-ring inline-flex items-center justify-center gap-1 rounded-lg font-medium hover:bg-fg/5 hover:text-ac disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-ac/10 data-[state=on]:text-ac [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -17,12 +17,12 @@ const toggleVariants = cva(
       },
       // Should match Button
       size: {
-        sm: 'h-6 rounded-sm px-2 text-xs',
-        default: 'h-8 rounded-md px-3 text-sm',
-        lg: 'h-10 rounded-md px-4 text-base',
-        'icon-sm': 'size-6 rounded-sm text-xs [&>svg]:size-4',
-        icon: 'size-8 rounded-md text-sm [&>svg]:size-5',
-        'icon-lg': 'size-10 rounded-md text-base [&>svg]:size-6',
+        sm: 'h-6 rounded-md px-1.5 text-xs [&>svg]:size-3',
+        default: 'h-8 rounded-lg px-2.5 text-sm [&>svg]:-mx-0.5 [&>svg]:size-4',
+        lg: 'h-10 gap-2 rounded-lg px-3.5 text-base [&>svg]:-mx-1 [&>svg]:size-5',
+        'icon-sm': 'size-6 rounded-md [&>svg]:size-4',
+        icon: 'size-8 rounded-lg [&>svg]:size-5',
+        'icon-lg': 'size-10 rounded-lg [&>svg]:size-6',
       },
     },
     // compoundVariants: [

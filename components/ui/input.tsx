@@ -19,9 +19,9 @@ const inputVariants = cva(
     variants: {
       // Should match Button
       inputSize: {
-        sm: 'h-6 rounded-sm px-1.5 text-xs',
-        md: 'h-8 rounded-md px-2 text-sm',
-        lg: 'h-10 rounded-md px-3 text-base',
+        sm: 'h-6 rounded-md px-1.5 text-xs',
+        md: 'h-8 rounded-lg px-2 text-sm',
+        lg: 'h-10 rounded-lg px-3 text-base',
       },
     },
     defaultVariants: {

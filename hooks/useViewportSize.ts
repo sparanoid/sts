@@ -1,35 +1,31 @@
-// https://github.com/mantinedev/mantine/blob/master/packages/@mantine/hooks/src/use-viewport-size/use-viewport-size.ts
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useMemo, useSyncExternalStore } from 'react'
 
-const eventListerOptions = {
+const eventListenerOptions = {
   passive: true,
 }
 
-export function useWindowEvent(type: string, listener: EventListener, options?: boolean | AddEventListenerOptions) {
-  useEffect(() => {
-    window.addEventListener(type, listener, options)
-    return () => window.removeEventListener(type, listener, options)
-  }, [type, listener, options])
+function subscribe(onStoreChange: () => void) {
+  window.addEventListener('resize', onStoreChange, eventListenerOptions)
+  window.addEventListener('orientationchange', onStoreChange, eventListenerOptions)
+  return () => {
+    window.removeEventListener('resize', onStoreChange)
+    window.removeEventListener('orientationchange', onStoreChange)
+  }
 }
 
 export function useViewportSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-  })
+  const width = useSyncExternalStore(
+    subscribe,
+    () => window.innerWidth,
+    () => 0
+  )
+  const height = useSyncExternalStore(
+    subscribe,
+    () => window.innerHeight,
+    () => 0
+  )
 
-  const setSize = useCallback(() => {
-    setWindowSize({
-      width: window.innerWidth || 0,
-      height: window.innerHeight || 0,
-    })
-  }, [])
-
-  useWindowEvent('resize', setSize, eventListerOptions)
-  useWindowEvent('orientationchange', setSize, eventListerOptions)
-  useEffect(setSize, [])
-
-  return windowSize
+  return useMemo(() => ({ width, height }), [width, height])
 }
