@@ -1,5 +1,3 @@
-'use client'
-
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Slot } from 'radix-ui'
 
@@ -10,12 +8,12 @@ import { Spinner } from './spinner'
 const buttonVariantsConfig = {
   // Should match Input, Toggle
   size: {
-    sm: 'text-xs rounded-sm h-6 px-1.5 [&>svg]:size-3',
-    default: 'text-sm rounded-md h-8 px-2.5 [&>svg]:size-4 [&>svg]:-mx-0.5',
-    lg: 'text-base rounded-md gap-2 h-10 px-3.5 [&>svg]:size-5 [&>svg]:-mx-1',
-    'icon-sm': 'rounded-sm size-6 [&>svg]:size-4',
-    icon: 'rounded-md size-8 [&>svg]:size-5',
-    'icon-lg': 'rounded-md size-10 [&>svg]:size-6',
+    sm: 'text-xs rounded-md h-6 px-1.5 [&>svg]:size-3',
+    default: 'text-sm rounded-lg h-8 px-2.5 [&>svg]:size-4 [&>svg]:-mx-0.5',
+    lg: 'text-base rounded-lg gap-2 h-10 px-3.5 [&>svg]:size-5 [&>svg]:-mx-1',
+    'icon-sm': 'rounded-md size-6 [&>svg]:size-4',
+    icon: 'rounded-lg size-8 [&>svg]:size-5',
+    'icon-lg': 'rounded-lg size-10 [&>svg]:size-6',
   },
   variant: {
     // map to "secondary" in shadcn
@@ -162,7 +160,7 @@ function Button({
   return (
     <Comp
       data-slot='button'
-      className={cn(buttonVariants({ variant, size, tint, className }), loading && 'cursor-wait')}
+      className={cn(buttonVariants({ variant, size, tint, className }), loading && 'cursor-wait!')}
       {...props}
     >
       {leftSection ? (
