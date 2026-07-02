@@ -11,12 +11,12 @@ export async function getStatuses(size: number) {
 
   const url = `${apiBase}/endpoints/statuses?page=1&pageSize=${size}`
   const headers: Record<string, string> = {
-    "User-Agent": `sparanoid-sts/${version}`,
-  };
+    'User-Agent': `sparanoid-sts/${version}`,
+  }
 
-  const { GATUS_API_USERNAME, GATUS_API_PASSWORD } = process.env;
+  const { GATUS_API_USERNAME, GATUS_API_PASSWORD } = process.env
   if (GATUS_API_USERNAME && GATUS_API_PASSWORD) {
-    headers.Authorization = `Basic ${Buffer.from(`${GATUS_API_USERNAME}:${GATUS_API_PASSWORD}`).toString("base64")}`;
+    headers.Authorization = `Basic ${Buffer.from(`${GATUS_API_USERNAME}:${GATUS_API_PASSWORD}`).toString('base64')}`
   }
 
   const res = await fetch(url, {

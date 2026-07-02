@@ -35,4 +35,5 @@ export interface InputProps extends React.ComponentProps<'input'>, VariantProps<
 function Input({ className, type, inputSize, ...props }: InputProps) {
   return <input type={type} data-slot='input' className={cn(inputVariants({ inputSize }), className)} {...props} />
 }
+
 export { Input }

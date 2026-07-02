@@ -1,7 +1,7 @@
 'use client'
 
-import { Select as SelectPrimitive } from 'radix-ui'
 import { IconCheck, IconChevronCompactDown, IconChevronCompactUp, IconChevronDown } from '@tabler/icons-react'
+import { Select as SelectPrimitive } from 'radix-ui'
 import type * as React from 'react'
 
 import { cn } from '@/utils/cn'
@@ -209,6 +209,7 @@ function SelectScrollDownButton({
 
 export {
   Select,
+  SelectBlankTrigger,
   SelectContent,
   SelectGroup,
   SelectItem,
@@ -217,6 +218,5 @@ export {
   SelectScrollUpButton,
   SelectSeparator,
   SelectTrigger,
-  SelectBlankTrigger,
   SelectValue,
 }
