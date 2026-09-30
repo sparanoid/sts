@@ -1,9 +1,8 @@
 import { IconChevronRight, IconDots } from '@tabler/icons-react'
+import { cn } from 'cn'
 import Link from 'next/link'
 import { Slot } from 'radix-ui'
 import type * as React from 'react'
-
-import { cn } from '@/utils/cn'
 
 function Breadcrumb({ ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label='breadcrumb' data-slot='breadcrumb' {...props} />

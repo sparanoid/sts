@@ -1,8 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from 'cn'
 import { Slot } from 'radix-ui'
 import type { HTMLAttributes } from 'react'
-
-import { cn } from '@/utils/cn'
 
 const badgeVariantsConfig = {
   size: {

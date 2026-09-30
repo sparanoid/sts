@@ -1,10 +1,9 @@
 'use client'
 
 import { IconCheck, IconChevronRight, IconCircleFilled } from '@tabler/icons-react'
+import { cn } from 'cn'
 import { DropdownMenu as DropdownMenuPrimitive } from 'radix-ui'
 import type * as React from 'react'
-
-import { cn } from '@/utils/cn'
 
 function DropdownMenu({ ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
   return <DropdownMenuPrimitive.Root data-slot='dropdown-menu' {...props} />

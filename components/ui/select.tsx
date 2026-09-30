@@ -2,10 +2,9 @@
 
 import { IconCheck, IconChevronCompactDown, IconChevronCompactUp, IconChevronDown } from '@tabler/icons-react'
 import type { VariantProps } from 'class-variance-authority'
+import { cn } from 'cn'
 import { Select as SelectPrimitive } from 'radix-ui'
 import * as React from 'react'
-
-import { cn } from '@/utils/cn'
 
 import { buttonVariants } from '@/components/ui/button'
 

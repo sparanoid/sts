@@ -1,10 +1,9 @@
 'use client'
 
 import { IconChevronLeft, IconChevronRight, IconDots } from '@tabler/icons-react'
+import { cn } from 'cn'
 import Link from 'next/link'
 import { type ComponentProps, Fragment } from 'react'
-
-import { cn } from '@/utils/cn'
 
 import { Button, buttonVariants } from '@/components/ui/button'
 import { Select, SelectBlankTrigger, SelectContent, SelectItem } from '@/components/ui/select'

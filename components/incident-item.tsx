@@ -1,11 +1,11 @@
 'use client'
 
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { cn } from 'cn'
 import Link from 'next/link'
 
 import type { Incident, IncidentUpdate } from '@/payload-types'
 
-import { cn } from '@/utils/cn'
 import { timeFromNow } from '@/utils/timeFromNow'
 
 import { TimestampTooltip } from '@/components/timestamp-tooltip'

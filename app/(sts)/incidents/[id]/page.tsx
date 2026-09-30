@@ -1,10 +1,10 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { cn } from 'cn'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { queryIncidentById } from '@/lib/queryIncidents'
 
-import { cn } from '@/utils/cn'
 import { formatDuration } from '@/utils/formatDuration'
 import { timeFromNow } from '@/utils/timeFromNow'
 

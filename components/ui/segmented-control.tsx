@@ -1,9 +1,8 @@
 'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from 'cn'
 import * as React from 'react'
-
-import { cn } from '@/utils/cn'
 
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 
