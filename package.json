@@ -21,7 +21,7 @@
     "@payloadcms/richtext-lexical": "^3.90.2",
     "@tabler/icons-react": "^3.48.0",
     "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
+    "cn": "^0.4.0",
     "dayjs": "^1.11.23",
     "graphql": "^16.14.2",
     "next": "^16.3.7",
@@ -30,8 +30,7 @@
     "radix-ui": "^1.6.7",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "swr": "^2.5.1",
-    "tailwind-merge": "^3.7.0"
+    "swr": "^2.5.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

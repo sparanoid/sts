@@ -1,7 +1,7 @@
 'use client'
 
 import { IconMenuOrder, IconRefresh, IconSearch, IconX } from '@tabler/icons-react'
-import clsx from 'clsx'
+import { clsx } from 'cn'
 import { useMemo, useState } from 'react'
 
 import type { Status, UptimeState } from '@/types'

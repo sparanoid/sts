@@ -1,7 +1,7 @@
 'use client'
 
 import { IconCircleCheckFilled, IconCircleXFilled, IconInfoCircle } from '@tabler/icons-react'
-import clsx from 'clsx'
+import { clsx } from 'cn'
 import { memo, useState } from 'react'
 
 import type { Status, StatusResult } from '@/types'
